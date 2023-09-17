@@ -8,7 +8,6 @@
                     <ul class="main-nav nav navbar-nav">
                         <li><a href="index.jsp">Home</a></li>
                         <li><a href="store.jsp">Store</a></li>
-                        <li><a href="product.jsp">Product</a></li>
                         <li><a href="cart.jsp">Cart</a></li>
                         <li class="active"><a href="checkout.jsp">CheckOut</a></li>
                         <li><a href="contact.jsp">Contact</a></li>

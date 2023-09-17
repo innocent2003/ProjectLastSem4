@@ -17,7 +17,6 @@
             <ul class="main-nav nav navbar-nav">
                 <li class="active"><a href="index.jsp">Home</a></li>                       
                 <li><a href="store.jsp">Store</a></li>
-                <li><a href="product.jsp">Product</a></li>
                 <li><a href="cart.jsp">Cart</a></li>
                 <li><a href="checkout.jsp">CheckOut</a></li>
                 <li><a href="contact.jsp">Contact</a></li>
@@ -91,7 +90,7 @@
                     </div>
                     <div class="shop-body">
                         <h3>Xiaomi</h3>
-                        <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="store.jsp?brand=1" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -105,7 +104,7 @@
                     </div>
                     <div class="shop-body">
                         <h3>Samsung</h3>
-                        <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="store.jsp?brand=2" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -119,7 +118,7 @@
                     </div>
                     <div class="shop-body">
                         <h3>Apple</h3>
-                        <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="store.jsp?brand=3" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -164,7 +163,7 @@
                                     </div>
                                     <div class="product-body">
                                         <h3 class="product-name"><a href="product.jsp?id=<%= product.getId()%>"><%= product.getProductName()%></a></h3>
-                                        <h4 class="product-price"><%= product.getPrice()%></h4>
+                                        <h4 class="product-price">$<%= product.getPrice()%></h4>
                                         <div class="product-rating">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -178,9 +177,16 @@
                                             <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                                         </div>
                                     </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                    </div>
+
+                                    <form action="add-to-cart" method="post">
+                                        <input type="hidden" name="productId" value="<%= product.getId()%>">
+                                        <input type="hidden" name="productName" value="<%= product.getProductName()%>">
+                                        <input type="hidden" name="productPrice" value="<%= product.getPrice()%>">
+                                        <input type="hidden" name="productImage" value="<%= product.getPrice()%>">
+                                        <div class="add-to-cart">
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                        </div>
+                                    </form>
                                 </div>
                                 <!-- /product -->
                                 <%
@@ -269,7 +275,7 @@
             <div class="clearfix visible-sm visible-xs"></div>
 
             <div class="col-md-4 col-xs-6">
-                                <div class="section-title">
+                <div class="section-title">
                     <h4 class="title">Apple</h4>
                 </div>
 
