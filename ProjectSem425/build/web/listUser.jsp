@@ -20,22 +20,20 @@
          user = "root"  password = ""/>
 
          <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from Customers;
+            SELECT * from Users;
          </sql:query>
  
       <table border = "1" width = "100%">
          <tr>
-            <th>Emp ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Age</th>
+            <th>ID</th>
+            <th>User</th>
+            <th>Pass</th>
          </tr>
          
          <c:forEach var = "row" items = "${result.rows}">
             <tr>
                <td> <c:out value = "${row.id}"/></td>
-               <td> <c:out value = "${row.Name}"/></td>
-               <td> <c:out value = "${row.Email}"/></td>
+               <td> <c:out value = "${row.Username}"/></td>
                <td> <c:out value = "${row.Password}"/></td>
             </tr>
          </c:forEach>

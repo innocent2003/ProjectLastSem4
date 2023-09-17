@@ -26,16 +26,14 @@ import javax.servlet.http.HttpServletResponse;
 public class RegisterServlet extends HttpServlet {
 protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String Name = request.getParameter("Name");
-        String Email = request.getParameter("Email");
+        String Username = request.getParameter("Username");
         String Password = request.getParameter("Password");
 
         try {
             Connection conn = getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO customers (Name,Email ,Password) VALUES (?, ?, ?)");
-            pstmt.setString(1, Name);
-            pstmt.setString(2, Email);
-            pstmt.setString(3, Password);
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Users (Username, Password, Role) VALUES (?, ?, 'Customer')");
+            pstmt.setString(1, Username);
+            pstmt.setString(2, Password);
             pstmt.executeUpdate();
             conn.close();
         } catch (Exception e) {

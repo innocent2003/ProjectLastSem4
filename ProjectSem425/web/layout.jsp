@@ -8,7 +8,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Phone</title>
+        <title>Smartphone</title>
 
         <!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -35,15 +35,18 @@
             <div id="top-header">
                 <div class="container">
                     <ul class="header-links pull-left">
-                        <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
+                        <li><a href="#"><i class="fa fa-phone"></i> +012-345-6789</a></li>
                         <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                        <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+                        <li><a href="#"><i class="fa fa-map-marker"></i> 123 Washington D.C</a></li>
                     </ul>
                     <ul class="header-links pull-right">
+                        <% if (session.getAttribute("userId") != null) {%>
+                        <li><a href="account.jsp"><i class="fa fa-user"></i>Welcome, <%= session.getAttribute("userName")%></a></li>
+                        <% } else { %>
                         <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
                         <li><a>|</a></li>
                         <li><a href="register.jsp"><i class="fa fa-user"></i> Register</a></li>
-                        <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
