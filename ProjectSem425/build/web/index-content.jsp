@@ -178,13 +178,13 @@
                                         </div>
                                     </div>
 
-                                    <form action="add-to-cart" method="post">
-                                        <input type="hidden" name="productId" value="<%= product.getId()%>">
-                                        <input type="hidden" name="productName" value="<%= product.getProductName()%>">
-                                        <input type="hidden" name="productPrice" value="<%= product.getPrice()%>">
-                                        <input type="hidden" name="productImage" value="<%= product.getPrice()%>">
+                                    <form id="add-to-cart-form" method="post">
+                                        <input type="hidden" id="productId" name="productId" value="<%= product.getId()%>">
+                                        <input type="hidden" id="productName" name="productName" value="<%= product.getProductName()%>">
+                                        <input type="hidden" id="productPrice" name="productPrice" value="<%= product.getPrice()%>">
+                                        <input type="hidden" id="productImage" name="productImage" value="<%= product.getPrice()%>">
                                         <div class="add-to-cart">
-                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                            <button class="add-to-cart-btn" onclick="addToCart(event)"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                         </div>
                                     </form>
                                 </div>
@@ -309,3 +309,39 @@
     <!-- /container -->
 </div>
 <!-- /SECTION -->
+<script>
+function addToCart(event) {
+    event.preventDefault();
+
+    var form = document.getElementById("add-to-cart-form");
+    var productId = form.elements["productId"].value;
+    var productName = form.elements["productName"].value;
+    var productPrice = form.elements["productPrice"].value;
+    var productImage = form.elements["productImage"].value;
+
+    var cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+    var existingProduct = cart.find(function(product) {
+        return product.productId === productId;
+    });
+
+    if (existingProduct) {
+        existingProduct.quantity += 1;
+    } else {
+        var product = {
+            productId: productId,
+            productName: productName,
+            productPrice: productPrice,
+            productImage: productImage,
+            quantity: 1
+        };
+
+        cart.push(product);
+    }
+
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+
+    alert("Item '" + productName + "' added");
+
+    form.reset();
+}
+</script>

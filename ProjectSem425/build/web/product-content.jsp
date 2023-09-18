@@ -4,7 +4,6 @@
 <%@page import="model.ProductDetail"%>
 <%
     String productId = request.getParameter("id");
-
     ProductDAO productDAO = new ProductDAO();
     ProductDetail product = productDAO.getProductById(productId);
     List<Product> productList = productDAO.getProductsByBrandId(product.getBrandId());
@@ -18,7 +17,7 @@
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
                 <li><a href="index.jsp">Home</a></li>
-                <li class="active"><a href="product.jsp">Product</a></li>
+                <li class="active"><a href="store.jsp">Store</a></li>
                 <li><a href="cart.jsp">Cart</a></li>
                 <li><a href="checkout.jsp">CheckOut</a></li>
                 <li><a href="contact.jsp">Contact</a></li>
