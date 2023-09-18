@@ -101,7 +101,7 @@
                                         </div>
                                         <div class="cart-summary">
                                             <small id="cartSelectedItems">0 Item(s) selected</small>
-                                            <h5 id="cartSubtotal">SUBTOTAL: $0.00</h5>
+                                            <h5 id="cartSubtotal">TOTAL: $0.00</h5>
                                         </div>
                                         <div class="cart-btns">
                                             <a href="cart.jsp">View Cart</a>
@@ -271,7 +271,83 @@
         <script src="resources/js/main.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-                                    window.onload = function () {
+                                    var cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+                                    var cartItemsElement = document.getElementById('cartItems1');
+                                    var totalPriceElement = document.getElementById('totalPrice1');
+
+                                    function updateCart() {
+                                        cartItemsElement.innerHTML = '';
+                                        var totalAmount = 0;
+
+                                        for (var i = 0; i < cart.length; i++) {
+                                            var product = cart[i];
+
+                                            var row = document.createElement('tr');
+
+                                            var imageCell = document.createElement('td');
+                                            var imageElement = document.createElement('img');
+                                            imageElement.src = product.image;
+                                            imageElement.alt = product.name;
+                                            imageElement.style.width = '50px';
+                                            imageElement.style.height = '50px';
+                                            imageCell.appendChild(imageElement);
+                                            row.appendChild(imageCell);
+
+                                            var productNameCell = document.createElement('td');
+                                            productNameCell.textContent = product.name;
+                                            row.appendChild(productNameCell);
+
+                                            var ramCell = document.createElement('td');
+                                            ramCell.textContent = product.ram;
+                                            row.appendChild(ramCell);
+
+                                            var storageCell = document.createElement('td');
+                                            storageCell.textContent = product.storage;
+                                            row.appendChild(storageCell);
+
+                                            var colorCell = document.createElement('td');
+                                            colorCell.textContent = product.color;
+                                            row.appendChild(colorCell);
+
+                                            var quantityCell = document.createElement('td');
+                                            quantityCell.textContent = product.quantity;
+                                            row.appendChild(quantityCell);
+
+                                            var priceCell = document.createElement('td');
+                                            priceCell.className = 'text-center';
+                                            priceCell.textContent = '$' + product.price;
+                                            row.appendChild(priceCell);
+
+                                            var actionCell = document.createElement('td');
+                                            actionCell.className = 'text-right';
+                                            var deleteButton = document.createElement('button');
+                                            deleteButton.textContent = 'Delete';
+                                            deleteButton.addEventListener('click', (function (index) {
+                                                return function () {
+                                                    removeFromCart(index);
+                                                };
+                                            })(i));
+                                            actionCell.appendChild(deleteButton);
+                                            row.appendChild(actionCell);
+
+                                            cartItemsElement.appendChild(row);
+
+                                            totalAmount += product.price * product.quantity;
+                                        }
+
+                                        totalPriceElement.textContent = '$' + totalAmount.toFixed(2);
+                                    }
+
+                                    function removeFromCart(index) {
+                                        cart.splice(index, 1);
+                                        sessionStorage.setItem('cart', JSON.stringify(cart));
+                                        updateCart();
+                                    }
+                                    updateCart();
+                                    
+        </script>
+        <script>
+            window.onload = function () {
                                         var cart = getCart();
                                         updateCartUI(cart);
                                     };
