@@ -42,12 +42,12 @@
                     <ul class="header-links pull-right">
                         <% if (session.getAttribute("userId") != null) {%>
                         <li><a href="account.jsp"><i class="fa fa-user"></i>Welcome, <%= session.getAttribute("userName")%></a></li>
-                         <li><a href="LogoutServlet"><i class="fa fa-user"></i>Logout</a></li>
-                        <% } else { %>
+                        <li><a href="LogoutServlet"><i class="fa fa-user"></i>Logout</a></li>
+                            <% } else { %>
                         <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
                         <li><a>|</a></li>
                         <li><a href="register.jsp"><i class="fa fa-user"></i> Register</a></li>
-                        <% } %>
+                            <% }%>
                     </ul>
                 </div>
             </div>
@@ -94,35 +94,14 @@
                                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span>Your Cart</span>
-                                        <div class="qty">3</div>
+                                        <div class="qty" id="cartItemCount">0</div>
                                     </a>
                                     <div class="cart-dropdown">
-                                        <div class="cart-list">
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="resources/img/product01.png" alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                    <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
-
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="resources/img/product02.png" alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                    <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
+                                        <div class="cart-list" id="cartItems">
                                         </div>
                                         <div class="cart-summary">
-                                            <small>3 Item(s) selected</small>
-                                            <h5>SUBTOTAL: $2940.00</h5>
+                                            <small id="cartSelectedItems">0 Item(s) selected</small>
+                                            <h5 id="cartSubtotal">SUBTOTAL: $0.00</h5>
                                         </div>
                                         <div class="cart-btns">
                                             <a href="cart.jsp">View Cart</a>
@@ -284,12 +263,168 @@
             <!-- /bottom footer -->
         </footer>
         <!-- /FOOTER -->
-
         <script src="resources/js/jquery.min.js"></script>
         <script src="resources/js/bootstrap.min.js"></script>
         <script src="resources/js/slick.min.js"></script>
         <script src="resources/js/nouislider.min.js"></script>
         <script src="resources/js/jquery.zoom.min.js"></script>
         <script src="resources/js/main.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+                                    window.onload = function () {
+                                        var cart = getCart();
+                                        updateCartUI(cart);
+                                    };
+                                    function addToCart(event) {
+                                        event.preventDefault();
+
+                                        var form = event.target.closest("form");
+                                        var productId = form.querySelector("#productId").value;
+                                        var productName = form.querySelector("#productName").value;
+                                        var productPrice = form.querySelector("#productPrice").value;
+                                        var productImage = form.querySelector("#productImage").value;
+                                        var productRam = form.querySelector("#productRam").value;
+                                        var productStorage = form.querySelector("#productStorage").value;
+                                        var productColor = form.querySelector("#productColor").value;
+                                        var cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+
+                                        var productExists = false;
+                                        for (var i = 0; i < cart.length; i++) {
+                                            if (cart[i].id === productId) {
+                                                cart[i].quantity += 1;
+                                                productExists = true;
+                                                break;
+                                            }
+                                        }
+                                        if (!productExists) {
+                                            cart.push({
+                                                id: productId,
+                                                name: productName,
+                                                price: productPrice,
+                                                image: productImage,
+                                                ram: productRam,
+                                                storage: productStorage,
+                                                color: productColor,
+                                                quantity: 1
+                                            });
+                                        }
+
+                                        sessionStorage.setItem('cart', JSON.stringify(cart));
+
+                                        updateCartUI(cart);
+                                    }
+
+                                    function updateCartUI(cart) {
+                                        var cartItemsContainer = document.getElementById('cartItems');
+                                        var cartItemCountElement = document.getElementById('cartItemCount');
+                                        var cartSelectedItems = document.getElementById('cartSelectedItems');
+                                        var cartSubtotal = document.getElementById('cartSubtotal');
+
+                                        var cartItemCount = 0;
+                                        var selectedItemsCount = 0;
+                                        var subtotal = 0;
+
+                                        // Clear the cart items container
+                                        while (cartItemsContainer.firstChild) {
+                                            cartItemsContainer.removeChild(cartItemsContainer.firstChild);
+                                        }
+
+                                        // Iterate over each item in the cart
+                                        for (var i = 0; i < cart.length; i++) {
+                                            var item = cart[i];
+
+                                            // Create the product widget
+                                            var productWidget = document.createElement('div');
+                                            productWidget.className = 'product-widget';
+
+                                            // Create the product image element
+                                            var productImageDiv = document.createElement('div');
+                                            productImageDiv.className = 'product-img';
+                                            var productImage = document.createElement('img');
+                                            productImage.src = item.image;
+                                            productImageDiv.appendChild(productImage);
+
+                                            // Create the product body element
+                                            var productBodyDiv = document.createElement('div');
+                                            productBodyDiv.className = 'product-body';
+                                            var productName = document.createElement('h3');
+                                            productName.className = 'product-name';
+                                            var productNameLink = document.createElement('a');
+                                            productNameLink.href = 'product.jsp?id=' + item.id;
+                                            productNameLink.textContent = item.name;
+                                            productName.appendChild(productNameLink);
+                                            var productInfor = document.createElement('h6');
+                                            productInfor.textContent = item.ram + "/" + item.storage + " - " + item.color;
+                                            var productPrice = document.createElement('h4');
+                                            productPrice.className = 'product-price';
+                                            var productQty = document.createElement('span');
+                                            productQty.className = 'qty';
+                                            productQty.textContent = item.quantity + 'x';
+                                            var productPriceValue = document.createElement('span');
+                                            productPriceValue.textContent = '$' + item.price;
+                                            productPrice.appendChild(productQty);
+                                            productPrice.appendChild(productPriceValue);
+
+                                            // Create the delete button
+                                            var deleteButton = document.createElement('button');
+                                            deleteButton.className = 'delete';
+                                            var deleteIcon = document.createElement('i');
+                                            deleteIcon.className = 'fa fa-close';
+                                            deleteButton.appendChild(deleteIcon);
+                                            deleteButton.addEventListener('click', createDeleteHandler(item));
+
+                                            // Append elements to the product widget
+                                            productWidget.appendChild(productImageDiv);
+                                            productWidget.appendChild(productBodyDiv);
+                                            productBodyDiv.appendChild(productName);
+                                            productBodyDiv.appendChild(productInfor);
+                                            productBodyDiv.appendChild(productPrice);
+                                            productWidget.appendChild(deleteButton);
+
+                                            // Append the product widget to the cart items container
+                                            cartItemsContainer.appendChild(productWidget);
+
+                                            // Update item count and subtotal
+                                            cartItemCount += item.quantity;
+                                            selectedItemsCount++;
+                                            subtotal += item.quantity * item.price;
+                                        }
+
+                                        // Update the UI with the updated values
+                                        cartItemCountElement.textContent = cartItemCount;
+                                        cartSelectedItems.textContent = selectedItemsCount + ' Item(s) selected';
+                                        cartSubtotal.textContent = 'SUBTOTAL: $' + subtotal;
+                                    }
+
+                                    function createDeleteHandler(item) {
+                                        return function () {
+                                            removeFromCart(item);
+                                            updateCartUI(getCart());
+                                        };
+                                    }
+
+                                    function removeFromCart(item) {
+                                        var cart = getCart();
+                                        var index = -1;
+
+                                        // Find the index of the item in the cart
+                                        for (var i = 0; i < cart.length; i++) {
+                                            if (cart[i].id === item.id) {
+                                                index = i;
+                                                break;
+                                            }
+                                        }
+
+                                        // Remove the item from the cart if found
+                                        if (index !== -1) {
+                                            cart.splice(index, 1);
+                                            sessionStorage.setItem('cart', JSON.stringify(cart));
+                                        }
+                                    }
+
+                                    function getCart() {
+                                        return JSON.parse(sessionStorage.getItem('cart')) || [];
+                                    }
+        </script>
     </body>
 </html>

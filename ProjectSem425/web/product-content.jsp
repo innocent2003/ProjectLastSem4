@@ -1,11 +1,11 @@
 <%@page import="java.util.List"%>
 <%@page import="model.Product"%>
 <%@page import="dao.ProductDAO"%>
-<%@page import="model.ProductDetail"%>
+<%@page import="model.Product"%>
 <%
     String productId = request.getParameter("id");
     ProductDAO productDAO = new ProductDAO();
-    ProductDetail product = productDAO.getProductById(productId);
+    Product product = productDAO.getProductById(productId);
     List<Product> productList = productDAO.getProductsByBrandId(product.getBrandId());
 %>
 <!-- NAVIGATION -->
@@ -390,7 +390,7 @@
             <div class="col-md-3 col-xs-6">
                 <div class="product">
                     <div class="product-img">
-                        <img src="resources/img/<%= pb.getImageURL()%>" alt="">
+                        <img src="resources/img/<%= pb.getImageUrl()%>" alt="">
                     </div>
                     <div class="product-body">
                         <h3 class="product-name"><a href="product.jsp?id=<%= pb.getId()%>"><%= pb.getProductName()%></a></h3>

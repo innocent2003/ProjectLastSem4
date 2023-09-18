@@ -159,10 +159,11 @@
                                 <!-- product -->
                                 <div class="product">
                                     <div class="product-img" style="padding-top: 20px;">
-                                        <img src="resources/img/<%= product.getImageURL()%>" alt="">
+                                        <a class="product-img" href="product.jsp?id=<%= product.getId()%>"><img src="resources/img/<%= product.getImageUrl()%>" alt=""></a>
                                     </div>
                                     <div class="product-body">
                                         <h3 class="product-name"><a href="product.jsp?id=<%= product.getId()%>"><%= product.getProductName()%></a></h3>
+                                        <h5><%= product.getRam()%>/<%= product.getStorage()%> - <%= product.getColor()%></h5>
                                         <h4 class="product-price">$<%= product.getPrice()%></h4>
                                         <div class="product-rating">
                                             <i class="fa fa-star"></i>
@@ -182,9 +183,12 @@
                                         <input type="hidden" id="productId" name="productId" value="<%= product.getId()%>">
                                         <input type="hidden" id="productName" name="productName" value="<%= product.getProductName()%>">
                                         <input type="hidden" id="productPrice" name="productPrice" value="<%= product.getPrice()%>">
-                                        <input type="hidden" id="productImage" name="productImage" value="<%= product.getPrice()%>">
+                                        <input type="hidden" id="productImage" name="productImage" value="resources/img/<%= product.getImageUrl()%>">
+                                        <input type="hidden" id="productRam" name="productRam" value="<%= product.getRam()%>">
+                                        <input type="hidden" id="productStorage" name="productStorage" value="<%= product.getStorage()%>">
+                                        <input type="hidden" id="productColor" name="productColor" value="<%= product.getColor()%>">
                                         <div class="add-to-cart">
-                                            <button class="add-to-cart-btn" onclick="addToCart(event)"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                            <button class="add-to-cart-btn" onclick="addToCart(event)"><i class="fa fa-shopping-cart" action="add-to-cart"></i> Add to cart</button>
                                         </div>
                                     </form>
                                 </div>
@@ -228,11 +232,12 @@
                         <!-- product widget -->
                         <div class="product-widget">
                             <div class="product-img">
-                                <img src="resources/img/<%= xiaomi.getImageURL()%>" alt="">
+                                <a class="product-img" href="product.jsp?id=<%= xiaomi.getId()%>"><img src="resources/img/<%= xiaomi.getImageUrl()%>" alt=""></a>
                             </div>
                             <div class="product-body">
                                 <h3 class="product-name"><a href="product.jsp?id=<%= xiaomi.getId()%>"><%= xiaomi.getProductName()%></a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price"><%= xiaomi.getPrice()%></del></h4>
+                                <h6><%= xiaomi.getRam()%>/<%= xiaomi.getStorage()%> - <%= xiaomi.getColor()%></h6>
+                                <h4 class="product-price">$<%= xiaomi.getPrice()%></h4>
                             </div>
                         </div>
                         <%
@@ -257,11 +262,12 @@
                         <!-- product widget -->
                         <div class="product-widget">
                             <div class="product-img">
-                                <img src="resources/img/<%= samsung.getImageURL()%>" alt="">
+                                <a class="product-img" href="product.jsp?id=<%= samsung.getId()%>"><img src="resources/img/<%= samsung.getImageUrl()%>" alt=""></a>
                             </div>
                             <div class="product-body">
                                 <h3 class="product-name"><a href="product.jsp?id=<%= samsung.getId()%>"><%= samsung.getProductName()%></a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price"><%= samsung.getPrice()%></del></h4>
+                                <h6><%= samsung.getRam()%>/<%= samsung.getStorage()%> - <%= samsung.getColor()%></h6>
+                                <h4 class="product-price">$<%= samsung.getPrice()%></h4>
                             </div>
                         </div>
                         <%
@@ -288,11 +294,12 @@
                         <!-- product widget -->
                         <div class="product-widget">
                             <div class="product-img">
-                                <img src="resources/img/<%= apple.getImageURL()%>" alt="">
+                                <a class="product-img" href="product.jsp?id=<%= apple.getId()%>"><img src="resources/img/<%= apple.getImageUrl()%>" alt=""></a>
                             </div>
                             <div class="product-body">
                                 <h3 class="product-name"><a href="product.jsp?id=<%= apple.getId()%>"><%= apple.getProductName()%></a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price"><%= apple.getPrice()%></del></h4>
+                                <h6><%= apple.getRam()%>/<%= apple.getStorage()%> - <%= apple.getColor()%></h6>
+                                <h4 class="product-price">$<%= apple.getPrice()%></h4>
                             </div>
                         </div>
                         <%
@@ -309,39 +316,3 @@
     <!-- /container -->
 </div>
 <!-- /SECTION -->
-<script>
-function addToCart(event) {
-    event.preventDefault();
-
-    var form = document.getElementById("add-to-cart-form");
-    var productId = form.elements["productId"].value;
-    var productName = form.elements["productName"].value;
-    var productPrice = form.elements["productPrice"].value;
-    var productImage = form.elements["productImage"].value;
-
-    var cart = JSON.parse(sessionStorage.getItem("cart")) || [];
-    var existingProduct = cart.find(function(product) {
-        return product.productId === productId;
-    });
-
-    if (existingProduct) {
-        existingProduct.quantity += 1;
-    } else {
-        var product = {
-            productId: productId,
-            productName: productName,
-            productPrice: productPrice,
-            productImage: productImage,
-            quantity: 1
-        };
-
-        cart.push(product);
-    }
-
-    sessionStorage.setItem("cart", JSON.stringify(cart));
-
-    alert("Item '" + productName + "' added");
-
-    form.reset();
-}
-</script>

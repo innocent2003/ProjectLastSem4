@@ -97,10 +97,11 @@
                     %>
                     <div class="product-widget">
                         <div class="product-img">
-                            <img src="resources/img/<%= product.getImageURL()%>" alt="">
+                            <a class="product-img" href="product.jsp?id=<%= product.getId()%>"><img src="resources/img/<%= product.getImageUrl()%>" alt=""></a>
                         </div>
                         <div class="product-body">
                             <h3 class="product-name"><a href="product.jsp?id=<%= product.getId()%>"><%= product.getProductName()%></a></h3>
+                            <h6><%= product.getRam()%>/<%= product.getStorage()%> - <%= product.getColor()%></h6>
                             <h4 class="product-price">$<%= product.getPrice()%></h4>
                         </div>
                     </div>
@@ -136,13 +137,15 @@
                     %>
                     <!-- product -->
                     <div class="col-md-4 col-xs-6">
+                        <!-- product -->
                         <div class="product">
                             <div class="product-img" style="padding-top: 20px;">
-                                <img src="resources/img/<%= product.getImageURL()%>" alt="">
+                                <a class="product-img" href="product.jsp?id=<%= product.getId()%>"><img src="resources/img/<%= product.getImageUrl()%>" alt=""></a>
                             </div>
                             <div class="product-body">
                                 <h3 class="product-name"><a href="product.jsp?id=<%= product.getId()%>"><%= product.getProductName()%></a></h3>
-                                <h4 class="product-price"><%= product.getPrice()%></h4>
+                                <h5><%= product.getRam()%>/<%= product.getStorage()%> - <%= product.getColor()%></h5>
+                                <h4 class="product-price">$<%= product.getPrice()%></h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -156,10 +159,21 @@
                                     <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                                 </div>
                             </div>
-                            <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                            </div>
+
+                            <form id="add-to-cart-form" method="post">
+                                <input type="hidden" id="productId" name="productId" value="<%= product.getId()%>">
+                                <input type="hidden" id="productName" name="productName" value="<%= product.getProductName()%>">
+                                <input type="hidden" id="productPrice" name="productPrice" value="<%= product.getPrice()%>">
+                                <input type="hidden" id="productImage" name="productImage" value="resources/img/<%= product.getImageUrl()%>">
+                                <input type="hidden" id="productRam" name="productRam" value="<%= product.getRam()%>">
+                                <input type="hidden" id="productStorage" name="productStorage" value="<%= product.getStorage()%>">
+                                <input type="hidden" id="productColor" name="productColor" value="<%= product.getColor()%>">
+                                <div class="add-to-cart">
+                                    <button class="add-to-cart-btn" onclick="addToCart(event)"><i class="fa fa-shopping-cart" action="add-to-cart"></i> Add to cart</button>
+                                </div>
+                            </form>
                         </div>
+                        <!-- /product -->
                     </div>
                     <%
                         }
