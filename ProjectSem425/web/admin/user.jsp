@@ -4,7 +4,15 @@
     Author     : Admin
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
+<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -251,7 +259,7 @@
                                         </div>
                                         <div class="font-weight-bold">
                                             <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
-                                            <div class="small text-gray-500">Emily Fowler Â· 58m</div>
+                                            <div class="small text-gray-500">Emily Fowler · 58m</div>
                                         </div>
                                     </a>
                                     <a class="dropdown-item d-flex align-items-center" href="#">
@@ -261,7 +269,7 @@
                                         </div>
                                         <div>
                                             <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
-                                            <div class="small text-gray-500">Jae Chun Â· 1d</div>
+                                            <div class="small text-gray-500">Jae Chun · 1d</div>
                                         </div>
                                     </a>
                                     <a class="dropdown-item d-flex align-items-center" href="#">
@@ -271,7 +279,7 @@
                                         </div>
                                         <div>
                                             <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-                                            <div class="small text-gray-500">Morgan Alvarez Â· 2d</div>
+                                            <div class="small text-gray-500">Morgan Alvarez · 2d</div>
                                         </div>
                                     </a>
                                     <a class="dropdown-item d-flex align-items-center" href="#">
@@ -281,7 +289,7 @@
                                         </div>
                                         <div>
                                             <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
-                                            <div class="small text-gray-500">Chicken the Dog Â· 2w</div>
+                                            <div class="small text-gray-500">Chicken the Dog · 2w</div>
                                         </div>
                                     </a>
                                     <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
@@ -334,25 +342,36 @@
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">User List</h6>
                             </div>
+                            <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+         url = "jdbc:mysql://localhost/javaproject"
+         user = "root"  password = ""/>
+
+         <sql:query dataSource = "${snapshot}" var = "result">
+            SELECT * from Users;
+         </sql:query>
+ 
+      
+      </table>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr class="text-center">
                                                 <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
+                                                <th>UserName</th>
+                                                <th>Password</th>
                                                 <th>Level</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            <tr class="text-center">
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
+                                            <c:forEach var = "row" items = "${result.rows}">
+                                                  <tr class="text-center">
+                                                    <td><c:out value="${row.id}"/></td>
+                                                <td><c:out value="${row.Username}"/></td>
+                                                <td><c:out value="${row.Password}"/></td>
+                                                <td><c:out value="${row.Role}"/></td>
                                                 <td>
                                                     <a href="usershow.jsp">
                                                         <i class="fas fa-fw fa-eye"></i>
@@ -363,6 +382,9 @@
                                                     <a class="text-danger" href=""><i class="fas fa-fw fa-trash"></i></a>
                                                 </td>
                                             </tr>
+                                            </c:forEach>
+                                          
+                                            
 
                                         </tbody>
                                     </table>
@@ -404,7 +426,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">Ã—</span>
+                            <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
