@@ -35,6 +35,7 @@
                <td> <c:out value = "${row.id}"/></td>
                <td> <c:out value = "${row.Username}"/></td>
                <td> <c:out value = "${row.Password}"/></td>
+               <td>${row.Username}</td>
             </tr>
          </c:forEach>
       </table>

@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,22 +20,23 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lemin
  */
+@WebServlet("/AddProductServlet")
 public class AddProductServlet extends HttpServlet {
 
  protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String Name = request.getParameter("Name");
-        String Email = request.getParameter("ProductName");
-        String Password = request.getParameter("ProductImage");
-        String Category_id = request.getParameter("Category_id");
-        String Price = request.getParameter("Quantity");
+        String ProductName = request.getParameter("ProductName");
+        String CategoryId = request.getParameter("CategoryId");
+        String BrandId = request.getParameter("BrandId");
+        String Price = request.getParameter("Price");
 
         try {
             Connection conn = getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO customers (Name,Email ,Password) VALUES (?, ?, ?)");
-            pstmt.setString(1, Name);
-            pstmt.setString(2, Email);
-            pstmt.setString(3, Password);
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO product (ProductName,CategoryId ,BrandId, Price) VALUES (?, ?, ?,?)");
+            pstmt.setString(1, ProductName);
+            pstmt.setString(2, CategoryId);
+            pstmt.setString(3, BrandId);
+            pstmt.setString(4, Price);
             pstmt.executeUpdate();
             conn.close();
         } catch (Exception e) {
