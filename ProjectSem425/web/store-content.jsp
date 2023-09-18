@@ -41,8 +41,8 @@
         <div class="row">
             <div class="col-md-12">
                 <ul class="breadcrumb-tree">
-                    <li><a href="../">Home</a></li>
-                    <li class="active"><a href="#">All Product</a></li>
+                    <li><a href="index.jsp">Home</a></li>
+                    <li class="active"><a href="store.jsp">Store</a></li>
                 </ul>
             </div>
         </div>

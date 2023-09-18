@@ -29,7 +29,7 @@
             <div class="col-md-12">
                 <h3 class="breadcrumb-header">Cart</h3>
                 <ul class="breadcrumb-tree">
-                    <li><a href="../">Home</a></li>
+                    <li><a href="index.jsp">Home</a></li>
                     <li class="active">Cart</li>
                 </ul>
             </div>
@@ -50,76 +50,28 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col"> </th>
+                            <th scope="col">Image</th>
                             <th scope="col">Product</th>
-                            <th scope="col">Available</th>
-                            <th scope="col" class="text-center">Quantity</th>
-                            <th scope="col" class="text-right">Price</th>
-                            <th> </th>
+                            <th scope="col">Ram</th>
+                            <th scope="col">Storage</th>
+                            <th scope="col">Color</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col" class="text-center">Price</th>
+                            <th scope="col" class="text-right">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="cartItems1"></tbody>
+                    <tfoot>
                         <tr>
-                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                            <td>Product Name Dada</td>
-                            <td>In stock</td>
-                            <td>
-                                <input id="form1" min="0" name="quantity" value="1" type="number"
-                                       class="form-control" onclick="this.parentNode.querySelector('input[type=number]')"/>  
-                            </td>
-                            <td class="text-right">124,90 ?</td>
-                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                            <td colspan="6"></td>
+                            <td class="text-center" id="totalPrice1"></td>
+                            <td></td>
                         </tr>
-                        <tr>
-                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                            <td>Product Name Toto</td>
-                            <td>In stock</td>
-                            <td>                              
-                                <input id="form1" min="0" name="quantity" value="1" type="number"
-                                       class="form-control" onclick="this.parentNode.querySelector('input[type=number]')"/>                        
-                            </td>
-                            <td class="text-right">33,90 ?</td>
-                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                        </tr>
-                        <tr>
-                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                            <td>Product Name Titi</td>
-                            <td>In stock</td>
-                            <td>
-                                <input id="form1" min="0" name="quantity" value="1" type="number"
-                                       class="form-control" onclick="this.parentNode.querySelector('input[type=number]')"/>  
-                            </td>
-                            <td class="text-right">70,00 ?</td>
-                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Sub-Total</td>
-                            <td class="text-right">255,90 ?</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Shipping</td>
-                            <td class="text-right">6,90 ?</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><strong>Total</strong></td>
-                            <td class="text-right"><strong>346,90 ?</strong></td>
-                        </tr>
-                    </tbody>
+                    </tfoot>
                 </table>
             </div>
         </div>
+
         <div class="col mb-2">
             <div class="row">
                 <div class="col-sm-12  col-md-6">
