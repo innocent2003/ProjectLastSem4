@@ -1,0 +1,50 @@
+.quantity-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-wrapper button {
+    margin: 0 5px;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.quantity-wrapper button:hover {
+    background-color: #ccc;
+}
+
+.product-name-cell{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.quantity-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swal2-popup {
+    top: -30% !important;
+    transform: translateY(0) !important;
+}
+
+.swal2-title {
+    font-size: 30px !important;
+}
+
+.swal2-content {
+    font-size: 30px !important;
+}
+
+.swal2-confirm,
+.swal2-cancel {
+  padding: 10px 20px;
+  font-size: 20px;
+}
+
