@@ -52,18 +52,19 @@
                         <tr>
                             <th scope="col">Image</th>
                             <th scope="col">Product</th>
-                            <th scope="col">Ram</th>
-                            <th scope="col">Storage</th>
-                            <th scope="col">Color</th>
-                            <th scope="col">Quantity</th>
+                            <th scope="col" class="text-center">Ram</th>
+                            <th scope="col" class="text-center">Storage</th>
+                            <th scope="col" class="text-center">Color</th>
+                            <th scope="col" class="text-center">Quantity</th>
                             <th scope="col" class="text-center">Price</th>
-                            <th scope="col" class="text-right">Action</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody id="cartItems1"></tbody>
-                    <tfoot>
+                    <tfoot> 
                         <tr>
-                            <td colspan="6"></td>
+                            <td colspan="5"></td>
+                            <td class="text-right"><b>Total:</b></td>
                             <td class="text-center" id="totalPrice1"></td>
                             <td></td>
                         </tr>
@@ -75,10 +76,10 @@
         <div class="col mb-2">
             <div class="row">
                 <div class="col-sm-12  col-md-6">
-                    <button class="btn btn-lg btn-block btn-light"><a href="store.jsp">Continue Shopping</a></button>
+                    <a href="store.jsp"><button class="btn btn-lg btn-block btn-light">Continue Shopping</button></a>
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
-                    <button class="btn btn-lg btn-block primary-btn text-uppercase"><a style="color: white" href="checkout.jsp">Checkout</a></button>
+                    <a style="color: white" href="checkout.jsp"><button class="btn btn-lg btn-block primary-btn text-uppercase">Checkout</button></a>
                 </div>
             </div>
         </div>
