@@ -55,22 +55,39 @@
         </div>
         <br />
         <div class="col-md-6">
-            <form class="my-form" method="post" action="">
-                <div class="form-group">
+            <form class="my-form" method="post" action="AddCustomerServlet">
+<!--                <div class="form-group">
                     <label for="form-name">Name</label>
-                    <input type="hidden" class="form-control" id="form-name" placeholder="User_id">
+                    <input type="hidden" class="form-control" id="form-name" placeholder="User_id" value="<%= session.getAttribute("userId") %>">
+                </div>-->
+                <div class="form-group">
+                    <label for="form-email">UserName</label>
+                    <input type="text" name="Username" class="form-control" id="form-email" placeholder="Username">
                 </div>
                 <div class="form-group">
-                    <label for="form-email">Email Address</label>
-                    <input type="email" class="form-control" id="form-email" placeholder="Email Address">
+                    <label for="form-subject">Password</label>
+                    <input type="text" name="Password" class="form-control" id="form-subject" placeholder="Password">
                 </div>
-                <div class="form-group">
-                    <label for="form-subject">Telephone</label>
-                    <input type="text" class="form-control" id="form-subject" placeholder="Subject">
-                </div>
-                <div class="form-group">
+                <input type="hidden" name="Role" value="Customer"/>
+<!--                <div class="form-group">
                     <label for="form-message">Email your Message</label>
                     <textarea class="form-control" id="form-message" placeholder="Message"></textarea>
+                </div>-->
+                <div class="form-group">
+                    <label for="form-message">Name </label>
+                    <input type="text" name="Name" class="form-control" id="form-subject" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="form-message">Address </label>
+                    <input type="text" name="Address" class="form-control" id="form-subject" placeholder="Address">
+                </div>
+                <div class="form-group">
+                    <label for="form-message">Phone </label>
+                    <input type="text" name="Phone" class="form-control" id="form-subject" placeholder="Phone">
+                </div>
+                <div class="form-group">
+                    <label for="form-message">Email </label>
+                    <input type="text" name="Email" class="form-control" id="form-subject" placeholder="Email">
                 </div>
                 <button class="btn primary-btn" type="submit">Contact Us</button>                
             </form>
@@ -78,5 +95,5 @@
     </div>
 </div>
 
-<h1><%= session.getAttribute("userId") %></h1>
+<h1></h1>
 <!-- /SECTION -->
