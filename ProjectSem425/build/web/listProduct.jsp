@@ -16,6 +16,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        E:\linhtinh\ProjectLastSem4\githubsem4\aa2\ProjectLastSem4\ProjectSem425\src\java\images
          <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
          url = "jdbc:mysql://localhost/javaproject2"
          user = "root"  password = ""/>

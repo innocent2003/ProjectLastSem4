@@ -45,10 +45,17 @@ public class LoginServlet extends HttpServlet {
             if (resultSet.next()) {
                 int userId = resultSet.getInt("Id");
                 String userName = resultSet.getString("Username");
+                String userRole = resultSet.getString("Role");
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", userId);
                 session.setAttribute("userName", userName);
-                response.sendRedirect("index.jsp"); // Redirect to the dashboard or any other page
+                
+                if("admin".equals(userRole)){
+                    response.sendRedirect("admin/user.jsp");
+                }else{
+                     response.sendRedirect("index.jsp"); // Redirect to the dashboard or any other page
+                }
+               
             } else {
                 response.sendRedirect("login.jsp?error=1"); // Redirect back to the login page with an error parameter
             }

@@ -8,6 +8,12 @@
     List<Product> samsungList = productDAO.getSamsungProducts();
     List<Product> appleList = productDAO.getAppleProducts();
 %>
+//<%
+//    if(session.getAttribute("userId") != null){
+//        chain.doFilter()
+//    }
+//
+//%>
 <nav id="navigation">
     <!-- container -->
     <div class="container">
