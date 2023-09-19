@@ -10,6 +10,22 @@
     }
     ProductDAO productDAO = new ProductDAO();
     Customer cus = productDAO.getCustomerById(userId);
+    String name = cus.getName();
+    String email = cus.getEmail();
+    String address = cus.getAddress();
+    String telephone = cus.getTelephone();
+    if (name == null) {
+        name = "empty";
+    }
+    if (email == null) {
+        email = "empty";
+    }
+    if (address == null) {
+        address = "empty";
+    }
+    if (telephone == null) {
+        telephone = "empty";
+    }
 %>
 <!-- NAVIGATION -->
         <nav id="navigation">
@@ -68,19 +84,19 @@
                             </div>
                             <div class="form-group">
                                 <label>Name: </label>
-                                <input class="input" type="text" name="last-name" placeholder="Name" readonly value="<%= cus.getName()%>">
+                                <input class="input" type="text" name="last-name" placeholder="Name" readonly value="<%= name %>">
                             </div>
                             <div class="form-group">
                                 <label>Email: </label>
-                                <input class="input" type="email" name="email" placeholder="Email" readonly value="<%= cus.getEmail()%>">
+                                <input class="input" type="email" name="email" placeholder="Email" readonly value="<%= email %>">
                             </div>
                             <div class="form-group">
                                 <label>Address: </label>
-                                <input class="input" type="readonly" name="address" placeholder="Address" readonly value="<%= cus.getAddress()%>">
+                                <input class="input" type="readonly" name="address" placeholder="Address" readonly value="<%= address %>">
                             </div>
                             <div class="form-group">
                                 <label>Telephone: </label>
-                                <input class="input" type="tel" name="tel" placeholder="Telephone" readonly value="<%= cus.getTelephone() %>">
+                                <input class="input" type="tel" name="tel" placeholder="Telephone" readonly value="<%= telephone %>">
                             </div>
                         </div>
                         <!-- /Customer Details -->
