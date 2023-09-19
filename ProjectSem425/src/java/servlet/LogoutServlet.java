@@ -38,7 +38,7 @@ public class LogoutServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LogoutServlet</title>");            
+            out.println("<title>Servlet LogoutServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet LogoutServlet at " + request.getContextPath() + "</h1>");
@@ -57,14 +57,21 @@ public class LogoutServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-//        processRequest(request, response);
-    HttpSession session = request.getSession(false);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
 
         if (session != null) {
             session.invalidate();
         }
+
+        // Xóa giỏ hàng từ sessionStorage trong JavaScript
+        String script = "<script>sessionStorage.removeItem('cart'); var cart = [];</script>";
+        response.setContentType("text/html");
+        response.getWriter().println(script);
+
+        // Xóa các thẻ đã được tạo trong hàm updateCartUI
+        String clearCartScript = "<script>document.getElementById('cartItems').innerHTML = '';</script>";
+        response.getWriter().println(clearCartScript);
 
         response.sendRedirect("login.jsp");
     }

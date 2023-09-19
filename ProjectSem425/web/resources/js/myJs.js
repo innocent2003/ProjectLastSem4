@@ -3,9 +3,44 @@ window.onload = function () {
     updateCartUI(cart);
 };
 
+$(document).ready(function () {
+    $('.product-thumb-imgs').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        asNavFor: '.product-main-img',
+        dots: false,
+        focusOnSelect: true
+    });
+
+    $('.product-main-img').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.product-thumb-imgs'
+    });
+
+    $('.thumb-img').click(function () {
+        var selectedImageSrc = $(this).find('img').attr('src');
+        $('#selected-image').attr('src', selectedImageSrc);
+    });
+});
+const productThumbs = document.querySelectorAll('.product-thumb');
+let selectedThumbIndex = 0;
+let isSlideRunning = false;
+
+productThumbs.forEach((thumb, index) => {
+    thumb.addEventListener('click', () => {
+        productThumbs.forEach((thumb) => {
+            thumb.classList.remove('selected');
+        });
+        thumb.classList.add('selected');
+        selectedThumbIndex = index;
+    });
+});
+
 function addToCart(event) {
     event.preventDefault();
-
     var form = event.target.closest("form");
     var productId = form.querySelector("#productId").value;
     var productName = form.querySelector("#productName").value;
@@ -43,7 +78,7 @@ function addToCart(event) {
     Swal.fire({
         icon: 'success',
         title: 'Success',
-        text: productName + ' added to card!',
+        text: productName + ' added to cart!',
         timer: 2000,
     });
 }
@@ -131,39 +166,39 @@ function updateCartUI(cart) {
 }
 
 function createDeleteHandler(item) {
-  return function() {
-    Swal.fire({
-      title: 'Delete',
-      text: 'Are you sure?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes',
-      cancelButtonText: 'No',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        removeFromCart(item);
-        updateCartUI(getCart());
-      }
-    });
-  };
+    return function () {
+        Swal.fire({
+            title: 'Delete',
+            text: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeFromCart(item);
+                updateCartUI(getCart());
+            }
+        });
+    };
 }
 
 function createDeleteHandler1(item) {
-  return function() {
-    Swal.fire({
-      title: 'Delete',
-      text: 'Are you sure?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes',
-      cancelButtonText: 'No',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        removeFromCart1(item);
-        updateCartUI(getCart());
-      }
-    });
-  };
+    return function () {
+        Swal.fire({
+            title: 'Delete',
+            text: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeFromCart1(item);
+                updateCartUI(getCart());
+            }
+        });
+    };
 }
 
 function removeFromCart(item) {
@@ -183,6 +218,13 @@ function removeFromCart(item) {
         cart.splice(index, 1);
         sessionStorage.setItem('cart', JSON.stringify(cart));
     }
+}
+
+function removeFromCart1(index) {
+    cart.splice(index, 1);
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+    updateCartUI(getCart())
 }
 
 function getCart() {
@@ -290,10 +332,12 @@ function changeProductQuantity(index, change) {
     updateCartUI(getCart());
 }
 
-function removeFromCart1(index) {
-    cart.splice(index, 1);
-    sessionStorage.setItem('cart', JSON.stringify(cart));
-    updateCart();
-    updateCartUI(getCart())
-}
+document.querySelector('#logoutLink').addEventListener('click', function() {
+  // Xóa toàn bộ giỏ hàng trong biến cart
+  cart = [];
+
+  // Xóa toàn bộ giỏ hàng trong sessionStorage
+  sessionStorage.removeItem('cart');
+});
+
 updateCart();

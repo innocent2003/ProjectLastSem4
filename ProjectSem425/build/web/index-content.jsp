@@ -152,8 +152,7 @@
                         <!-- tab -->
                         <div id="tab2" class="tab-pane fade in active">
                             <div class="products-slick" data-nav="#slick-nav-2">
-                                <%
-                                    if (productList != null) {
+                                <%                                    if (productList != null) {
                                         for (Product product : productList) {
                                 %>
                                 <!-- product -->
@@ -187,9 +186,21 @@
                                         <input type="hidden" id="productRam" name="productRam" value="<%= product.getRam()%>">
                                         <input type="hidden" id="productStorage" name="productStorage" value="<%= product.getStorage()%>">
                                         <input type="hidden" id="productColor" name="productColor" value="<%= product.getColor()%>">
+                                        <%
+                                            if (session.getAttribute("userId") != null) {
+                                        %>
                                         <div class="add-to-cart">
-                                            <button class="add-to-cart-btn" onclick="addToCart(event)"><i class="fa fa-shopping-cart" action="add-to-cart"></i> Add to cart</button>
+                                            <button class="add-to-cart-btn" onclick="addToCart(event)"><i class="fa fa-shopping-cart"></i> Add to cart</button>
                                         </div>
+                                        <%
+                                        } else {
+                                        %>
+                                        <div class="add-to-cart">
+                                            <a href="login.jsp" class="add-to-cart-btn" style="display: inline-flex; justify-content: center; align-items: center;"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                        </div>
+                                        <%
+                                        }
+                                        %>
                                     </form>
                                 </div>
                                 <!-- /product -->

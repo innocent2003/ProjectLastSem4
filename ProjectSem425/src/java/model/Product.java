@@ -5,11 +5,14 @@
  */
 package model;
 
+import java.util.List;
+
 /**
  *
  * @author Expguy
  */
 public class Product {
+
     private int id;
     private String productName;
     private double price;
@@ -23,6 +26,7 @@ public class Product {
     private String brandName;
     private String description;
     private int quantity;
+    private List<String> imageList;
 
     public Product() {
     }
@@ -32,6 +36,23 @@ public class Product {
         this.productName = productName;
         this.price = price;
         this.imageUrl = imageUrl;
+    }
+
+    public Product(int id, String productName, double price, String imageUrl, String ram, String storage, String color, int categoryId, String categoryName, int brandId, String brandName, String description, int quantity, List<String> imageList) {
+        this.id = id;
+        this.productName = productName;
+        this.price = price;
+        this.imageUrl = imageUrl;
+        this.ram = ram;
+        this.storage = storage;
+        this.color = color;
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.brandId = brandId;
+        this.brandName = brandName;
+        this.description = description;
+        this.quantity = quantity;
+        this.imageList = imageList;
     }
 
     public Product(int id, String productName, double price, String imageUrl, String ram, String storage, String color) {
@@ -58,6 +79,14 @@ public class Product {
         this.brandName = brandName;
         this.description = description;
         this.quantity = quantity;
+    }
+
+    public List<String> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<String> imageList) {
+        this.imageList = imageList;
     }
 
     public int getId() {

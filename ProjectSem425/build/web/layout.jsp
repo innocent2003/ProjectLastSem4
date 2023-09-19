@@ -44,7 +44,7 @@
                     <ul class="header-links pull-right">
                         <% if (session.getAttribute("userId") != null) {%>
                         <li><a href="account.jsp"><i class="fa fa-user"></i>Welcome, <%= session.getAttribute("userName")%></a></li>
-                        <li><a href="LogoutServlet"><i class="fa fa-user"></i>Logout</a></li>
+                        <li><a href="LogoutServlet" id="logoutLink"><i class="fa fa-user"></i>Logout</a></li>
                             <% } else { %>
                         <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
                         <li><a>|</a></li>
@@ -274,5 +274,11 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
         <script src="resources/js/myJs.js"></script>
+        <script>
+                document.getElementById('logoutLink').addEventListener('click', function () {
+                    cart = [];
+                    sessionStorage.removeItem('cart');
+                });
+        </script>
     </body>
 </html>

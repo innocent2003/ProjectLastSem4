@@ -56,34 +56,33 @@
     <div class="container">
         <!-- row -->
         <div class="row">
-            <!-- Product main img -->
+            <!-- HTML -->
             <div class="col-md-5 col-md-push-2">
-                <div id="product-main-img">
+                <div id="product-main-img" class="product-carousel">
+                    <%
+                        List<String> imageList = product.getImageList();
+                        for (String imageUrl : imageList) {
+                    %>
                     <div class="product-preview">
-                        <img src="resources/img/<%= product.getImageUrl()%>" alt="">
+                        <img src="resources/img/<%= imageUrl%>" alt="">
                     </div>
+                    <%
+                        }
+                    %>
                 </div>
             </div>
-            <!-- /Product main img -->
-
             <!-- Product thumb imgs -->
-            <div class="col-md-2  col-md-pull-5">
-                <div id="product-imgs">
-                    <div class="product-preview">
-                        <img src="resources/img/<%= product.getImageUrl()%>" alt="">
+            <div class="col-md-2 col-md-pull-5">
+                <div id="product-imgs" class="product-thumb-carousel">
+                    <%
+                        for (String imageUrl : imageList) {
+                    %>
+                    <div class="product-thumb">
+                        <img src="resources/img/<%= imageUrl%>" alt="">
                     </div>
-
-                    <div class="product-preview">
-                        <img src="resources/img/product03.png" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="resources/img/product06.png" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="resources/img/product08.png" alt="">
-                    </div>
+                    <%
+                        }
+                    %>
                 </div>
             </div>
             <!-- /Product thumb imgs -->
@@ -100,38 +99,38 @@
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-o"></i>
                         </div>
-                        <a class="review-link" href="#">10 Review(s) | Add your review</a>
-                    </div>
-                    <div  style="margin-bottom: -30px">
-                        <h3 class="product-price">$<%= product.getPrice()%></h3>
-                        <span class="product-available">In Stock</span>
+                        <span>10 Review(s)</span>
                     </div>
                     <div class="product-options">
-                        <label>
-                            Size
-                            <select class="input-select">
-                                <option value="0">X</option>
-                            </select>
-                        </label>
-                        <label>
-                            Color
-                            <select class="input-select">
-                                <option value="0">Red</option>
-                            </select>
-                        </label>
+                        <span>Ram: <b><%= product.getRam()%>GB</b></span>
+                        <span style="margin-left: 20px; margin-right: 20px">Storage: <b><%= product.getStorage()%>GB</b></span>
+                        <span>Color: <b><%= product.getColor()%></b></span>
                     </div>
 
-                    <div class="add-to-cart">
-                        <div class="qty-label">
-                            Qty
-                            <div class="input-number">
-                                <input type="number">
-                                <span class="qty-up">+</span>
-                                <span class="qty-down">-</span>
-                            </div>
+                    <form id="add-to-cart-form" method="post">
+                        <input type="hidden" id="productId" name="productId" value="<%= product.getId()%>">
+                        <input type="hidden" id="productName" name="productName" value="<%= product.getProductName()%>">
+                        <input type="hidden" id="productPrice" name="productPrice" value="<%= product.getPrice()%>">
+                        <input type="hidden" id="productImage" name="productImage" value="resources/img/<%= product.getImageUrl()%>">
+                        <input type="hidden" id="productRam" name="productRam" value="<%= product.getRam()%>">
+                        <input type="hidden" id="productStorage" name="productStorage" value="<%= product.getStorage()%>">
+                        <input type="hidden" id="productColor" name="productColor" value="<%= product.getColor()%>">
+                        <%
+                            if (session.getAttribute("userId") != null) {
+                        %>
+                        <div class="add-to-cart">
+                            <button class="add-to-cart-btn" onclick="addToCart(event)"><i class="fa fa-shopping-cart"></i> Add to cart</button>
                         </div>
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                    </div>
+                        <%
+                        } else {
+                        %>
+                        <div class="add-to-cart">
+                            <a href="login.jsp" class="add-to-cart-btn" style="display: inline-flex; justify-content: center; align-items: center;"><i class="fa fa-shopping-cart" style="padding-left: 20px"></i> Add to cart</a>
+                        </div>
+                        <%
+                            }
+                        %>
+                    </form>
 
                     <ul class="product-btns">
                         <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
@@ -336,8 +335,6 @@
                                 <div class="col-md-3">
                                     <div id="review-form">
                                         <form class="review-form">
-                                            <input class="input" type="text" placeholder="Your Name">
-                                            <input class="input" type="email" placeholder="Your Email">
                                             <textarea class="input" placeholder="Your Review"></textarea>
                                             <div class="input-rating">
                                                 <span>Your Rating: </span>
@@ -388,14 +385,21 @@
             %>
             <!-- product -->
             <div class="col-md-3 col-xs-6">
+                <!-- product -->
                 <div class="product">
-                    <div class="product-img">
-                        <img src="resources/img/<%= pb.getImageUrl()%>" alt="">
+                    <div class="product-img" style="padding-top: 20px;">
+                        <a class="product-img" href="product.jsp?id=<%= pb.getId()%>"><img src="resources/img/<%= pb.getImageUrl()%>" alt=""></a>
                     </div>
                     <div class="product-body">
                         <h3 class="product-name"><a href="product.jsp?id=<%= pb.getId()%>"><%= pb.getProductName()%></a></h3>
+                        <h5><%= pb.getRam()%>/<%= pb.getStorage()%> - <%= pb.getColor()%></h5>
                         <h4 class="product-price">$<%= pb.getPrice()%></h4>
                         <div class="product-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
                         </div>
                         <div class="product-btns">
                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
@@ -403,10 +407,33 @@
                             <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                         </div>
                     </div>
-                    <div class="add-to-cart">
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                    </div>
+
+                    <form id="add-to-cart-form" method="post">
+                        <input type="hidden" id="productId" name="productId" value="<%= pb.getId()%>">
+                        <input type="hidden" id="productName" name="productName" value="<%= pb.getProductName()%>">
+                        <input type="hidden" id="productPrice" name="productPrice" value="<%= pb.getPrice()%>">
+                        <input type="hidden" id="productImage" name="productImage" value="resources/img/<%= pb.getImageUrl()%>">
+                        <input type="hidden" id="productRam" name="productRam" value="<%= pb.getRam()%>">
+                        <input type="hidden" id="productStorage" name="productStorage" value="<%= pb.getStorage()%>">
+                        <input type="hidden" id="productColor" name="productColor" value="<%= pb.getColor()%>">
+                        <%
+                            if (session.getAttribute("userId") != null) {
+                        %>
+                        <div class="add-to-cart">
+                            <button class="add-to-cart-btn" onclick="addToCart(event)"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+                        </div>
+                        <%
+                        } else {
+                        %>
+                        <div class="add-to-cart">
+                            <a href="login.jsp" class="add-to-cart-btn" style="display: inline-flex; justify-content: center; align-items: center;"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                        </div>
+                        <%
+                            }
+                        %>
+                    </form>
                 </div>
+                <!-- /product -->
             </div>
             <!-- /product -->
             <div class="clearfix visible-sm visible-xs"></div>
