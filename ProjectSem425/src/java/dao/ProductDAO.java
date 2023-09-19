@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import model.Brand;
+import model.Customer;
 import model.Product;
 
 public class ProductDAO {
@@ -274,15 +275,15 @@ public class ProductDAO {
         Class.forName("com.mysql.jdbc.Driver");
         Connection conn = DriverManager.getConnection(url, user, password);
         try {
-            String query = "SELECT p.id, p.productName, p.price, p.categoryId, p.brandId, pd.ram, pd.storage, pd.color, pd.description, pd.quantity, "
-                    + "(SELECT pi.url FROM product_image pi WHERE pi.productid = p.id LIMIT 1) AS url, "
+            String query = "SELECT p.id, p.productName, p.price, p.categoryId, p.brandId, pd.ram, pd.storage, pd.color, pd.description, pd.quantity,"
+                    + "(SELECT pi.url FROM product_image pi WHERE pi.productId = p.id LIMIT 1) AS url, "
                     + "c.categoryname, b.brandname "
                     + "FROM product p "
-                    + "JOIN product_detail pd ON p.id = pd.productid "
-                    + "JOIN product_image pi ON p.id = pi.productid "
+                    + "JOIN product_detail pd ON p.id = pd.productId "
                     + "JOIN category c ON p.categoryid = c.id "
                     + "JOIN brand b ON p.brandid = b.id "
-                    + "WHERE brandId = ?";
+                    + "WHERE p.brandId = ?";
+
             statement = conn.prepareStatement(query);
             statement.setInt(1, brandIds);
             resultSet = statement.executeQuery();
@@ -319,5 +320,41 @@ public class ProductDAO {
             }
         }
         return productList;
+    }
+    
+    public Customer getCustomerById(int customerId) throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM customers WHERE user_id = ?";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        Customer customer = new Customer();
+
+        String url = "jdbc:mysql://localhost:3306/javaproject";
+        String user = "root";
+        String password = "";
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(url, user, password);
+        try {
+            statement = conn.prepareStatement(query);
+            statement.setInt(1, customerId);
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String address = resultSet.getString("address");
+                String telephone = resultSet.getString("phone");
+                customer = new Customer(id, name, email, address, telephone);
+            }
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+        }
+
+        return customer;
     }
 }

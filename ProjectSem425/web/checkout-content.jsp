@@ -1,4 +1,17 @@
-        <!-- NAVIGATION -->
+<%@page import="dao.ProductDAO" %>
+<%@page import="model.Customer"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+    session = request.getSession();
+    Object userIdObj = session.getAttribute("userId");
+    int userId = 0;
+    if (userIdObj != null) {
+        userId = (Integer) userIdObj;
+    }
+    ProductDAO productDAO = new ProductDAO();
+    Customer cus = productDAO.getCustomerById(userId);
+%>
+<!-- NAVIGATION -->
         <nav id="navigation">
             <!-- container -->
             <div class="container">
@@ -54,16 +67,20 @@
                                 <h3 class="title">Customer</h3>
                             </div>
                             <div class="form-group">
-                                <input class="input" type="text" name="last-name" placeholder="Name" readonly>
+                                <label>Name: </label>
+                                <input class="input" type="text" name="last-name" placeholder="Name" readonly value="<%= cus.getName()%>">
                             </div>
                             <div class="form-group">
-                                <input class="input" type="email" name="email" placeholder="Email" readonly>
+                                <label>Email: </label>
+                                <input class="input" type="email" name="email" placeholder="Email" readonly value="<%= cus.getEmail()%>">
                             </div>
                             <div class="form-group">
-                                <input class="input" type="readonly" name="address" placeholder="Address" readonly>
+                                <label>Address: </label>
+                                <input class="input" type="readonly" name="address" placeholder="Address" readonly value="<%= cus.getAddress()%>">
                             </div>
                             <div class="form-group">
-                                <input class="input" type="tel" name="tel" placeholder="Telephone" readonly>
+                                <label>Telephone: </label>
+                                <input class="input" type="tel" name="tel" placeholder="Telephone" readonly value="<%= cus.getTelephone() %>">
                             </div>
                         </div>
                         <!-- /Customer Details -->

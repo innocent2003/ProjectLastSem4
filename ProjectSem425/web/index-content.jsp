@@ -13,7 +13,8 @@
 //        chain.doFilter()
 //    }
 //
-//%>
+//
+%>
 <nav id="navigation">
     <!-- container -->
     <div class="container">
