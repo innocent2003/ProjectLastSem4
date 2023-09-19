@@ -3,7 +3,10 @@
     Created on : Sep 18, 2023, 10:38:16 PM
     Author     : lemin
 --%>
-
+<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
+<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 <!-- NAVIGATION -->
 <nav id="navigation">
     <!-- container -->
@@ -55,39 +58,27 @@
         </div>
         <br />
         <div class="col-md-6">
-            <form class="my-form" method="post" action="AddCustomerServlet">
+            <form class="my-form" method="post" action="UpdateCustomerServlet">
 <!--                <div class="form-group">
                     <label for="form-name">Name</label>
                     <input type="hidden" class="form-control" id="form-name" placeholder="User_id" value="<%= session.getAttribute("userId") %>">
                 </div>-->
+                <input type="text" value="<%= session.getAttribute("userId")  %>"/>
                 <div class="form-group">
                     <label for="form-email">UserName</label>
-                    <input type="text" name="Username" class="form-control" id="form-email" placeholder="Username">
+                    <input type="text" name="name" class="form-control" id="form-email" placeholder="Username">
                 </div>
                 <div class="form-group">
                     <label for="form-subject">Password</label>
-                    <input type="text" name="Password" class="form-control" id="form-subject" placeholder="Password">
+                    <input type="text" name="address" class="form-control" id="form-subject" placeholder="Password">
                 </div>
-                <input type="hidden" name="Role" value="Customer"/>
-<!--                <div class="form-group">
-                    <label for="form-message">Email your Message</label>
-                    <textarea class="form-control" id="form-message" placeholder="Message"></textarea>
-                </div>-->
-                <div class="form-group">
-                    <label for="form-message">Name </label>
-                    <input type="text" name="Name" class="form-control" id="form-subject" placeholder="Name">
+              <div class="form-group">
+                    <label for="form-subject">Password</label>
+                    <input type="text" name="phone" class="form-control" id="form-subject" placeholder="Password">
                 </div>
                 <div class="form-group">
-                    <label for="form-message">Address </label>
-                    <input type="text" name="Address" class="form-control" id="form-subject" placeholder="Address">
-                </div>
-                <div class="form-group">
-                    <label for="form-message">Phone </label>
-                    <input type="text" name="Phone" class="form-control" id="form-subject" placeholder="Phone">
-                </div>
-                <div class="form-group">
-                    <label for="form-message">Email </label>
-                    <input type="text" name="Email" class="form-control" id="form-subject" placeholder="Email">
+                    <label for="form-subject">Password</label>
+                    <input type="text" name="email" class="form-control" id="form-subject" placeholder="Password">
                 </div>
                 <button class="btn primary-btn" type="submit">Contact Us</button>                
             </form>
