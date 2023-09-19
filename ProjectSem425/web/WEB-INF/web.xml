@@ -4,9 +4,33 @@
         <servlet-name>AddCommentServlet</servlet-name>
         <servlet-class>servlet.AddCommentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteProductServlet</servlet-name>
+        <servlet-class>servlet.DeleteProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductImageServlet</servlet-name>
+        <servlet-class>servlet.ProductImageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCustomerServlet</servlet-name>
+        <servlet-class>servlet.AddCustomerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddCommentServlet</servlet-name>
         <url-pattern>/AddCommentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProductServlet</servlet-name>
+        <url-pattern>/DeleteProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductImageServlet</servlet-name>
+        <url-pattern>/ProductImageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCustomerServlet</servlet-name>
+        <url-pattern>/AddCustomerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

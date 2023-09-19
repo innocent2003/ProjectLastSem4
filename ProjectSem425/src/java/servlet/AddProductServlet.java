@@ -43,7 +43,7 @@ public class AddProductServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("addProduct.jsp");
     }
 
     private Connection getConnection() throws Exception {

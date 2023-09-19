@@ -43,6 +43,7 @@
                         <% if (session.getAttribute("userId") != null) {%>
                         <li><a href="account.jsp"><i class="fa fa-user"></i>Welcome, <%= session.getAttribute("userName")%></a></li>
                         <li><a href="LogoutServlet"><i class="fa fa-user"></i>Logout</a></li>
+                        <li><a href="customer.jsp"><i class="fa fa-user"></i>Customer detail</a></li>
                             <% } else { %>
                         <li><a href="login.jsp"><i class="fa fa-user"></i> Login</a></li>
                         <li><a>|</a></li>

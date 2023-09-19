@@ -3,9 +3,37 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4/ProjectSem425/web/product.jsp</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4/ProjectSem425/web/index.jsp</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4/ProjectSem425/web/product-content.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/addProduct.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/test.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/src/java/servlet/AddCustomerServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/admin/useredit.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/index.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/WEB-INF/web.xml</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/store.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/store-content.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/src/java/servlet/DeleteProductServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/register.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/src/java/servlet/LoginServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/src/java/model/Customers.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/customer-content.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/admin/productshow.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/listProduct.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/src/java/servlet/ProductDetailServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/admin/usershow.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/src/java/servlet/AddProductServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/layout.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/login.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/contact-content.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/src/java/servlet/ProductImageServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/product-content.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/customer.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/product.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/checkout.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/src/java/servlet/AddCategoryServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/src/java/servlet/AddCommentServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/listUser.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/contact.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa2/ProjectLastSem4/ProjectSem425/web/index-content.jsp</file>
         </group>
     </open-files>
 </project-private>

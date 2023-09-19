@@ -20,18 +20,18 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/product-content")
 public class ProductDetailServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Trích xuất tham số ID từ URL
-        String productId = request.getParameter("id");
-
-        // Lấy thông tin chi tiết sản phẩm từ cơ sở dữ liệu hoặc nơi lưu trữ khác
-
-        // Gán thông tin sản phẩm vào request attribute để truyền dữ liệu cho view
-        request.setAttribute("productId", productId);
-
-        // Forward yêu cầu đến view productDetail.jsp
-        RequestDispatcher dispatcher = request.getRequestDispatcher("product-content.jsp");
-        dispatcher.forward(request, response);
-    }
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        // Trích xuất tham số ID từ URL
+//        String productId = request.getParameter("id");
+//
+//        // Lấy thông tin chi tiết sản phẩm từ cơ sở dữ liệu hoặc nơi lưu trữ khác
+//
+//        // Gán thông tin sản phẩm vào request attribute để truyền dữ liệu cho view
+//        request.setAttribute("productId", productId);
+//
+//        // Forward yêu cầu đến view productDetail.jsp
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("product-content.jsp");
+//        dispatcher.forward(request, response);
+//    }
 }
 

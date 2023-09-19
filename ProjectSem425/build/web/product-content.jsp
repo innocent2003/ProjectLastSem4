@@ -335,7 +335,7 @@
                                 <!-- Review Form -->
                                 <div class="col-md-3">
                                     <div id="review-form">
-                                        <form class="review-form">
+                                        <form method="post" class="review-form">
                                             <input class="input" type="text" placeholder="Your Name">
                                             <input class="input" type="email" placeholder="Your Email">
                                             <textarea class="input" placeholder="Your Review"></textarea>
@@ -349,7 +349,7 @@
                                                     <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
                                                 </div>
                                             </div>
-                                            <button class="primary-btn">Submit</button>
+                                            <button type="submit" class="primary-btn">Submit</button>
                                         </form>
                                     </div>
                                 </div>

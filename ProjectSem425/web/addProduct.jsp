@@ -45,5 +45,32 @@
             Price: <input type="number" name="Price"/>
             <input type="submit" value="Submit"/>
         </form>
+            
+            <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+         url = "jdbc:mysql://localhost/javaproject"
+         user = "root"  password = ""/>
+
+         <sql:query dataSource = "${snapshot}" var = "result">
+            SELECT * from Product;
+         </sql:query>
+ 
+      <table border = "1" width = "100%">
+         <tr>
+            <th> ID</th>
+            <th>Product Name</th>
+             <th>Product Image</th>
+            <th>Price</th>
+            <th>Quantitiy</th>
+         </tr>
+         
+         <c:forEach var = "row" items = "${result.rows}">
+            <tr>
+               <td> <c:out value = "${row.Id}"/></td>
+               <td> <c:out value = "${row.ProductName}"/></td>
+               <td> <c:out value = "${row.Price}"/></td>
+               <td></td>
+            </tr>
+         </c:forEach>
+      </table>
     </body>
 </html>
