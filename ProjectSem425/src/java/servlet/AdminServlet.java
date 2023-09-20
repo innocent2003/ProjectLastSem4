@@ -7,35 +7,35 @@ package servlet;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
 /**
  *
  * @author lemin
  */
-@MultipartConfig
-//@WebServlet("admin/AddProductServlet")
-public class AddProductServlet1 extends HttpServlet {
+@WebServlet(name = "AdminServlet", urlPatterns = {"/admint/*"})
+public class AdminServlet extends HttpServlet {
+    
+     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Hiển thị trang đăng nhập
+        request.getRequestDispatcher("/admin/demoProduct.jsp").forward(request, response);
+    }
+    
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       
         String productName = request.getParameter("productName");
@@ -108,5 +108,4 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             // Handle database errors
         }
     }
-   
 }

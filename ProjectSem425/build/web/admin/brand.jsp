@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
+<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -330,6 +334,13 @@
                         </div>
 
                         <!-- DataTales Example -->
+                              <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+         url = "jdbc:mysql://localhost/javaproject"
+         user = "root"  password = ""/>
+
+         <sql:query dataSource = "${snapshot}" var = "result">
+            SELECT * from brand;
+         </sql:query>
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Brand List</h6>
@@ -347,10 +358,11 @@
                                         </thead>
 
                                         <tbody>
+                                            <c:forEach var="root" items="${result.rows}">
                                             <tr class="text-center">
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
+                                                <td><c:out value="${row.id}"/></td>
+                                                <td><c:out value="${row.BrandName}"/></td>
+                                                <td><c:out value="${row.status}"/></td>
                                                 <td>                                                
                                                     <a class="text-success m-3" href="brandedit.jsp">
                                                         <i class="fas fa-fw fa-edit"></i>
@@ -358,6 +370,8 @@
                                                     <a class="text-danger" href=""><i class="fas fa-fw fa-trash"></i></a>
                                                 </td>
                                             </tr>
+                                            </c:forEach>
+                                           
 
                                         </tbody>
                                     </table>

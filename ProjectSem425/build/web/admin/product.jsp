@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
+<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -334,6 +338,13 @@
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Product List</h6>
                             </div>
+                            
+                            <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+         url = "jdbc:mysql://localhost/javaproject"
+         user = "root"  password = ""/>
+        <sql:query dataSource = "${snapshot}" var = "result">
+            SELECT * from product ;
+         </sql:query>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -352,12 +363,11 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr class="text-center">
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
+                                            
+                                            <c:forEach var="row" items="${result.rows}">
+                                                <tr class="text-center">
+                                                    <td><c:out value="${row.ProductName}"/></td>
+                                               
                                                 <td>$320,800</td>
                                                 <td>RAM 4GB</td>
                                                 <td>61</td>
@@ -371,6 +381,9 @@
                                                     <a class="text-danger" href=""><i class="fas fa-fw fa-trash"></i></a>
                                                 </td>
                                             </tr>
+                                            </c:forEach>
+
+                                            
                                         </tbody>
                                     </table>
                                 </div>
