@@ -236,7 +236,7 @@
     <div class="container">
         <!-- row -->
         <div class="row">
-            <div class="col-md-4 col-xs-6">
+            <div class="col-md-4 col-xs-6" >
                 <div class="section-title">
                     <h4 class="title">Xiaomi</h4>
                 </div>
