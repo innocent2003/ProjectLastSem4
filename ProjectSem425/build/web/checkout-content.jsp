@@ -1,4 +1,33 @@
-        <!-- NAVIGATION -->
+<%@page import="dao.ProductDAO" %>
+<%@page import="model.Customer"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+    session = request.getSession();
+    Object userIdObj = session.getAttribute("userId");
+    int userId = 0;
+    if (userIdObj != null) {
+        userId = (Integer) userIdObj;
+    }
+    ProductDAO productDAO = new ProductDAO();
+    Customer cus = productDAO.getCustomerById(userId);
+    String name = cus.getName();
+    String email = cus.getEmail();
+    String address = cus.getAddress();
+    String telephone = cus.getTelephone();
+    if (name == null) {
+        name = "empty";
+    }
+    if (email == null) {
+        email = "empty";
+    }
+    if (address == null) {
+        address = "empty";
+    }
+    if (telephone == null) {
+        telephone = "empty";
+    }
+%>
+<!-- NAVIGATION -->
         <nav id="navigation">
             <!-- container -->
             <div class="container">
@@ -54,16 +83,20 @@
                                 <h3 class="title">Customer</h3>
                             </div>
                             <div class="form-group">
-                                <input class="input" type="text" name="last-name" placeholder="Name" readonly>
+                                <label>Name: </label>
+                                <input class="input" type="text" name="last-name" placeholder="Name" readonly value="<%= name %>">
                             </div>
                             <div class="form-group">
-                                <input class="input" type="email" name="email" placeholder="Email" readonly>
+                                <label>Email: </label>
+                                <input class="input" type="email" name="email" placeholder="Email" readonly value="<%= email %>">
                             </div>
                             <div class="form-group">
-                                <input class="input" type="readonly" name="address" placeholder="Address" readonly>
+                                <label>Address: </label>
+                                <input class="input" type="readonly" name="address" placeholder="Address" readonly value="<%= address %>">
                             </div>
                             <div class="form-group">
-                                <input class="input" type="tel" name="tel" placeholder="Telephone" readonly>
+                                <label>Telephone: </label>
+                                <input class="input" type="tel" name="tel" placeholder="Telephone" readonly value="<%= telephone %>">
                             </div>
                         </div>
                         <!-- /Customer Details -->
