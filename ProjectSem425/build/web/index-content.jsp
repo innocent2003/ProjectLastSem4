@@ -72,7 +72,7 @@
                     </ul>
                     <h2 class="text-uppercase">hot deal this week</h2>
                     <p>New Collection Up to 50% OFF</p>
-                    <a class="primary-btn cta-btn" href="#">Shop now</a>
+                    <a class="primary-btn cta-btn" href="store.jsp">Shop now</a>
                 </div>
             </div>
         </div>
@@ -206,7 +206,7 @@
                                             <a href="login.jsp" class="add-to-cart-btn" style="display: inline-flex; justify-content: center; align-items: center;"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                         </div>
                                         <%
-                                        }
+                                            }
                                         %>
                                     </form>
                                 </div>

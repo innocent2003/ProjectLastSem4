@@ -38,9 +38,9 @@
         <div class="row">
             <div class="col-md-12">
                 <ul class="breadcrumb-tree">
-                    <li><a href="../">Home</a></li>
-                    <li><a href="#">All Categories</a></li>
-                    <li class="active">Product detail</li>
+                    <li><a href="index.jsp">Home</a></li>
+                    <li><a href="store.jsp">Store</a></li>
+                    <li class="active">Product</li>
                 </ul>
             </div>
         </div>
@@ -334,13 +334,8 @@
                                 <!-- Review Form -->
                                 <div class="col-md-3">
                                     <div id="review-form">
-<<<<<<< HEAD
                                         <form class="review-form">
-=======
                                         <form method="post" class="review-form">
-                                            <input class="input" type="text" placeholder="Your Name">
-                                            <input class="input" type="email" placeholder="Your Email">
->>>>>>> f05cf3167eb6e18759bebcf4150a78661f4ac0e3
                                             <textarea class="input" placeholder="Your Review"></textarea>
                                             <div class="input-rating">
                                                 <span>Your Rating: </span>

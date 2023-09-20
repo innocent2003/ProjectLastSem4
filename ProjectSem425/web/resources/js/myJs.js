@@ -80,6 +80,8 @@ function addToCart(event) {
         title: 'Success',
         text: productName + ' added to cart!',
         timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: true,
     });
 }
 
@@ -178,6 +180,14 @@ function createDeleteHandler(item) {
             if (result.isConfirmed) {
                 removeFromCart(item);
                 updateCartUI(getCart());
+                Swal.fire({
+                    title: 'Item cleared',
+                    text: 'Your item has been cleared.',
+                    icon: 'success',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: true,
+                });
             }
         });
     };
@@ -196,6 +206,14 @@ function createDeleteHandler1(item) {
             if (result.isConfirmed) {
                 removeFromCart1(item);
                 updateCartUI(getCart());
+                Swal.fire({
+                    title: 'Item cleared',
+                    text: 'Your item has been cleared.',
+                    icon: 'success',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: true,
+                });
             }
         });
     };
@@ -313,6 +331,50 @@ function updateCart() {
     }
 
     totalPriceElement.textContent = '$' + totalAmount.toFixed(2);
+    if (cart.length > 0) {
+        var clearBtnElement = document.getElementById('clearBtn');
+        var clearCartButton = document.createElement('button');
+        clearCartButton.textContent = 'Clear Cart';
+        clearCartButton.id = 'clearCartButton';
+        clearCartButton.classList.add('right-align');
+        clearCartButton.addEventListener('click', createClearHandler());
+        clearBtnElement.appendChild(clearCartButton);
+    }
+}
+
+function createClearHandler() {
+    return function () {
+        Swal.fire({
+            title: 'Delete',
+            text: 'Are you sure you want to clear the cart?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                clearCart();
+                updateCart();
+                updateCartUI(getCart())
+                var clearCartButton = document.getElementById('clearCartButton');
+                var clearBtnElement = document.getElementById('clearBtn');
+                clearBtnElement.removeChild(clearCartButton);
+                Swal.fire({
+                    title: 'Cart cleared',
+                    text: 'Your cart has been cleared.',
+                    icon: 'success',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: true,
+                });
+            }
+        });
+    };
+}
+
+function clearCart() {
+    cart = [];
+    sessionStorage.removeItem('cart');
 }
 
 function createQuantityChangeHandler(index, change) {
@@ -333,10 +395,7 @@ function changeProductQuantity(index, change) {
 }
 
 document.querySelector('#logoutLink').addEventListener('click', function () {
-    // Xóa toàn bộ giỏ hàng trong biến cart
     cart = [];
-
-    // Xóa toàn bộ giỏ hàng trong sessionStorage
     sessionStorage.removeItem('cart');
 });
 
