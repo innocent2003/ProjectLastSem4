@@ -70,15 +70,15 @@
                 </div>
                 <div class="form-group">
                     <label for="form-subject">Password</label>
-                    <input type="text" name="address" class="form-control" id="form-subject" placeholder="Password">
+                    <input type="text" name="address" class="form-control" id="form-subject" placeholder="Address">
                 </div>
               <div class="form-group">
-                    <label for="form-subject">Password</label>
-                    <input type="text" name="phone" class="form-control" id="form-subject" placeholder="Password">
+                    <label for="form-subject">Phone number</label>
+                    <input type="text" name="phone" class="form-control" id="form-subject" placeholder="Phone number">
                 </div>
                 <div class="form-group">
-                    <label for="form-subject">Password</label>
-                    <input type="text" name="email" class="form-control" id="form-subject" placeholder="Password">
+                    <label for="form-subject">Email</label>
+                    <input type="text" name="email" class="form-control" id="form-subject" placeholder="Email">
                 </div>
                 <button class="btn primary-btn" type="submit">Contact Us</button>                
             </form>
