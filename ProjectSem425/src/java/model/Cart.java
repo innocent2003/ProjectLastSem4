@@ -13,19 +13,27 @@ import java.util.List;
  * @author Expguy
  */
 public class Cart {
-    private List<Product> items;
-    
+
+    private List<CartItem> items;
+
     public Cart() {
-        items = new ArrayList<>();
+        this.items = new ArrayList<>();
     }
 
-    public void addToCart(Product product) {
-        items.add(product);
+    public void addItem(CartItem item) {
+        items.add(item);
     }
 
-    // Các phương thức getter và setter
+    public double getTotalPrice() {
+        double totalPrice = 0.0;
+        for (CartItem item : items) {
+            totalPrice += item.getPrice() * item.getQuantity();
+        }
+        return totalPrice;
+    }
 
-    public List<Product> getItems() {
+    // Other methods for manipulating the cart items
+    public List<CartItem> getItems() {
         return items;
     }
 }

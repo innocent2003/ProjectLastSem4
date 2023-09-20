@@ -1,5 +1,4 @@
 package dao;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -321,7 +320,7 @@ public class ProductDAO {
         }
         return productList;
     }
-    
+
     public Customer getCustomerById(int customerId) throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM customers WHERE user_id = ?";
         PreparedStatement statement = null;

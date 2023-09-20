@@ -1,35 +1,23 @@
-$(document).ready(function () {
-    $('.product-thumb-imgs').slick({
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        asNavFor: '.product-main-img',
-        dots: false,
-        focusOnSelect: true
-    });
-
-    $('.product-main-img').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        fade: true,
-        asNavFor: '.product-thumb-imgs'
-    });
-
-    $('.thumb-img').click(function () {
-        var selectedImageSrc = $(this).find('img').attr('src');
-        $('#selected-image').attr('src', selectedImageSrc);
-    });
-});
-const productThumbs = document.querySelectorAll('.product-thumb');
-let selectedThumbIndex = 0;
-let isSlideRunning = false;
-
-productThumbs.forEach((thumb, index) => {
-    thumb.addEventListener('click', () => {
-        productThumbs.forEach((thumb) => {
-            thumb.classList.remove('selected');
-        });
-        thumb.classList.add('selected');
-        selectedThumbIndex = index;
-    });
-});
+<%@page import="java.util.List"%>
+<%@page import="model.CartItem"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Page</title>
+</head>
+<body>
+    <h2>Cart List:</h2>
+    <ul>
+        <% for (CartItem cartItem : (List<CartItem>) request.getAttribute("cartList")) { %>
+            <li>Product ID: <%= cartItem.getId() %></li>
+            <li>Quantity: <%= cartItem.getQuantity() %></li>
+            <li>Price: <%= cartItem.getPrice() %></li>
+            <li>Subtotal: <%= cartItem.getPrice() * cartItem.getQuantity() %></li>
+            <br>
+        <% } %>
+    </ul>
+     <h2>Order ID: <%= request.getAttribute("orderId") %></h2>
+</body>
+</html>

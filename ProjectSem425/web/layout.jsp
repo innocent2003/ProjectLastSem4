@@ -27,7 +27,8 @@
         <link rel="stylesheet" href="resources/css/font-awesome.min.css">
 
         <!-- Custom stlylesheet -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
+
         <link type="text/css" rel="stylesheet" href="resources/css/style.css"/>
         <link type="text/css" rel="stylesheet" href="resources/css/myCss.css"/>
     </head>
@@ -272,13 +273,13 @@
         <script src="resources/js/jquery.zoom.min.js"></script>
         <script src="resources/js/main.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>
         <script src="resources/js/myJs.js"></script>
         <script>
-                document.getElementById('logoutLink').addEventListener('click', function () {
-                    cart = [];
-                    sessionStorage.removeItem('cart');
-                });
+                                    document.getElementById('logoutLink').addEventListener('click', function () {
+                                        cart = [];
+                                        sessionStorage.removeItem('cart');
+                                    });
         </script>
     </body>
 </html>

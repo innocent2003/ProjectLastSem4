@@ -332,12 +332,12 @@ function changeProductQuantity(index, change) {
     updateCartUI(getCart());
 }
 
-document.querySelector('#logoutLink').addEventListener('click', function() {
-  // Xóa toàn bộ giỏ hàng trong biến cart
-  cart = [];
+document.querySelector('#logoutLink').addEventListener('click', function () {
+    // Xóa toàn bộ giỏ hàng trong biến cart
+    cart = [];
 
-  // Xóa toàn bộ giỏ hàng trong sessionStorage
-  sessionStorage.removeItem('cart');
+    // Xóa toàn bộ giỏ hàng trong sessionStorage
+    sessionStorage.removeItem('cart');
 });
 
 updateCart();
