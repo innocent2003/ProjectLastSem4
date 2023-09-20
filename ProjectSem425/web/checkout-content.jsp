@@ -58,7 +58,7 @@
             <div class="col-md-12">
                 <h3 class="breadcrumb-header">Checkout</h3>
                 <ul class="breadcrumb-tree">
-                    <li><a href="../">Home</a></li>
+                    <li><a href="index.jsp">Home</a></li>
                     <li class="active">Checkout</li>
                 </ul>
             </div>
@@ -164,7 +164,7 @@
                 <form id="myForm" action="processOrder" method="post">
                     <input type="hidden" id="userId" name="userId" value="<%= userId%>">
                     <input type="hidden" id="myHiddenField" name="myHiddenField">
-                    <button type="submit" class="primary-btn order-submit" style="width: 100%">Place order</button>
+                    <button type="submit" class="primary-btn order-submit" style="width: 100%" on>Place order</button>
                 </form>
 
             </div>
@@ -177,9 +177,7 @@
 <!-- /SECTION -->
 <script>
     var cart = JSON.parse(sessionStorage.getItem('cart')) || [];
-
     var cartContainer = document.getElementById('cartContainer');
-
     if (cart.length > 0) {
         for (var i = 0; i < cart.length; i++) {
             var cartItem = document.createElement('div');
@@ -214,5 +212,6 @@
         event.preventDefault();
         this.submit();
         console.log('Form submitted.');
+        sessionStorage.removeItem('cart');
     });
 </script>

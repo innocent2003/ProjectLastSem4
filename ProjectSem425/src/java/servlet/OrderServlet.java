@@ -97,52 +97,68 @@ public class OrderServlet extends HttpServlet {
 
     private void addOrderFromForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException, SQLException {
         String strUserId = request.getParameter("userId");
-        int userId = Integer.parseInt(strUserId);
-        String cartJson = request.getParameter("myHiddenField");
-        request.setAttribute("cartJson", cartJson);
-        Gson gson = new Gson();
-        Type cartListType = new TypeToken<List<CartItem>>() {
-        }.getType();
-        List<CartItem> cartList = gson.fromJson(cartJson, cartListType);
-        request.setAttribute("cartList", cartList);
-        request.setAttribute("userId", userId);
-
-        String url = "jdbc:mysql://localhost:3306/javaproject";
-        String user = "root";
-        String password = "";
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(url, user, password);
-        String insertOrderQuery = "INSERT INTO orders(customerId, order_date, total, status) VALUES (?, ?, ?, '0')";
-        PreparedStatement insertOrderStmt = conn.prepareStatement(insertOrderQuery, Statement.RETURN_GENERATED_KEYS);
-        insertOrderStmt.setInt(1, userId);
-        insertOrderStmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
-        double total = 0.0;
-        for (CartItem cartItem : cartList) {
-            total += cartItem.getPrice() * cartItem.getQuantity();
+        int userId = 0;
+        if (strUserId != null && !strUserId.isEmpty()) {
+            userId = Integer.parseInt(strUserId);
         }
-        insertOrderStmt.setDouble(3, total);
-        insertOrderStmt.executeUpdate();
-        ResultSet generatedKeys = insertOrderStmt.getGeneratedKeys();
-        if (generatedKeys.next()) {
-            int orderId = generatedKeys.getInt(1);
-            String insertOrderDetailQuery = "INSERT INTO order_detail (OrderId, ProductId, Quantity, Price, Subtotal) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement insertOrderDetailStmt = conn.prepareStatement(insertOrderDetailQuery);
-            for (CartItem cartItem : cartList) {
-                int id = cartItem.getId();
-                int quantity = cartItem.getQuantity();
-                double price = cartItem.getPrice();
-                double subtotal = cartItem.getPrice() * cartItem.getQuantity();
-                insertOrderDetailStmt.setInt(1, orderId);
-                insertOrderDetailStmt.setInt(2, id);
-                insertOrderDetailStmt.setInt(3, quantity);
-                insertOrderDetailStmt.setDouble(4, price);
-                insertOrderDetailStmt.setDouble(5, subtotal);
-                insertOrderDetailStmt.executeUpdate();
+        if (userId == 0) {
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            return;
+        }
+        String cartJson = request.getParameter("myHiddenField");
+        if (cartJson != null) {
+            try {
+                Gson gson = new Gson();
+                Type cartListType = new TypeToken<List<CartItem>>() {
+                }.getType();
+                List<CartItem> cartList = gson.fromJson(cartJson, cartListType);
+                request.setAttribute("cartList", cartList);
+                request.setAttribute("userId", userId);
+
+                String url = "jdbc:mysql://localhost:3306/javaproject";
+                String user = "root";
+                String password = "";
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn = DriverManager.getConnection(url, user, password);
+                String insertOrderQuery = "INSERT INTO orders(customerId, order_date, total, status) VALUES (?, ?, ?, '0')";
+                PreparedStatement insertOrderStmt = conn.prepareStatement(insertOrderQuery, Statement.RETURN_GENERATED_KEYS);
+                double total = 0.0;
+                for (CartItem cartItem : cartList) {
+                    total += cartItem.getPrice() * cartItem.getQuantity();
+                }
+                if (total != 0) {
+                    insertOrderStmt.setInt(1, userId);
+                    insertOrderStmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+                    insertOrderStmt.setDouble(3, total);
+                    insertOrderStmt.executeUpdate();
+                    ResultSet generatedKeys = insertOrderStmt.getGeneratedKeys();
+                    if (generatedKeys.next()) {
+                        int orderId = generatedKeys.getInt(1);
+                        String insertOrderDetailQuery = "INSERT INTO order_detail (OrderId, ProductId, Quantity, Price, Subtotal) VALUES (?, ?, ?, ?, ?)";
+                        PreparedStatement insertOrderDetailStmt = conn.prepareStatement(insertOrderDetailQuery);
+                        for (CartItem cartItem : cartList) {
+                            int id = cartItem.getId();
+                            int quantity = cartItem.getQuantity();
+                            double price = cartItem.getPrice();
+                            double subtotal = cartItem.getPrice() * cartItem.getQuantity();
+                            insertOrderDetailStmt.setInt(1, orderId);
+                            insertOrderDetailStmt.setInt(2, id);
+                            insertOrderDetailStmt.setInt(3, quantity);
+                            insertOrderDetailStmt.setDouble(4, price);
+                            insertOrderDetailStmt.setDouble(5, subtotal);
+                            insertOrderDetailStmt.executeUpdate();
+                        }
+                    }
+                    conn.close();
+                    String redirectUrl = request.getContextPath() + "/success-order.jsp";
+                    response.sendRedirect(redirectUrl);
+                    return;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/test.jsp");
-        dispatcher.forward(request, response);
-        conn.close();
+        response.sendRedirect(request.getContextPath() + "/store.jsp");
     }
 
     /**
