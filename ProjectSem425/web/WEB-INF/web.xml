@@ -20,6 +20,10 @@
         <servlet-name>UpdateCustomerServlet</servlet-name>
         <servlet-class>servlet.UpdateCustomerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddProductServlet1</servlet-name>
+        <servlet-class>servlet.AddProductServlet1</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddCommentServlet</servlet-name>
         <url-pattern>/AddCommentServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>UpdateCustomerServlet</servlet-name>
         <url-pattern>/UpdateCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProductServlet1</servlet-name>
+        <url-pattern>/AddProductServlet1</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

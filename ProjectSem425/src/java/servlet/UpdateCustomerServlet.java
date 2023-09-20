@@ -38,9 +38,9 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
 
-        String jdbcUrl = "jdbc:mysql://your-database-host:3306/your-database";
-        String dbUser = "your-username";
-        String dbPassword = "your-password";
+        String jdbcUrl = "jdbc:mysql://localhost:3306/javaproject";
+        String dbUser = "root";
+        String dbPassword = "";
 
         try (Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword)) {
             // Prepare and execute the SQL update statement
