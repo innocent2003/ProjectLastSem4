@@ -11,6 +11,17 @@
     List<Product> appleList = productDAO.getAppleProducts();
     List<Brand> brandList = productDAO.getBrands();
     List<Product> finalList = null;
+    int recordsPerPage = 6;
+    int totalRecords = productList.size();
+    int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
+    int currentPage = 1;
+
+    if (request.getParameter("page") != null) {
+        currentPage = Integer.parseInt(request.getParameter("page"));
+    }
+
+    int startRecord = (currentPage - 1) * recordsPerPage;
+    int endRecord = Math.min(startRecord + recordsPerPage, totalRecords);
 %>
 <nav id="navigation">
     <!-- container -->
@@ -133,7 +144,8 @@
                         } else {
                             finalList = productList;
                         }
-                        for (Product product : finalList) {
+                        for (int i = startRecord; i < endRecord; i++) {
+                            Product product = finalList.get(i);
                     %>
                     <!-- product -->
                     <div class="col-md-4 col-xs-6">
@@ -147,11 +159,16 @@
                                 <h5><%= product.getRam()%>/<%= product.getStorage()%> - <%= product.getColor()%></h5>
                                 <h4 class="product-price">$<%= product.getPrice()%></h4>
                                 <div class="product-rating">
+                                    <%
+                                        String productId = String.valueOf(product.getId());
+                                        int vote = productDAO.calculateRoundedAverageVoteById(productId);
+                                    %>
+                                    <% for (int j = 0; j < vote; j++) { %>
                                     <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                                    <% }%>
+                                    <% for (int j = vote; j < 5; j++) { %>
+                                    <i class="fa fa-star-o"></i>
+                                    <% }%>
                                 </div>
                                 <div class="product-btns">
                                     <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
@@ -197,11 +214,13 @@
                 <!-- store bottom filter -->
                 <div class="store-filter clearfix">
                     <ul class="store-pagination">
-                        <li class="active">1</li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                        <% for (int i = 1; i <= totalPages; i++) { %>
+                        <% if (i == currentPage) {%>
+                        <li class="active"><%= i%></li>
+                            <% } else {%>
+                        <li><a href="#" class="page-link" data-page="<%= i%>"><%= i%></a></li>
+                            <% } %>
+                            <% }%>
                     </ul>
                 </div>
                 <!-- /store bottom filter -->
@@ -213,3 +232,25 @@
     <!-- /container -->
 </div>
 <!-- /SECTION -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+                                    $('#store').on('click', '.page-link', function (e) {
+                                        e.preventDefault();
+
+                                        var page = $(this).data('page');
+                                        var url = 'store.jsp?page=' + page;
+
+                                        $.ajax({
+                                            url: url,
+                                            type: 'GET',
+                                            success: function (data) {
+                                                $('#store').html($(data).find('#store').html());
+                                            },
+                                            error: function (xhr, status, error) {
+                                                console.log(error);
+                                            }
+                                        });
+                                    });
+                                });
+</script>

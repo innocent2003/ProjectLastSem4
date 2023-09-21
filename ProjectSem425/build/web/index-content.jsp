@@ -172,11 +172,16 @@
                                         <h5><%= product.getRam()%>/<%= product.getStorage()%> - <%= product.getColor()%></h5>
                                         <h4 class="product-price">$<%= product.getPrice()%></h4>
                                         <div class="product-rating">
+                                            <%
+                                                String productId = String.valueOf(product.getId());
+                                                int vote = productDAO.calculateRoundedAverageVoteById(productId);
+                                            %>
+                                            <% for (int i = 0; i < vote; i++) { %>
                                             <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
+                                            <% }%>
+                                            <% for (int i = vote; i < 5; i++) { %>
+                                            <i class="fa fa-star-o"></i>
+                                            <% }%>
                                         </div>
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>

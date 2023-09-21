@@ -1,12 +1,39 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="model.Comment"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Product"%>
 <%@page import="dao.ProductDAO"%>
 <%@page import="model.Product"%>
 <%
+    session = request.getSession();
+    Object userIdObj = session.getAttribute("userId");
+    int userId = 0;
+    if (userIdObj != null) {
+        userId = (Integer) userIdObj;
+    }
     String productId = request.getParameter("id");
     ProductDAO productDAO = new ProductDAO();
     Product product = productDAO.getProductById(productId);
+    int avgvote = productDAO.calculateRoundedAverageVoteById(productId);
+    int totalComment = productDAO.getTotalComments(productId);
+    int totalVoteByRating1 = productDAO.getTotalVotesByRating(productId, 1);
+    int totalVoteByRating2 = productDAO.getTotalVotesByRating(productId, 2);
+    int totalVoteByRating3 = productDAO.getTotalVotesByRating(productId, 3);
+    int totalVoteByRating4 = productDAO.getTotalVotesByRating(productId, 4);
+    int totalVoteByRating5 = productDAO.getTotalVotesByRating(productId, 5);
     List<Product> productList = productDAO.getProductsByBrandId(product.getBrandId());
+    List<Comment> commentList = productDAO.getCommentsByProductId(productId);
+    int recordsPerPage = 3;
+    int totalRecords = commentList.size();
+    int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
+    int currentPage = 1;
+
+    if (request.getParameter("page") != null) {
+        currentPage = Integer.parseInt(request.getParameter("page"));
+    }
+
+    int startRecord = (currentPage - 1) * recordsPerPage;
+    int endRecord = Math.min(startRecord + recordsPerPage, totalRecords);
 %>
 <!-- NAVIGATION -->
 <nav id="navigation">
@@ -93,13 +120,14 @@
                     <h2 class="product-name"><%= product.getProductName()%></h2>
                     <div>
                         <div class="product-rating">
+                            <% for (int i = 0; i < avgvote; i++) { %>
                             <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                            <% } %>
+                            <% for (int i = avgvote; i < 5; i++) { %>
                             <i class="fa fa-star-o"></i>
+                            <% }%>
                         </div>
-                        <span>10 Review(s)</span>
+                        <span><%= totalComment%> Review(s)</span>
                     </div>
                     <div class="product-options">
                         <span>Ram: <b><%= product.getRam()%>GB</b></span>
@@ -164,7 +192,7 @@
                     <!-- product tab nav -->
                     <ul class="tab-nav">
                         <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-                        <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+                        <li><a data-toggle="tab" href="#tab3">(<%= totalComment%>) Review(s)</a></li>
                     </ul>
                     <!-- /product tab nav -->
 
@@ -187,13 +215,14 @@
                                 <div class="col-md-3">
                                     <div id="rating">
                                         <div class="rating-avg">
-                                            <span>4.5</span>
+                                            <span><%= avgvote%></span>
                                             <div class="rating-stars">
+                                                <% for (int i = 0; i < avgvote; i++) { %>
                                                 <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
+                                                <% } %>
+                                                <% for (int i = avgvote; i < 5; i++) { %>
                                                 <i class="fa fa-star-o"></i>
+                                                <% } %>
                                             </div>
                                         </div>
                                         <ul class="rating">
@@ -206,9 +235,9 @@
                                                     <i class="fa fa-star"></i>
                                                 </div>
                                                 <div class="rating-progress">
-                                                    <div style="width: 80%;"></div>
+                                                    <div style="width: 100%;"></div>
                                                 </div>
-                                                <span class="sum">3</span>
+                                                <span class="sum"><%= totalVoteByRating5%></span>
                                             </li>
                                             <li>
                                                 <div class="rating-stars">
@@ -216,25 +245,25 @@
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width: 80%;"></div>
+                                                </div>
+                                                <span class="sum"><%= totalVoteByRating4%></span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 <div class="rating-progress">
                                                     <div style="width: 60%;"></div>
                                                 </div>
-                                                <span class="sum">2</span>
-                                            </li>
-                                            <li>
-                                                <div class="rating-stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </div>
-                                                <div class="rating-progress">
-                                                    <div></div>
-                                                </div>
-                                                <span class="sum">0</span>
+                                                <span class="sum"><%= totalVoteByRating3%></span>
                                             </li>
                                             <li>
                                                 <div class="rating-stars">
@@ -245,9 +274,9 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 <div class="rating-progress">
-                                                    <div></div>
+                                                    <div style="width: 40%;"></div>
                                                 </div>
-                                                <span class="sum">0</span>
+                                                <span class="sum"><%= totalVoteByRating2%></span>
                                             </li>
                                             <li>
                                                 <div class="rating-stars">
@@ -258,9 +287,9 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 <div class="rating-progress">
-                                                    <div></div>
+                                                    <div style="width: 20%;"></div>
                                                 </div>
-                                                <span class="sum">0</span>
+                                                <span class="sum"><%= totalVoteByRating1%></span>
                                             </li>
                                         </ul>
                                     </div>
@@ -271,61 +300,46 @@
                                 <div class="col-md-6">
                                     <div id="reviews">
                                         <ul class="reviews">
+                                            <%
+                                                if (commentList != null) {
+                                                    for (int i = startRecord; i < endRecord; i++) {
+                                                        Comment c = commentList.get(i);
+                                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                                        String createdAt = sdf.format(c.getCreateAt());
+
+                                            %>
                                             <li>
                                                 <div class="review-heading">
-                                                    <h5 class="name">John</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                    <h5 class="name"><%= c.getUserName()%></h5>
+                                                    <p class="date"><%= createdAt%></p>
                                                     <div class="review-rating">
+                                                        <% int vote = c.getVote(); %>
+                                                        <% for (int j = 0; j < 5; j++) { %>
+                                                        <% if (j < vote) { %>
                                                         <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
+                                                        <% } else { %>
                                                         <i class="fa fa-star-o empty"></i>
+                                                        <% } %>
+                                                        <% }%>
                                                     </div>
                                                 </div>
                                                 <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    <p><%= c.getContent()%></p>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <div class="review-heading">
-                                                    <h5 class="name">John</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o empty"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="review-heading">
-                                                    <h5 class="name">John</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o empty"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                </div>
-                                            </li>
+                                            <%
+                                                    }
+                                                }
+                                            %>
                                         </ul>
                                         <ul class="reviews-pagination">
-                                            <li class="active">1</li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                            <% for (int i = 1; i <= totalPages; i++) { %>
+                                            <% if (i == currentPage) {%>
+                                            <li class="active"><%= i%></li>
+                                                <% } else {%>
+                                            <li><a href="#" class="page-link" data-page="<%= i%>"><%= i%></a></li>
+                                                <% } %>
+                                                <% } %>
                                         </ul>
                                     </div>
                                 </div>
@@ -334,9 +348,13 @@
                                 <!-- Review Form -->
                                 <div class="col-md-3">
                                     <div id="review-form">
-                                        <form class="review-form">
-                                        <form method="post" class="review-form">
-                                            <textarea class="input" placeholder="Your Review"></textarea>
+                                        <%
+                                            if (userId != 0) {
+                                        %>
+                                        <form method="post" action="addComment" class="review-form">
+                                            <input type="hidden" name="userId" value="<%= userId%>">
+                                            <input type="hidden" name="productId" value="<%= productId%>">
+                                            <textarea class="input" name="review" placeholder="Your Review"></textarea>
                                             <div class="input-rating">
                                                 <span>Your Rating: </span>
                                                 <div class="stars">
@@ -349,6 +367,13 @@
                                             </div>
                                             <button type="submit" class="primary-btn">Submit</button>
                                         </form>
+                                        <%
+                                        } else {
+                                        %>
+                                        <a href="login.jsp"><button class="primary-btn">Login</button></a>
+                                        <%
+                                            }
+                                        %>
                                     </div>
                                 </div>
                                 <!-- /Review Form -->
@@ -448,3 +473,75 @@
     <!-- /container -->
 </div>
 <!-- /Section -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+                                $(document).ready(function () {
+                                    $(".review-form").submit(function (event) {
+                                        event.preventDefault();
+
+                                        var form = $(this);
+                                        var formData = $(this).serialize();
+
+                                        $.ajax({
+                                            url: "addComment",
+                                            type: "POST",
+                                            data: formData,
+                                            success: function (response) {
+                                                if (response === "success") {
+                                                    Swal.fire({
+                                                        icon: 'success',
+                                                        title: 'Success',
+                                                        text: 'Comment has been added successfully',
+                                                        timer: 2000,
+                                                        timerProgressBar: true,
+                                                        showConfirmButton: true,
+                                                    }).then(function () {
+                                                        setTimeout(function () {
+                                                            location.reload();
+                                                        });
+                                                    });
+                                                } else {
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'Error',
+                                                        text: response,
+                                                        timer: 2000,
+                                                        timerProgressBar: true,
+                                                        showConfirmButton: true,
+                                                    });
+                                                }
+                                            },
+                                            error: function (xhr, status, error) {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'Error',
+                                                    text: xhr.responseText,
+                                                    timer: 2000,
+                                                    timerProgressBar: true,
+                                                    showConfirmButton: true,
+                                                });
+                                            }
+                                        });
+                                    });
+                                });
+                                $(document).ready(function () {
+                                    $('#reviews').on('click', '.page-link', function (e) {
+                                        e.preventDefault();
+
+                                        var page = $(this).data('page');
+                                        var url = 'product.jsp?id=<%= productId%>&page=' + page;
+
+                                        $.ajax({
+                                            url: url,
+                                            type: 'GET',
+                                            success: function (data) {
+                                                $('#reviews').html($(data).find('#reviews').html());
+                                            },
+                                            error: function (xhr, status, error) {
+                                                console.log(error);
+                                            }
+                                        });
+                                    });
+                                });
+</script>

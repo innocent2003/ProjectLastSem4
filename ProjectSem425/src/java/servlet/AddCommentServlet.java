@@ -7,7 +7,15 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lemin
  */
+@WebServlet("/addComment")
 public class AddCommentServlet extends HttpServlet {
 
     /**
@@ -35,7 +44,7 @@ public class AddCommentServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddCommentServlet</title>");            
+            out.println("<title>Servlet AddCommentServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet AddCommentServlet at " + request.getContextPath() + "</h1>");
@@ -70,7 +79,47 @@ public class AddCommentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String userIdString = request.getParameter("userId");
+        String productIdString = request.getParameter("productId");
+        String ratingString = request.getParameter("rating");
+        String review = request.getParameter("review");
+
+        if (userIdString != null && productIdString != null && ratingString != null && review != null && !ratingString.isEmpty() && !review.isEmpty()) {
+            try {
+                int userId = Integer.parseInt(userIdString);
+                int productId = Integer.parseInt(productIdString);
+                int rating = Integer.parseInt(ratingString);
+
+                String url = "jdbc:mysql://localhost:3306/javaproject";
+                String user = "root";
+                String password = "";
+
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn = DriverManager.getConnection(url, user, password);
+
+                String sql = "INSERT INTO comments (CustomerId, ProductId, Vote, Content, created_at) VALUES (?, ?, ?, ?, ?)";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, userId);
+                stmt.setInt(2, productId);
+                stmt.setInt(3, rating);
+                stmt.setString(4, review);
+                stmt.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
+                stmt.executeUpdate();
+
+                stmt.close();
+                conn.close();
+
+                response.getWriter().write("success");
+            } catch (NumberFormatException e) {
+                response.getWriter().write("Invalid number format");
+            } catch (SQLException e) {
+                response.getWriter().write("Failed to connect to the database");
+                response.getWriter().write("SQL error: " + e.getMessage());
+            } catch (ClassNotFoundException ex) {
+            }
+        } else {
+            response.getWriter().write("Comments and votes cannot be left blank");
+        }
     }
 
     /**

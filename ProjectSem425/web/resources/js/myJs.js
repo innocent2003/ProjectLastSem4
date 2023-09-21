@@ -331,50 +331,6 @@ function updateCart() {
     }
 
     totalPriceElement.textContent = '$' + totalAmount.toFixed(2);
-    if (cart.length > 0) {
-        var clearBtnElement = document.getElementById('clearBtn');
-        var clearCartButton = document.createElement('button');
-        clearCartButton.textContent = 'Clear Cart';
-        clearCartButton.id = 'clearCartButton';
-        clearCartButton.classList.add('right-align');
-        clearCartButton.addEventListener('click', createClearHandler());
-        clearBtnElement.appendChild(clearCartButton);
-    }
-}
-
-function createClearHandler() {
-    return function () {
-        Swal.fire({
-            title: 'Delete',
-            text: 'Are you sure you want to clear the cart?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                clearCart();
-                updateCart();
-                updateCartUI(getCart())
-                var clearCartButton = document.getElementById('clearCartButton');
-                var clearBtnElement = document.getElementById('clearBtn');
-                clearBtnElement.removeChild(clearCartButton);
-                Swal.fire({
-                    title: 'Cart cleared',
-                    text: 'Your cart has been cleared.',
-                    icon: 'success',
-                    timer: 2000,
-                    timerProgressBar: true,
-                    showConfirmButton: true,
-                });
-            }
-        });
-    };
-}
-
-function clearCart() {
-    cart = [];
-    sessionStorage.removeItem('cart');
 }
 
 function createQuantityChangeHandler(index, change) {
