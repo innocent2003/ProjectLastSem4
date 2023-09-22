@@ -16,7 +16,8 @@
         <form action="AddProductServlet2"" method="post" enctype="multipart/form-data">
         <label for="productName">Product Name:</label>
         <input type="text" id="productName" name="productName" required><br><br>
-
+        <input type="number" name="CategoryId"/>
+        <input type="number" name="BrandId"/>
         <label for="ram">RAM:</label>
         <input type="text" id="ram" name="ram" required><br><br>
 

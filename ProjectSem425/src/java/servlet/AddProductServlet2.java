@@ -52,7 +52,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
         // Save the image to a directory
-        String imagePath = "E:\\linhtinh\\ProjectLastSem4\\githubsem4\\aa3\\ProjectLastSem4\\ProjectSem425\\src\\java\\images\\" + fileName;
+        String imagePath = "E:\\linhtinh\\ProjectLastSem4\\githubsem4\\aa8\\ProjectLastSem4\\ProjectSem425\\web\\resources\\img\\" + fileName;
         try (InputStream fileContent = filePart.getInputStream();
              OutputStream imageOutputStream = new FileOutputStream(imagePath)) {
             byte[] buffer = new byte[1024];
@@ -97,11 +97,11 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
                 String imageSql = "INSERT INTO product_image (ProductId, URL) VALUES (?, ?)";
                 PreparedStatement imageStatement = conn.prepareStatement(imageSql);
                 imageStatement.setInt(1, productId);
-                imageStatement.setString(2, imagePath);
+                imageStatement.setString(2, fileName);
                 imageStatement.executeUpdate();
                 
                 // Redirect or display a success message
-                response.sendRedirect("success.jsp");
+                response.sendRedirect("product.jsp");
             } else {
                 // Handle the case where the database connection is null
                 response.getWriter().println("Database connection is null. Check your database configuration.");
