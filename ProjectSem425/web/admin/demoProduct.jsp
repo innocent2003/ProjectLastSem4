@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <form action="<%= request.getContextPath() %>/admin/login"" method="post" enctype="multipart/form-data">
+        <form action="AddProductServlet2"" method="post" enctype="multipart/form-data">
         <label for="productName">Product Name:</label>
         <input type="text" id="productName" name="productName" required><br><br>
 

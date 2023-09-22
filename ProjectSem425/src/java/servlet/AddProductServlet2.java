@@ -7,21 +7,14 @@ package servlet;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -29,15 +22,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
 /**
  *
  * @author lemin
  */
 @MultipartConfig
-//@WebServlet("admin/AddProductServlet")
-@WebServlet("/admin/AddProductServlet1")
-public class AddProductServlet1 extends HttpServlet {
-      protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+@WebServlet(name = "AddProductServlet2", urlPatterns = {"/admin/AddProductServlet2"})
+public class AddProductServlet2 extends HttpServlet {
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Your servlet logic here
         // For example, you can set attributes and forward to the JSP
         request.setAttribute("message", "Hello from Servlet!");

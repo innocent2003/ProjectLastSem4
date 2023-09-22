@@ -334,7 +334,7 @@
                         </div>
 
                         <!-- DataTales Example -->
-                              <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+                       <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
          url = "jdbc:mysql://localhost/javaproject"
          user = "root"  password = ""/>
 
@@ -358,7 +358,7 @@
                                         </thead>
 
                                         <tbody>
-                                            <c:forEach var="root" items="${result.rows}">
+                                            <c:forEach var="row" items="${result.rows}">
                                             <tr class="text-center">
                                                 <td><c:out value="${row.id}"/></td>
                                                 <td><c:out value="${row.BrandName}"/></td>

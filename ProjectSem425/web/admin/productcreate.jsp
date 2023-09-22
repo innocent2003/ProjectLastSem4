@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
+<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -142,7 +146,7 @@
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                         <!-- Sidebar Toggle (Topbar) -->
-                        <form class="form-inline">
+                        <form class="form-inline" >
                             <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                                 <i class="fa fa-bars"></i>
                             </button>
@@ -333,64 +337,79 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Create</h6>
                             </div>
                             <div class="card-body">
-                                <form class="row g-3 needs-validation" novalidate>
+                                <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+         url = "jdbc:mysql://localhost/javaproject"
+         user = "root"  password = ""/>
+
+         <sql:query dataSource = "${snapshot}" var = "result">
+            SELECT * from brand;
+         </sql:query>
+            <sql:query dataSource = "${snapshot}" var = "result1">
+            SELECT * from category;
+         </sql:query>
+                            
+                                <form class="row g-3 needs-validation" novalidate action="AddProductServlet2"" method="post" enctype="multipart/form-data">
                                     <div class="table-responsive">
                                         <div class="form-group d-flex">
                                             <label for="brand" class="col-md-3 text-md-right col-form-label">Brand</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <select required name="brand_id" id="brand_id" class="form-control">
-                                                    <option>-- Brand --</option>
+                                                <select required name="BrandId" id="brand_id" class="form-control">
+<!--                                                    <option>-- Brand --</option>
                                                     <option>Samsung</option>
                                                     <option>Iphone</option>
-                                                    <option>Sony</option>
+                                                    <option>Sony</option>-->
+                                                      <c:forEach var = "row" items = "${result.rows}">
+                     <option value="${row.id}">${row.BrandName}</option>
+                </c:forEach>
+                                               
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
                                             <label for="category" class="col-md-3 text-md-right col-form-label">Category</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <select required name="category_id" id="category_id" class="form-control">
-                                                    <option>-- Category --</option>
-                                                    <option>Máy tính</option>
-                                                    <option>Điện thoại</option>
-                                                    <option>Tai nghe</option>
+                                                <select required name="CategoryId" id="category_id" class="form-control">
+                                                      <c:forEach var = "row" items = "${result1.rows}">
+                     <option value="${row.id}">${row.CategoryName}</option>
+                </c:forEach>
+                                    
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
-                                            <label for="name" class="col-md-3 text-md-right col-form-label">Avartar</label>
+                                            <label for="name" class="col-md-3 text-md-right col-form-label">Image</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="file" name="image" aria-describedby="basic-addon1" />
+                                                <input type="file" id="image" name="image" accept="image/*" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
                                             <label for="productname" class="col-md-3 text-md-right col-form-label">Product Name</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="text" class="form-control rounded" placeholder="Product Name" aria-label="productname" aria-describedby="basic-addon1" />
+                                                <input type="text" name="productName" class="form-control rounded" placeholder="Product Name" aria-label="productname" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
                                             <label for="price" class="col-md-3 text-md-right col-form-label">Price</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="text" class="form-control rounded" placeholder="Price" aria-label="Price" aria-describedby="basic-addon1" />
+                                                <input type="text" name="price" class="form-control rounded" placeholder="Price" aria-label="Price" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
-                                            <label for="qty" class="col-md-3 text-md-right col-form-label">Quantity</label>
+                                            <label for="qty" class="col-md-3 text-md-right col-form-label">Ram</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="text" class="form-control rounded" placeholder="Quantity" aria-label="Quantity" aria-describedby="basic-addon1" />
+                                                <input type="text" id="ram" name="ram" class="form-control rounded" placeholder="Ram" aria-label="Quantity" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
-                                            <label for="status" class="col-md-3 text-md-right col-form-label">Status</label>
+                                            <label for="status" class="col-md-3 text-md-right col-form-label">Storage</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="text" class="form-control rounded" placeholder="Status" aria-label="Status" aria-describedby="basic-addon1" />
+                                                <input type="text" id="storage" name="storage" class="form-control rounded" placeholder="Storage" aria-label="Status" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
-                                            <label for="feature" class="col-md-3 text-md-right col-form-label">Feature</label>
+                                            <label for="feature" class="col-md-3 text-md-right col-form-label">Color</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="text" class="form-control rounded" placeholder="Feature" aria-label="Feature" aria-describedby="basic-addon1" />
+                                                <input type="text" id="color" name="color" class="form-control rounded" placeholder="Feature" aria-label="Feature" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
@@ -401,8 +420,8 @@
                                         </div>
                                     </div>
                                     <div class="card-body text-center">
-                                        <button type="button" class="btn btn-secondary">Cancer</button>
-                                        <button type="button" class="btn btn-primary">Save</button>
+                                        <button type="reset" class="btn btn-secondary">Cancer</button>
+                                        <button type="submit" class="btn btn-primary">Save</button>
                                     </div>
                                 </form>
                             </div>

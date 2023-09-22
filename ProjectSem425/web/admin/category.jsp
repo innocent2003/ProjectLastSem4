@@ -352,10 +352,19 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr class="text-center">
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
+                                            
+                                             <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+         url = "jdbc:mysql://localhost/javaproject"
+         user = "root"  password = ""/>
+
+         <sql:query dataSource = "${snapshot}" var = "result">
+            SELECT * from category;
+         </sql:query>
+         <c:forEach var="row" items="${result.rows}">
+              <tr class="text-center">
+                                                <td>${row.Id}</td>
+                                                <td>${row.CategoryName}</td>
+                                                <td>${row.Status}</td>
                                                 <td>
                                                     <a class="text-success m-3" href="categoryedit.jsp">
                                                         <i class="fas fa-fw fa-edit"></i>
@@ -363,6 +372,8 @@
                                                     <a class="text-danger" href=""><i class="fas fa-fw fa-trash"></i></a>
                                                 </td>
                                             </tr>
+         </c:forEach>
+                                           
 
                                         </tbody>
                                     </table>

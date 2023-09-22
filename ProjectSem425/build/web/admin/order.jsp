@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
+<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -347,11 +351,19 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
+ <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+         url = "jdbc:mysql://localhost/javaproject"
+         user = "root"  password = ""/>
 
+         <sql:query dataSource = "${snapshot}" var = "result">
+            SELECT * from orders;
+         </sql:query>
                                         <tbody>
-                                            <tr class="text-center">
+                                             <c:forEach var = "row" items = "${result.rows}">
+                                                     <tr class="text-center">
+                                               
                                                 <td>1</td>
-                                                <td>Tiger Nixon</td>
+                                                <td><c:out value="${row.id}"/></td>
                                                 <td>Tiger Nixon</td>
                                                 <td>Tiger Nixon</td>
                                                 <td>Tiger Nixon</td>
@@ -365,6 +377,8 @@
                                                     <a class="text-danger" href=""><i class="fas fa-fw fa-trash"></i></a>
                                                 </td>
                                             </tr>
+                                                </c:forEach>
+                                           
 
                                         </tbody>
                                     </table>

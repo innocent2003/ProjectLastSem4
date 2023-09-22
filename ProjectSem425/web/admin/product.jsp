@@ -343,7 +343,7 @@
          url = "jdbc:mysql://localhost/javaproject"
          user = "root"  password = ""/>
         <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from product ;
+            SELECT * from product inner join product_detail on product.Id = product_detail.ProductId;
          </sql:query>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -366,11 +366,14 @@
                                             
                                             <c:forEach var="row" items="${result.rows}">
                                                 <tr class="text-center">
+                                                    <td><c:out value="${row.Id}"/></td>
                                                     <td><c:out value="${row.ProductName}"/></td>
-                                               
-                                                <td>$320,800</td>
-                                                <td>RAM 4GB</td>
-                                                <td>61</td>
+                                                    <td><c:out value="${row.Price}"/></td>
+                                                <td><c:out value="${row.Ram}"/></td>
+                                                <td><c:out value="${row.Storage}"/></td>
+                                                <td><c:out value="${row.Color}"/></td>
+                                                <td><c:out value="${row.Quantity}"/></td>
+                                                <td><c:out value="${row.Status}"/></td>
                                                 <td>
                                                     <a href="productshow.jsp">
                                                         <i class="fas fa-fw fa-eye"></i>
