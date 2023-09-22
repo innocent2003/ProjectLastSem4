@@ -356,18 +356,18 @@
          user = "root"  password = ""/>
 
          <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from orders;
+            SELECT * from orders inner join customers on orders.CustomerId = customers.Id;
          </sql:query>
                                         <tbody>
                                              <c:forEach var = "row" items = "${result.rows}">
                                                      <tr class="text-center">
                                                
                                                 <td>1</td>
-                                                <td><c:out value="${row.id}"/></td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
+                                                <td><c:out value="${row.Id}"/></td>
+                                                <td><c:out value="${row.Name}"/></td>
+                                                <td><c:out value="${row.Order_date}"/></td>
+                                                <td><c:out value="${row.Total}"/></td>
+                                                <td><c:out value="${row.Status}"/></td>
                                                 <td>Edinburgh</td>
                                                 <td>61</td>
                                                 <td>

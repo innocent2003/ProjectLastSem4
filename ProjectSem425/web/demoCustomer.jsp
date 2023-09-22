@@ -34,5 +34,11 @@
         
         <input type="submit" value="Register">
     </form>
+        
+        
+          <form action="DeleteUserCustomerServlet" method="post">
+        User ID: <input type="text" name="userId">
+        <input type="submit" value="Delete">
+    </form>
     </body>
 </html>

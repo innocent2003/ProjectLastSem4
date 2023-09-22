@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
+<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -335,7 +339,9 @@
                                 </a>
                                 <a class="text-warning m-3" href="">Delete</a>
                             </div>
-                            <div class="card-body">
+                            
+                            <c:if test="${not empty user}">
+                                 <div class="card-body">
                                 <div class="table-responsive">
                                     <div class="form-group d-flex">
                                         <label for="avartar" class="col-md-3 text-md-right ">Avartar</label>
@@ -346,13 +352,13 @@
                                     <div class="form-group d-flex">
                                         <label for="name" class="col-md-3 text-md-right ">Full Name</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>Nguyễn Thị Ngân</p>
+                                            <p></p>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label for="email" class="col-md-3 text-md-right ">Email</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>admin@.com</p>
+                                            <p></p>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex">
@@ -363,6 +369,8 @@
                                     </div>
                                 </div>
                             </div>
+                            </c:if>
+                           
                         </div>
 
                     </div>

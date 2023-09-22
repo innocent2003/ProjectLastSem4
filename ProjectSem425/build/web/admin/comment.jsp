@@ -353,16 +353,21 @@
                                         </thead>
 
                                         <tbody>
+                                               <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+         url = "jdbc:mysql://localhost/javaproject"
+         user = "root"  password = ""/>
+
+         <sql:query dataSource = "${snapshot}" var = "result">
+            SELECT * from comments inner join customers on comments.CustomerId = customers.Id inner join product on product.Id = comments.ProductId;
+         </sql:query>
                                             <tr class="text-center">
-                                                <td>1</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>Good!</td>
-                                                <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat numquam rerum nemo, porro ab voluptatum quo facilis laboriosam, sint amet minus nostrum ipsam fuga inventore voluptatem. Recusandae ipsam temporibus
-                                                    officiis.
-                                                </td>
-                                                <td>Pending</td>
+                                                <td><c:out value="${row.Id}"/></td>
+                                                <td><c:out value="${row.Name}"/></td>
+                                                <td><c:out value="${row.Content}"/></td>
+                                                <td><c:out value="${row.ProductId}"/></td>
+                                                <td><c:out value="${row.Vote}"/></td>
+                                                <td><c:out value="${row.Price}"/></td>
+                                                <td><c:out value="${row.ProductName}"/></td>
                                                 <td>                                                                                                                                            
                                                     <a class="text-danger m-3" href=""><i class="fas fa-fw fa-trash"></i></a>
                                                     <a class="text-primary" href="">
