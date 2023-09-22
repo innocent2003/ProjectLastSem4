@@ -27,8 +27,6 @@
         <link rel="stylesheet" href="resources/css/font-awesome.min.css">
 
         <!-- Custom stlylesheet -->
-        <!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">-->
-
         <link type="text/css" rel="stylesheet" href="resources/css/style.css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
         <link type="text/css" rel="stylesheet" href="resources/css/myCss.css"/>
@@ -64,7 +62,7 @@
                     <!-- row -->
                     <div class="row">
                         <!-- LOGO -->
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="header-logo">
                                 <a href="index.jsp">
                                     <img src="resources/img/logo.png" alt="">
@@ -73,24 +71,8 @@
                         </div>
                         <!-- /LOGO -->
 
-                        <!-- SEARCH BAR -->
-                        <div class="col-md-6">
-                            <div class="header-search">
-                                <form>
-                                    <select class="input-select">
-                                        <option value="0">All Categories</option>
-                                        <option value="1">Smartphone</option>
-                                        <option value="1">Other</option>
-                                    </select>
-                                    <input class="input" placeholder="Search here">
-                                    <button class="search-btn">Search</button>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- /SEARCH BAR -->
-
                         <!-- ACCOUNT -->
-                        <div class="col-md-3 clearfix">
+                        <div class="col-md-6 clearfix">
                             <div class="header-ctn">
 
                                 <!-- Cart -->
@@ -273,7 +255,6 @@
         <script src="resources/js/jquery.zoom.min.js"></script>
         <script src="resources/js/main.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <!--        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>-->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
         <script src="resources/js/myJs.js"></script>
         <script>

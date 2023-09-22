@@ -16,7 +16,7 @@
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
                 <li><a href="index.jsp">Home</a></li>
-                <li><a href="store.jsp">Store</a></li>
+                <li><a href="store.jsp?brand=0">Store</a></li>
                 <li><a href="cart.jsp">Cart</a></li>
                 <li><a href="checkout.jsp">CheckOut</a></li>
                 <li class="active"><a href="contact.jsp">Contact</a></li>
@@ -38,7 +38,7 @@
             <div class="col-md-12">
                 <h3 class="breadcrumb-header">Contact Us</h3>
                 <ul class="breadcrumb-tree">
-                    <li><a href="../">Home</a></li>
+                    <li><a href="index.jsp">Home</a></li>
                     <li class="active">Contact</li>
                 </ul>
             </div>

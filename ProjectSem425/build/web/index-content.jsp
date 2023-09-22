@@ -3,7 +3,7 @@
 <%@page import="dao.ProductDAO" %>
 <%
     ProductDAO productDAO = new ProductDAO();
-    List<Product> productList = productDAO.getProducts();
+    List<Product> productList = productDAO.get5RandomProducts();
     List<Product> xiaomiList = productDAO.getXiaomiProducts();
     List<Product> samsungList = productDAO.getSamsungProducts();
     List<Product> appleList = productDAO.getAppleProducts();
@@ -23,7 +23,7 @@
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
                 <li class="active"><a href="index.jsp">Home</a></li>                       
-                <li><a href="store.jsp">Store</a></li>
+                <li><a href="store.jsp?brand=0">Store</a></li>
                 <li><a href="cart.jsp">Cart</a></li>
                 <li><a href="checkout.jsp">CheckOut</a></li>
                 <li><a href="contact.jsp">Contact</a></li>
@@ -147,7 +147,7 @@
             <!-- section title -->
             <div class="col-md-12">
                 <div class="section-title">
-                    <h3 class="title">Top selling</h3>
+                    <h3 class="title">Random</h3>
                 </div>
             </div>
             <!-- /section title -->

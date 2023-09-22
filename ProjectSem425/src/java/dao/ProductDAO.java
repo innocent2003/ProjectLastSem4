@@ -17,21 +17,37 @@ public class ProductDAO {
             + "JOIN product_detail pd ON p.id = pd.productid "
             + "JOIN category c ON p.categoryid = c.id "
             + "JOIN brand b ON p.brandid = b.id";
+
+    private static final String GET_5RANDOMPRODUCTS_QUERY = "SELECT p.id, p.productName, p.price, p.categoryId, p.brandId, pd.ram, pd.storage, pd.color, pd.description, pd.quantity, "
+            + "(SELECT pi.url FROM product_image pi WHERE pi.productid = p.id LIMIT 1) AS url, "
+            + "c.categoryname, b.brandname "
+            + "FROM product p "
+            + "JOIN product_detail pd ON p.id = pd.productid "
+            + "JOIN category c ON p.categoryid = c.id "
+            + "JOIN brand b ON p.brandid = b.id "
+            + "ORDER BY RAND() "
+            + "LIMIT 5";
     private static final String Get_XIAOMIPRODUCTS_QUERY = "SELECT p.id, p.productName, p.price, p.categoryId, p.brandId, pd.ram, pd.storage, pd.color, "
             + "(SELECT pi.url FROM product_image pi WHERE pi.productId = p.id LIMIT 1) AS url "
             + "FROM product p "
             + "JOIN product_detail pd ON p.id = pd.productId "
-            + "WHERE p.brandId = 1";
+            + "WHERE p.brandId = 1 "
+            + "ORDER BY RAND() "
+            + "LIMIT 3";
     private static final String Get_SAMSUNGPRODUCTS_QUERY = "SELECT p.id, p.productName, p.price, p.categoryId, p.brandId, pd.ram, pd.storage, pd.color, "
             + "(SELECT pi.url FROM product_image pi WHERE pi.productId = p.id LIMIT 1) AS url "
             + "FROM product p "
             + "JOIN product_detail pd ON p.id = pd.productId "
-            + "WHERE p.brandId = 2";
+            + "WHERE p.brandId = 2 "
+            + "ORDER BY RAND() "
+            + "LIMIT 3";
     private static final String Get_APPLEPRODUCTS_QUERY = "SELECT p.id, p.productName, p.price, p.categoryId, p.brandId, pd.ram, pd.storage, pd.color, "
             + "(SELECT pi.url FROM product_image pi WHERE pi.productId = p.id LIMIT 1) AS url "
             + "FROM product p "
             + "JOIN product_detail pd ON p.id = pd.productId "
-            + "WHERE p.brandId = 3";
+            + "WHERE p.brandId = 3 "
+            + "ORDER BY RAND() "
+            + "LIMIT 3";
     private static final String GET_BRANDS_QUERY = "SELECT * FROM BRAND";
 
     public List<Brand> getBrands() throws ClassNotFoundException {
@@ -67,6 +83,40 @@ public class ProductDAO {
             Class.forName("com.mysql.jdbc.Driver");
             try (Connection conn = DriverManager.getConnection(url, user, password);
                     PreparedStatement statement = conn.prepareStatement(GET_PRODUCTS_QUERY);
+                    ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String productName = resultSet.getString("productName");
+                    double price = resultSet.getDouble("price");
+                    String image = resultSet.getString("url");
+                    String ram = resultSet.getString("ram");
+                    String storage = resultSet.getString("storage");
+                    String color = resultSet.getString("color");
+                    int brandId = resultSet.getInt("brandId");
+                    String brandName = resultSet.getString("brandName");
+                    int categoryId = resultSet.getInt("categoryId");
+                    String categoryName = resultSet.getString("categoryName");
+                    String description = resultSet.getString("description");
+                    int qty = resultSet.getInt("quantity");
+                    Product product = new Product(id, productName, price, image, ram, storage, color, brandId, brandName, categoryId, categoryName, description, qty);
+                    productList.add(product);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productList;
+    }
+
+    public List<Product> get5RandomProducts() throws ClassNotFoundException {
+        List<Product> productList = new ArrayList<>();
+        try {
+            String url = "jdbc:mysql://localhost:3306/javaproject";
+            String user = "root";
+            String password = "";
+            Class.forName("com.mysql.jdbc.Driver");
+            try (Connection conn = DriverManager.getConnection(url, user, password);
+                    PreparedStatement statement = conn.prepareStatement(GET_5RANDOMPRODUCTS_QUERY);
                     ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     int id = resultSet.getInt("id");
@@ -266,26 +316,39 @@ public class ProductDAO {
         return images;
     }
 
-    public List<Product> getProductsByBrandId(int brandIds) throws ClassNotFoundException, SQLException {
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        List<Product> productList = null;
-        String url = "jdbc:mysql://localhost:3306/javaproject";
-        String user = "root";
-        String password = "";
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(url, user, password);
+    public List<Product> getProductsByBrandId(String brandId) {
         try {
-            String query = "SELECT p.id, p.productName, p.price, p.categoryId, p.brandId, pd.ram, pd.storage, pd.color, pd.description, pd.quantity,"
-                    + "(SELECT pi.url FROM product_image pi WHERE pi.productId = p.id LIMIT 1) AS url, "
-                    + "c.categoryname, b.brandname "
-                    + "FROM product p "
-                    + "JOIN product_detail pd ON p.id = pd.productId "
-                    + "JOIN category c ON p.categoryid = c.id "
-                    + "JOIN brand b ON p.brandid = b.id "
-                    + "WHERE p.brandId = ?";
-            statement = conn.prepareStatement(query);
-            statement.setInt(1, brandIds);
+            PreparedStatement statement = null;
+            ResultSet resultSet = null;
+            List<Product> productList = null;
+            String url = "jdbc:mysql://localhost:3306/javaproject";
+            String user = "root";
+            String password = "";
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(url, user, password);
+
+            if (brandId.equals("0")) {
+                String query = "SELECT p.id, p.productName, p.price, p.categoryId, p.brandId, pd.ram, pd.storage, pd.color, pd.description, pd.quantity,"
+                        + "(SELECT pi.url FROM product_image pi WHERE pi.productId = p.id LIMIT 1) AS url, "
+                        + "c.categoryname, b.brandname "
+                        + "FROM product p "
+                        + "JOIN product_detail pd ON p.id = pd.productId "
+                        + "JOIN category c ON p.categoryid = c.id "
+                        + "JOIN brand b ON p.brandid = b.id";
+                statement = conn.prepareStatement(query);
+            } else {
+                String query = "SELECT p.id, p.productName, p.price, p.categoryId, p.brandId, pd.ram, pd.storage, pd.color, pd.description, pd.quantity,"
+                        + "(SELECT pi.url FROM product_image pi WHERE pi.productId = p.id LIMIT 1) AS url, "
+                        + "c.categoryname, b.brandname "
+                        + "FROM product p "
+                        + "JOIN product_detail pd ON p.id = pd.productId "
+                        + "JOIN category c ON p.categoryid = c.id "
+                        + "JOIN brand b ON p.brandid = b.id "
+                        + "WHERE p.brandId = ?";
+                statement = conn.prepareStatement(query);
+                statement.setString(1, brandId);
+            }
+
             resultSet = statement.executeQuery();
             productList = new ArrayList<>();
             while (resultSet.next()) {
@@ -296,30 +359,76 @@ public class ProductDAO {
                 String ram = resultSet.getString("ram");
                 String storage = resultSet.getString("storage");
                 String color = resultSet.getString("color");
-                int brandId = resultSet.getInt("brandId");
+                String strBrandId = resultSet.getString("brandId");
+                int bid = Integer.parseInt(strBrandId);
                 String brandName = resultSet.getString("brandName");
                 int categoryId = resultSet.getInt("categoryId");
                 String categoryName = resultSet.getString("categoryName");
                 String description = resultSet.getString("description");
                 int qty = resultSet.getInt("quantity");
-                Product product = new Product(id, productName, price, image, ram, storage, color, brandId, brandName, categoryId, categoryName, description, qty);
+                Product product = new Product(id, productName, price, image, ram, storage, color, bid, brandName, categoryId, categoryName, description, qty);
                 productList.add(product);
             }
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (statement != null) {
-                    statement.close();
-                }
-            } finally {
-                if (conn != null) {
-                    conn.close();
-                }
-            }
+
+            return productList;
+        } catch (ClassNotFoundException | SQLException e) {
+            // Xử lý ngoại lệ
+            e.printStackTrace();
+            return null;
         }
-        return productList;
+    }
+
+    public List<Product> getRandomProductsByBrandId(String brandId) {
+        try {
+            PreparedStatement statement = null;
+            ResultSet resultSet = null;
+            List<Product> productList = null;
+            String url = "jdbc:mysql://localhost:3306/javaproject";
+            String user = "root";
+            String password = "";
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(url, user, password);
+
+            String query = "SELECT p.id, p.productName, p.price, p.categoryId, p.brandId, pd.ram, pd.storage, pd.color, pd.description, pd.quantity,"
+                    + "(SELECT pi.url FROM product_image pi WHERE pi.productId = p.id LIMIT 1) AS url, "
+                    + "c.categoryname, b.brandname "
+                    + "FROM product p "
+                    + "JOIN product_detail pd ON p.id = pd.productId "
+                    + "JOIN category c ON p.categoryid = c.id "
+                    + "JOIN brand b ON p.brandid = b.id "
+                    + "WHERE p.brandId = ? "
+                    + "ORDER BY RAND() "
+                    + "LIMIT 4";
+            statement = conn.prepareStatement(query);
+            statement.setString(1, brandId);
+
+            resultSet = statement.executeQuery();
+            productList = new ArrayList<>();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String productName = resultSet.getString("productName");
+                double price = resultSet.getDouble("price");
+                String image = resultSet.getString("url");
+                String ram = resultSet.getString("ram");
+                String storage = resultSet.getString("storage");
+                String color = resultSet.getString("color");
+                String strBrandId = resultSet.getString("brandId");
+                int bid = Integer.parseInt(strBrandId);
+                String brandName = resultSet.getString("brandName");
+                int categoryId = resultSet.getInt("categoryId");
+                String categoryName = resultSet.getString("categoryName");
+                String description = resultSet.getString("description");
+                int qty = resultSet.getInt("quantity");
+                Product product = new Product(id, productName, price, image, ram, storage, color, bid, brandName, categoryId, categoryName, description, qty);
+                productList.add(product);
+            }
+
+            return productList;
+        } catch (ClassNotFoundException | SQLException e) {
+            // Xử lý ngoại lệ
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public Customer getCustomerById(int customerId) throws SQLException, ClassNotFoundException {

@@ -21,7 +21,10 @@
     int totalVoteByRating3 = productDAO.getTotalVotesByRating(productId, 3);
     int totalVoteByRating4 = productDAO.getTotalVotesByRating(productId, 4);
     int totalVoteByRating5 = productDAO.getTotalVotesByRating(productId, 5);
-    List<Product> productList = productDAO.getProductsByBrandId(product.getBrandId());
+    int brandId = product.getBrandId();
+    String strBrandId = String.valueOf(brandId);
+    List<Product> productList = productDAO.getProductsByBrandId(strBrandId);
+    List<Product> rproductList = productDAO.getRandomProductsByBrandId(strBrandId);
     List<Comment> commentList = productDAO.getCommentsByProductId(productId);
     int recordsPerPage = 3;
     int totalRecords = commentList.size();
@@ -44,7 +47,7 @@
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
                 <li><a href="index.jsp">Home</a></li>
-                <li class="active"><a href="store.jsp">Store</a></li>
+                <li class="active"><a href="store.jsp?brand=0">Store</a></li>
                 <li><a href="cart.jsp">Cart</a></li>
                 <li><a href="checkout.jsp">CheckOut</a></li>
                 <li><a href="contact.jsp">Contact</a></li>
@@ -64,9 +67,10 @@
         <!-- row -->
         <div class="row">
             <div class="col-md-12">
+                <h3 class="breadcrumb-header">Product</h3>
                 <ul class="breadcrumb-tree">
                     <li><a href="index.jsp">Home</a></li>
-                    <li><a href="store.jsp">Store</a></li>
+                    <li><a href="store.jsp?brand=0">Store</a></li>
                     <li class="active">Product</li>
                 </ul>
             </div>
@@ -222,7 +226,7 @@
                                                 <% } %>
                                                 <% for (int i = avgvote; i < 5; i++) { %>
                                                 <i class="fa fa-star-o"></i>
-                                                <% } %>
+                                                <% }%>
                                             </div>
                                         </div>
                                         <ul class="rating">
@@ -407,7 +411,7 @@
             </div>
             <%
                 if (productList != null) {
-                    for (Product pb : productList) {
+                    for (Product pb : rproductList) {
             %>
             <!-- product -->
             <div class="col-md-3 col-xs-6">
@@ -421,11 +425,15 @@
                         <h5><%= pb.getRam()%>/<%= pb.getStorage()%> - <%= pb.getColor()%></h5>
                         <h4 class="product-price">$<%= pb.getPrice()%></h4>
                         <div class="product-rating">
+                            <%
+                                int vote = productDAO.calculateRoundedAverageVoteById(productId);
+                            %>
+                            <% for (int i = 0; i < vote; i++) { %>
                             <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                            <% }%>
+                            <% for (int i = vote; i < 5; i++) { %>
+                            <i class="fa fa-star-o"></i>
+                            <% }%>
                         </div>
                         <div class="product-btns">
                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>

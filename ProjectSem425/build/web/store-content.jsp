@@ -5,12 +5,9 @@
 <%
     String brandId = request.getParameter("brand");
     ProductDAO productDAO = new ProductDAO();
-    List<Product> productList = productDAO.getProducts();
-    List<Product> xiaomiList = productDAO.getXiaomiProducts();
-    List<Product> samsungList = productDAO.getSamsungProducts();
-    List<Product> appleList = productDAO.getAppleProducts();
+    List<Product> productList = productDAO.getProductsByBrandId(brandId);
+    List<Product> randomList = productDAO.get5RandomProducts();
     List<Brand> brandList = productDAO.getBrands();
-    List<Product> finalList = null;
     int recordsPerPage = 6;
     int totalRecords = productList.size();
     int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
@@ -31,7 +28,7 @@
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
                 <li><a href="index.jsp">Home</a></li>                       
-                <li class="active"><a href="store.jsp">Store</a></li>
+                <li class="active"><a href="store.jsp?brand=0">Store</a></li>
                 <li><a href="cart.jsp">Cart</a></li>
                 <li><a href="checkout.jsp">CheckOut</a></li>
                 <li><a href="contact.jsp">Contact</a></li>
@@ -51,9 +48,10 @@
         <!-- row -->
         <div class="row">
             <div class="col-md-12">
+                <h3 class="breadcrumb-header">Store</h3>
                 <ul class="breadcrumb-tree">
                     <li><a href="index.jsp">Home</a></li>
-                    <li class="active"><a href="store.jsp">Store</a></li>
+                    <li class="active">Store</li>
                 </ul>
             </div>
         </div>
@@ -76,14 +74,13 @@
                     <h3 class="aside-title">Brand</h3>
                     <div class="checkbox-filter">
                         <div class="input-checkbox">
-                            <input type="checkbox" id="brand-1">
-                            <label for="brand-1">
-                                <a href="store.jsp">All</a>
+                            <input type="checkbox" id="brand-0">
+                            <label for="brand-0">
+                                <a href="store.jsp?brand=0">All Brands</a>
                             </label>
                         </div>
                         <%
-                            if (brandList != null) {
-                                for (Brand brand : brandList) {
+                            for (Brand brand : brandList) {
                         %>
                         <div class="input-checkbox">
                             <input type="checkbox" id="brand-1">
@@ -92,7 +89,6 @@
                             </label>
                         </div>
                         <%
-                                }
                             }
                         %>
                     </div>
@@ -101,10 +97,10 @@
 
                 <!-- aside Widget -->
                 <div class="aside">
-                    <h3 class="aside-title">Top selling</h3>
+                    <h3 class="aside-title">Random</h3>
                     <%
-                        if (productList != null) {
-                            for (Product product : productList) {
+                        if (randomList != null) {
+                            for (Product product : randomList) {
                     %>
                     <div class="product-widget">
                         <div class="product-img">
@@ -126,28 +122,27 @@
             <!-- /ASIDE -->
 
             <!-- STORE -->
-            <div id="store" class="col-md-9">
+            <div id="store" class="col-md-9 ">
                 <!-- store products -->
                 <div class="row">
+                    <!-- SEARCH BAR -->
+                    <div class="col-md-12">
+                        <div class="header-search text-center">
+                            <form method="post">
+                                <input class="input" name="keywordInput" placeholder="Search here">
+                                <button class="search-btn" type="submit" style="border-radius: 0">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /SEARCH BAR -->
                     <div class="clearfix visible-sm visible-xs"></div>
                     <%
-                        if (brandId != null) {
-                            if (brandId.equals("1")) {
-                                finalList = xiaomiList;
-                            } else if (brandId.equals("2")) {
-                                finalList = samsungList;
-                            } else if (brandId.equals("3")) {
-                                finalList = appleList;
-                            } else {
-                                finalList = productList;
-                            }
-                        } else {
-                            finalList = productList;
-                        }
-                        for (int i = startRecord; i < endRecord; i++) {
-                            Product product = finalList.get(i);
+                        if (productList != null) {
+                            for (int i = startRecord; i < endRecord; i++) {
+                                Product product = productList.get(i);
                     %>
                     <!-- product -->
+
                     <div class="col-md-4 col-xs-6">
                         <!-- product -->
                         <div class="product">
@@ -205,6 +200,7 @@
                         <!-- /product -->
                     </div>
                     <%
+                            }
                         }
                     %>
                     <!-- /product -->
@@ -234,23 +230,28 @@
 <!-- /SECTION -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-                                    $('#store').on('click', '.page-link', function (e) {
+                                        $(document).ready(function () {
+                                        $('#store').on('click', '.page-link', function (e) {
                                         e.preventDefault();
-
                                         var page = $(this).data('page');
-                                        var url = 'store.jsp?page=' + page;
-
+                                        var brandId = '<%= request.getParameter("brand")%>';
+                                        var url = 'store.jsp?brand=' + brandId + '&page=' + page;
                                         $.ajax({
-                                            url: url,
-                                            type: 'GET',
-                                            success: function (data) {
+                                        url: url,
+                                                type: 'GET',
+                                                success: function (data) {
                                                 $('#store').html($(data).find('#store').html());
-                                            },
-                                            error: function (xhr, status, error) {
+                                                },
+                                                error: function (xhr, status, error) {
                                                 console.log(error);
-                                            }
+                                                }
                                         });
-                                    });
-                                });
+                                        });
+                                        });
+                                        document.querySelector('.search-btn').addEventListener('click', function(event) {
+                                        event.preventDefault();
+                                        var keyword = document.querySelector('.input').value;
+                                        var category = document.querySelector('.input-select').value;
+                                        searchProducts(keyword, category);
+                                        });
 </script>

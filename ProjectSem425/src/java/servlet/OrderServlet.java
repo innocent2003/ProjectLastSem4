@@ -157,7 +157,7 @@ public class OrderServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        response.sendRedirect(request.getContextPath() + "/store.jsp");
+        response.sendRedirect(request.getContextPath() + "/store.jsp?brand=0");
     }
 
     /**
