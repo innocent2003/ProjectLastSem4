@@ -381,7 +381,12 @@
                                                     <a class="text-success m-3" href="productedit.jsp">
                                                         <i class="fas fa-fw fa-edit"></i>
                                                     </a>
-                                                    <a class="text-danger" href=""><i class="fas fa-fw fa-trash"></i></a>
+                                                     <form action="DeleteDetailImage" method="post">
+                                                         <input type="hidden" name="productId" value="${row.Id}"/>
+   
+     <button type="submit" class="text-danger" ><i class="fas fa-fw fa-trash"></i></button>
+</form>
+                                                   
                                                 </td>
                                             </tr>
                                             </c:forEach>

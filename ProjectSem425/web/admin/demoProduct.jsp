@@ -35,5 +35,11 @@
 
         <input type="submit" value="Add Product">
     </form>
+        
+        
+        <form action="DeleteDetailImage" method="post">
+    <input type="text" name="productId" placeholder="Nhập ID sản phẩm cần xóa">
+    <input type="submit" value="Xóa sản phẩm">
+</form>
     </body>
 </html>
