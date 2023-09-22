@@ -66,7 +66,6 @@
                             <td colspan="5"></td>
                             <td class="text-right"><b>Total:</b></td>
                             <td class="text-center" id="totalPrice1"></td>
-                            <td></td>
                         </tr>
                     </tfoot>
                 </table>

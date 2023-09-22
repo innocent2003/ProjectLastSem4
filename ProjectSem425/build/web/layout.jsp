@@ -27,9 +27,10 @@
         <link rel="stylesheet" href="resources/css/font-awesome.min.css">
 
         <!-- Custom stlylesheet -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
+        <!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">-->
 
         <link type="text/css" rel="stylesheet" href="resources/css/style.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
         <link type="text/css" rel="stylesheet" href="resources/css/myCss.css"/>
     </head>
     <body>
@@ -78,8 +79,8 @@
                                 <form>
                                     <select class="input-select">
                                         <option value="0">All Categories</option>
-                                        <option value="1">Category 01</option>
-                                        <option value="1">Category 02</option>
+                                        <option value="1">Smartphone</option>
+                                        <option value="1">Other</option>
                                     </select>
                                     <input class="input" placeholder="Search here">
                                     <button class="search-btn">Search</button>
@@ -184,8 +185,8 @@
                                 <h3 class="footer-title">About Us</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
                                 <ul class="footer-links">
-                                    <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-                                    <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+                                    <li><a href="#"><i class="fa fa-map-marker"></i>123 Washington D.C</a></li>
+                                    <li><a href="#"><i class="fa fa-phone"></i>+012-345-6789</a></li>
                                     <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
                                 </ul>
                             </div>
@@ -196,10 +197,9 @@
                                 <h3 class="footer-title">Categories</h3>
                                 <ul class="footer-links">
                                     <li><a href="#">Hot deals</a></li>
-                                    <li><a href="#">Laptops</a></li>
                                     <li><a href="#">Smartphones</a></li>
-                                    <li><a href="#">Cameras</a></li>
                                     <li><a href="#">Accessories</a></li>
+                                    <li><a href="#">Other</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -273,7 +273,8 @@
         <script src="resources/js/jquery.zoom.min.js"></script>
         <script src="resources/js/main.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>
+        <!--        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>-->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
         <script src="resources/js/myJs.js"></script>
         <script>
                                     document.getElementById('logoutLink').addEventListener('click', function () {

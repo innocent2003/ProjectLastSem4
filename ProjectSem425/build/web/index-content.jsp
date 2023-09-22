@@ -72,7 +72,7 @@
                     </ul>
                     <h2 class="text-uppercase">hot deal this week</h2>
                     <p>New Collection Up to 50% OFF</p>
-                    <a class="primary-btn cta-btn" href="#">Shop now</a>
+                    <a class="primary-btn cta-btn" href="store.jsp">Shop now</a>
                 </div>
             </div>
         </div>
@@ -172,11 +172,16 @@
                                         <h5><%= product.getRam()%>/<%= product.getStorage()%> - <%= product.getColor()%></h5>
                                         <h4 class="product-price">$<%= product.getPrice()%></h4>
                                         <div class="product-rating">
+                                            <%
+                                                String productId = String.valueOf(product.getId());
+                                                int vote = productDAO.calculateRoundedAverageVoteById(productId);
+                                            %>
+                                            <% for (int i = 0; i < vote; i++) { %>
                                             <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
+                                            <% }%>
+                                            <% for (int i = vote; i < 5; i++) { %>
+                                            <i class="fa fa-star-o"></i>
+                                            <% }%>
                                         </div>
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
@@ -206,7 +211,7 @@
                                             <a href="login.jsp" class="add-to-cart-btn" style="display: inline-flex; justify-content: center; align-items: center;"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                         </div>
                                         <%
-                                        }
+                                            }
                                         %>
                                     </form>
                                 </div>
@@ -236,7 +241,7 @@
     <div class="container">
         <!-- row -->
         <div class="row">
-            <div class="col-md-4 col-xs-6">
+            <div class="col-md-4 col-xs-6" >
                 <div class="section-title">
                     <h4 class="title">Xiaomi</h4>
                 </div>

@@ -1,8 +1,10 @@
 package dao;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import model.Brand;
+import model.Comment;
 import model.Customer;
 import model.Product;
 
@@ -282,7 +284,6 @@ public class ProductDAO {
                     + "JOIN category c ON p.categoryid = c.id "
                     + "JOIN brand b ON p.brandid = b.id "
                     + "WHERE p.brandId = ?";
-
             statement = conn.prepareStatement(query);
             statement.setInt(1, brandIds);
             resultSet = statement.executeQuery();
@@ -326,7 +327,6 @@ public class ProductDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         Customer customer = new Customer();
-
         String url = "jdbc:mysql://localhost:3306/javaproject";
         String user = "root";
         String password = "";
@@ -355,5 +355,127 @@ public class ProductDAO {
         }
 
         return customer;
+    }
+
+    public List<Comment> getCommentsByProductId(String productId) throws ClassNotFoundException {
+        List<Comment> comments = new ArrayList<>();
+
+        try {
+            String url = "jdbc:mysql://localhost:3306/javaproject";
+            String user = "root";
+            String password = "";
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(url, user, password);
+            String sql = "SELECT c.*, cu.name FROM comments c JOIN customers cu ON c.CustomerId = cu.Id WHERE c.ProductId = ? ORDER BY c.created_at DESC";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, productId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String userName = rs.getString("name");
+                int vote = rs.getInt("vote");
+                String content = rs.getString("content");
+                Timestamp createdAt = rs.getTimestamp("created_at");
+
+                Comment comment = new Comment(userName, vote, content, createdAt);
+                comments.add(comment);
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return comments;
+    }
+
+    public int calculateRoundedAverageVoteById(String productId) {
+        double averageVote = 0.0;
+
+        try {
+            String url = "jdbc:mysql://localhost:3306/javaproject";
+            String user = "root";
+            String password = "";
+            Class.forName("com.mysql.jdbc.Driver");
+
+            try (Connection connection = DriverManager.getConnection(url, user, password);
+                    PreparedStatement statement = connection.prepareStatement(
+                            "SELECT IFNULL(AVG(vote), 0) AS average_vote "
+                            + "FROM comments "
+                            + "WHERE productid = ?")) {
+
+                statement.setString(1, productId);
+
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        averageVote = resultSet.getDouble("average_vote");
+                    }
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (averageVote == 0.0) {
+            averageVote = 5.0;
+        }
+
+        int roundedAverageVote = (int) Math.round(averageVote);
+        return roundedAverageVote;
+    }
+
+    public int getTotalComments(String productId) {
+        int totalComments = 0;
+
+        try {
+            String url = "jdbc:mysql://localhost:3306/javaproject";
+            String user = "root";
+            String password = "";
+            Class.forName("com.mysql.jdbc.Driver");
+            try (Connection connection = DriverManager.getConnection(url, user, password)) {
+                // Tạo truy vấn SQL để tính tổng số comment
+                String query = "SELECT COUNT(*) AS total_comments FROM comments WHERE productid = ?";
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+                    statement.setString(1, productId);
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        if (resultSet.next()) {
+                            totalComments = resultSet.getInt("total_comments");
+                        }
+                    }
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalComments;
+    }
+
+    public int getTotalVotesByRating(String productId, int rating) {
+        int totalVotes = 0;
+
+        try {
+            String url = "jdbc:mysql://localhost:3306/javaproject";
+            String user = "root";
+            String password = "";
+            Class.forName("com.mysql.jdbc.Driver");
+            try (Connection connection = DriverManager.getConnection(url, user, password)) {
+                // Tạo truy vấn SQL để tính tổng số vote cho một số sao cụ thể
+                String query = "SELECT COUNT(*) AS total_votes FROM comments WHERE productid = ? AND vote = ?";
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+                    statement.setString(1, productId);
+                    statement.setInt(2, rating);
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        if (resultSet.next()) {
+                            totalVotes = resultSet.getInt("total_votes");
+                        }
+                    }
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalVotes;
     }
 }

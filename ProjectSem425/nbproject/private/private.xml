@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>web/product-content.jsp</url>
+            <bookmark id="1">
+                <name/>
+                <line>345</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa7/ProjectLastSem4/ProjectSem425/web/admin/demoProduct.jsp</file>
             <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa7/ProjectLastSem4/ProjectSem425/web/admin/user.jsp</file>
             <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa7/ProjectLastSem4/ProjectSem425/web/admin/order.jsp</file>
             <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa7/ProjectLastSem4/ProjectSem425/web/demoProduct.jsp</file>
             <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa7/ProjectLastSem4/ProjectSem425/web/admin/productcreate.jsp</file>
             <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa7/ProjectLastSem4/ProjectSem425/web/addProduct.jsp</file>
+=======
+            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectSem4/ProjectSem425/web/store-content.jsp</file>
+            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectSem4/ProjectSem425/web/product-content.jsp</file>
+>>>>>>> 2e03c1e18f015928b32ac0b5f74be354d494d785
         </group>
     </open-files>
 </project-private>

@@ -80,6 +80,8 @@ function addToCart(event) {
         title: 'Success',
         text: productName + ' added to cart!',
         timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: true,
     });
 }
 
@@ -178,6 +180,14 @@ function createDeleteHandler(item) {
             if (result.isConfirmed) {
                 removeFromCart(item);
                 updateCartUI(getCart());
+                Swal.fire({
+                    title: 'Item cleared',
+                    text: 'Your item has been cleared.',
+                    icon: 'success',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: true,
+                });
             }
         });
     };
@@ -196,6 +206,14 @@ function createDeleteHandler1(item) {
             if (result.isConfirmed) {
                 removeFromCart1(item);
                 updateCartUI(getCart());
+                Swal.fire({
+                    title: 'Item cleared',
+                    text: 'Your item has been cleared.',
+                    icon: 'success',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: true,
+                });
             }
         });
     };
@@ -333,10 +351,7 @@ function changeProductQuantity(index, change) {
 }
 
 document.querySelector('#logoutLink').addEventListener('click', function () {
-    // Xóa toàn bộ giỏ hàng trong biến cart
     cart = [];
-
-    // Xóa toàn bộ giỏ hàng trong sessionStorage
     sessionStorage.removeItem('cart');
 });
 

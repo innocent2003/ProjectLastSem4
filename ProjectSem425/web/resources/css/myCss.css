@@ -29,6 +29,10 @@
     align-items: center;
 }
 
+.swal2-container {
+    transform: scale(1.2);
+}
+
 .swal2-popup {
     top: -30% !important;
     transform: translateY(0) !important;
@@ -75,4 +79,8 @@
 
 .product-thumb.selected {
     border: 1px solid red !important;
+}
+
+.right-align {
+  float: right;
 }
