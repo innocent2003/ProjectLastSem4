@@ -373,13 +373,18 @@
                                                 <td><c:out value="${row.Password}"/></td>
                                                 <td><c:out value="${row.Role}"/></td>
                                                 <td>
-                                                    <a href="usershow.jsp">
+                                                    <a href="usershow.jsp?id=${row.id}">
                                                         <i class="fas fa-fw fa-eye"></i>
                                                     </a>
                                                     <a class="text-success m-3" href="useredit.jsp">
                                                         <i class="fas fa-fw fa-edit"></i>
-                                                    </a>
-                                                    <a class="text-danger" href=""><i class="fas fa-fw fa-trash"></i></a>
+                                                    </a><form method="post" action="DeleteUserCustomerServlet">
+                                                        <input type="hidden" name="userId" value="${row.id}"/>
+                                                                        <button type="submit" style="background-color: white" class="text-danger" ><i class="fas fa-fw fa-trash">
+                                                                    
+                                                        </i></button>
+                                                                    </form>
+                                                            
                                                 </td>
                                             </tr>
                                             </c:forEach>
