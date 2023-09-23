@@ -373,10 +373,10 @@
                                                         </a>
                                                         <a class="text-success m-3" href="useredit.jsp">
                                                             <i class="fas fa-fw fa-edit"></i>
-                                                        </a><form method="post" action="DeleteUserCustomerServlet">
+                                                        </a>
+                                                            <form method="post" action="DeleteUserCustomerServlet">
                                                             <input type="hidden" name="userId" value="${row.id}"/>
                                                             <button type="submit" style="background-color: white" class="text-danger" ><i class="fas fa-fw fa-trash">
-
                                                                 </i></button>
                                                         </form>
 

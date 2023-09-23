@@ -3,7 +3,6 @@
     Created on : Sep 13, 2023, 12:12:42 AM
     Author     : Admin
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import = "java.io.*,java.util.*,java.sql.*"%>
 <%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
@@ -69,19 +68,19 @@
                 </div>
 
                 <!-- Nav Item - Login -->
-<!--                <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">
-                        <i class="fas fa-fw fa-sign-in-alt"></i>
-                        <span>Login</span>
-                    </a>
-                </li>
-
-                 Nav Item - Register 
-                <li class="nav-item">
-                    <a class="nav-link" href="register.jsp">
-                        <i class="fas fa-fw fa-registered"></i>
-                        <span>Register</span></a>
-                </li>-->
+                <!--                <li class="nav-item">
+                                    <a class="nav-link" href="login.jsp">
+                                        <i class="fas fa-fw fa-sign-in-alt"></i>
+                                        <span>Login</span>
+                                    </a>
+                                </li>
+                
+                                 Nav Item - Register 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="register.jsp">
+                                        <i class="fas fa-fw fa-registered"></i>
+                                        <span>Register</span></a>
+                                </li>-->
 
                 <!-- Nav Item - User -->
                 <li class="nav-item">
@@ -343,39 +342,33 @@
                                             <tr class="text-center">
                                                 <th>ID</th>
                                                 <th>Product</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
+                                                <th>Customer</th>
                                                 <th>Vote</th>
-                                                <th>Comment</th>
-                                                <th>Status</th>
+                                                <th>Content</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                               <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-         url = "jdbc:mysql://localhost/javaproject"
-         user = "root"  password = ""/>
+                                            <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+                                                               url = "jdbc:mysql://localhost/javaproject"
+                                                               user = "root"  password = ""/>
 
-         <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from comments inner join customers on comments.CustomerId = customers.Id inner join product on product.Id = comments.ProductId;
-         </sql:query>
-                                            <tr class="text-center">
-                                                <td><c:out value="${row.Id}"/></td>
-                                                <td><c:out value="${row.Name}"/></td>
-                                                <td><c:out value="${row.Content}"/></td>
-                                                <td><c:out value="${row.ProductId}"/></td>
-                                                <td><c:out value="${row.Vote}"/></td>
-                                                <td><c:out value="${row.Price}"/></td>
-                                                <td><c:out value="${row.ProductName}"/></td>
-                                                <td>                                                                                                                                            
-                                                    <a class="text-danger m-3" href=""><i class="fas fa-fw fa-trash"></i></a>
-                                                    <a class="text-primary" href="">
-                                                        <i class="fas fa-fw fa-reply"></i>
-                                                    </a>
-                                                </td>                                         
-                                            </tr>
-
+                                            <sql:query dataSource = "${snapshot}" var = "result">
+                                                SELECT * from comments join customers on comments.CustomerId = customers.Id join product on product.Id = comments.ProductId;
+                                            </sql:query>
+                                            <c:forEach var="row" items="${result.rows}">
+                                                <tr class="text-center">
+                                                    <td><c:out value="${row.Id}"/></td>
+                                                    <td><c:out value="${row.ProductName}"/></td>
+                                                    <td><c:out value="${row.Name}"/></td>
+                                                    <td><c:out value="${row.Vote}"/></td>
+                                                    <td><c:out value="${row.Content}"/></td>
+                                                    <td>                                                                                                                                            
+                                                        <a class="text-danger m-3" href=""><i class="fas fa-fw fa-trash"></i></a>
+                                                    </td>                                         
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
