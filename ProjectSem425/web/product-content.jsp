@@ -315,7 +315,7 @@
                                             %>
                                             <li>
                                                 <div class="review-heading">
-                                                    <h5 class="name"><%= c.getUserName()%></h5>
+                                                    <h6 class="name"><%= c.getUserName()%></h6>
                                                     <p class="date"><%= createdAt%></p>
                                                     <div class="review-rating">
                                                         <% int vote = c.getVote(); %>

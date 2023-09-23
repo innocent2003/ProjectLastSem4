@@ -62,7 +62,7 @@
                     <!-- row -->
                     <div class="row">
                         <!-- LOGO -->
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="header-logo">
                                 <a href="index.jsp">
                                     <img src="resources/img/logo.png" alt="">
@@ -70,12 +70,23 @@
                             </div>
                         </div>
                         <!-- /LOGO -->
+                        
+                        <!-- SEARCH BAR -->
+                        <div class="col-md-6">
+                            <div class="header-search text-center">
+                                <form method="post">
+                                    <input class="input" name="keywordInput" placeholder="Search here">
+                                    <button class="search-btn" type="submit" style="border-radius: 0">Search</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /SEARCH BAR -->
 
                         <!-- ACCOUNT -->
-                        <div class="col-md-6 clearfix">
+                        <div class="col-md-3 clearfix">
                             <div class="header-ctn">
 
-                                <!-- Cart -->
+                            <!-- Cart -->
                                 <div class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                         <i class="fa fa-shopping-cart"></i>

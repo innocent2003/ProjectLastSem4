@@ -125,16 +125,6 @@
             <div id="store" class="col-md-9 ">
                 <!-- store products -->
                 <div class="row">
-                    <!-- SEARCH BAR -->
-                    <div class="col-md-12">
-                        <div class="header-search text-center">
-                            <form method="post">
-                                <input class="input" name="keywordInput" placeholder="Search here">
-                                <button class="search-btn" type="submit" style="border-radius: 0">Search</button>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- /SEARCH BAR -->
                     <div class="clearfix visible-sm visible-xs"></div>
                     <%
                         if (productList != null) {
