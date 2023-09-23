@@ -12,8 +12,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -95,19 +93,17 @@ public class AddCommentServlet extends HttpServlet {
                 String password = "";
 
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection conn = DriverManager.getConnection(url, user, password);
-
-                String sql = "INSERT INTO comments (CustomerId, ProductId, Vote, Content, created_at) VALUES (?, ?, ?, ?, ?)";
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                stmt.setInt(1, userId);
-                stmt.setInt(2, productId);
-                stmt.setInt(3, rating);
-                stmt.setString(4, review);
-                stmt.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
-                stmt.executeUpdate();
-
-                stmt.close();
-                conn.close();
+                try (Connection conn = DriverManager.getConnection(url, user, password)) {
+                    String sql = "INSERT INTO comments (CustomerId, ProductId, Vote, Content, created_at) VALUES (?, ?, ?, ?, ?)";
+                    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                        stmt.setInt(1, userId);
+                        stmt.setInt(2, productId);
+                        stmt.setInt(3, rating);
+                        stmt.setString(4, review);
+                        stmt.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
+                        stmt.executeUpdate();
+                    }
+                }
 
                 response.getWriter().write("success");
             } catch (NumberFormatException e) {

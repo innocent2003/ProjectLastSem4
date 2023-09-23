@@ -4,6 +4,7 @@
 <%@page import="model.Product"%>
 <%@page import="dao.ProductDAO"%>
 <%@page import="model.Product"%>
+
 <%
     session = request.getSession();
     Object userIdObj = session.getAttribute("userId");

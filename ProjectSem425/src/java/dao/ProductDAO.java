@@ -48,6 +48,7 @@ public class ProductDAO {
             + "WHERE p.brandId = 3 "
             + "ORDER BY RAND() "
             + "LIMIT 3";
+
     private static final String GET_BRANDS_QUERY = "SELECT * FROM BRAND";
 
     public List<Brand> getBrands() throws ClassNotFoundException {
@@ -494,7 +495,6 @@ public class ProductDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return comments;
     }
 

@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.sql.Statement;
@@ -119,6 +120,7 @@ public class OrderServlet extends HttpServlet {
                 String password = "";
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection conn = DriverManager.getConnection(url, user, password);
+
                 String insertOrderQuery = "INSERT INTO orders(customerId, order_date, total, status) VALUES (?, ?, ?, '0')";
                 PreparedStatement insertOrderStmt = conn.prepareStatement(insertOrderQuery, Statement.RETURN_GENERATED_KEYS);
                 double total = 0.0;
@@ -153,8 +155,7 @@ public class OrderServlet extends HttpServlet {
                     response.sendRedirect(redirectUrl);
                     return;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (JsonSyntaxException | IOException | ClassNotFoundException | SQLException e) {
             }
         }
         response.sendRedirect(request.getContextPath() + "/store.jsp?brand=0");
