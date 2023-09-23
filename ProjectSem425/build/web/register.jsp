@@ -82,7 +82,6 @@
         <script src="resources/js/jquery.min.js" type="text/javascript"></script>
         <!-- Đầu tiên, thêm mã JavaScript của thư viện Swal -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
         <script>
             document.querySelector('.register-form').addEventListener('submit', function (event) {
                 event.preventDefault();
@@ -222,7 +221,10 @@
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Registration failed',
-                                    text: 'An error occurred while registering'
+                                    text: 'An error occurred while registering',
+                                    timer: 2000,
+                                    timerProgressBar: true,
+                                    showConfirmButton: true,
                                 });
                             }
                         })
