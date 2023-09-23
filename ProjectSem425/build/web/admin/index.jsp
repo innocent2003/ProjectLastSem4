@@ -18,11 +18,11 @@
 
     <title>SB Admin 2 - Dashboard</title>
     <!-- Custom fonts for this template-->
-    <link href="admin/vendor/all.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../admin/vendor/all.min.css" rel="stylesheet" type="text/css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="admin/vendor/sb-admin-2.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../admin/vendor/sb-admin-2.min.css" rel="stylesheet" type="text/css"/>
 
 </head>
 
@@ -32,101 +32,93 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-            </a>
-  
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Pages
-            </div>
-
-            <!-- Nav Item - Login -->
-<!--            <li class="nav-item">
-                <a class="nav-link" href="admin/login.jsp">
-                    <i class="fas fa-fw fa-sign-in-alt"></i>
-                    <span>Login</span>
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fas fa-laugh-wink"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
                 </a>
-            </li>
 
-             Nav Item - Register 
-            <li class="nav-item">
-                <a class="nav-link" href="admin/register.jsp">
-                    <i class="fas fa-fw fa-registered"></i>
-                    <span>Register</span></a>
-            </li>-->
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - User -->
-            <li class="nav-item">
-                <a class="nav-link" href="admin/user.jsp">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>User</span></a>
-            </li>
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.jsp">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
 
-            <!-- Nav Item - Product -->
-            <li class="nav-item">
-                <a class="nav-link" href="admin/product.jsp">
-                    <i class="fas fa-fw fa-bacon"></i>
-                    <span>Product</span></a>
-            </li>
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
-            <!-- Nav Item - Order -->
-            <li class="nav-item">
-                <a class="nav-link" href="admin/order.jsp">
-                    <i class="fas fa-fw fa-shopping-bag"></i>
-                    <span>Order</span></a>
-            </li>
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Pages
+                </div>
 
-            <!-- Nav Item - Category -->
-            <li class="nav-item">
-                <a class="nav-link" href="admin/category.jsp">
-                    <i class="fas fa-fw fa-calendar-day"></i>
-                    <span>Category</span></a>
-            </li>
+                <!-- Nav Item - Login -->
+                <li class="nav-item">
+                    <a class="nav-link" href="LogoutAdmin">
+                        <i class="fas fa-fw fa-sign-in-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li><!--            
+                <!-- Nav Item - User -->
+                <li class="nav-item">
+                    <a class="nav-link" href="user.jsp">
+                        <i class="fas fa-fw fa-user"></i>
+                        <span>User</span></a>
+                </li>
 
-            <!-- Nav Item - Brand -->
-            <li class="nav-item">
-                <a class="nav-link" href="admin/brand.jsp">
-                    <i class="fas fa-fw fa-braille"></i>
-                    <span>Brand</span></a>
-            </li>
+                <!-- Nav Item - Product -->
+                <li class="nav-item">
+                    <a class="nav-link" href="product.jsp">
+                        <i class="fas fa-fw fa-bacon"></i>
+                        <span>Product</span></a>
+                </li>
 
-            <!-- Nav Item - Comment -->
-            <li class="nav-item">
-                <a class="nav-link" href="admin/comment.jsp">
-                    <i class="fas fa-fw fa-comments"></i>
-                    <span>Comment</span></a>
-            </li>
+                <!-- Nav Item - Order -->
+                <li class="nav-item">
+                    <a class="nav-link" href="order.jsp">
+                        <i class="fas fa-fw fa-shopping-bag"></i>
+                        <span>Order</span></a>
+                </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+                <!-- Nav Item - Category -->
+                <li class="nav-item">
+                    <a class="nav-link" href="category.jsp">
+                        <i class="fas fa-fw fa-calendar-day"></i>
+                        <span>Category</span></a>
+                </li>
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+                <!-- Nav Item - Brand -->
+                <li class="nav-item">
+                    <a class="nav-link" href="brand.jsp">
+                        <i class="fas fa-fw fa-braille"></i>
+                        <span>Brand</span></a>
+                </li>
 
-        </ul>
-        <!-- End of Sidebar -->
+                <!-- Nav Item - Comment -->
+                <li class="nav-item">
+                    <a class="nav-link" href="comment.jsp">
+                        <i class="fas fa-fw fa-comments"></i>
+                        <span>Comment</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
+
+            </ul>
+            <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -523,21 +515,21 @@
         </div>
 
         <!-- Bootstrap core JavaScript-->
-        <script src="admin/vendor/jquery.min.js" type="text/javascript"></script>
-        <script src="admin/vendor/bootstrap.bundle.min.js" type="text/javascript"></script>
+        <script src="../admin/vendor/jquery.min.js" type="text/javascript"></script>
+        <script src="../admin/vendor/bootstrap.bundle.min.js" type="text/javascript"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="admin/vendor/jquery.easing.min.js" type="text/javascript"></script>
+        <script src="../admin/vendor/jquery.easing.min.js" type="text/javascript"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="admin/vendor/sb-admin-2.min.js" type="text/javascript"></script>
+        <script src="../admin/vendor/sb-admin-2.min.js" type="text/javascript"></script>
 
         <!-- Page level plugins -->
-        <script src="admin/vendor/Chart.min.js" type="text/javascript"></script>
+        <script src="../admin/vendor/Chart.min.js" type="text/javascript"></script>
 
         <!-- Page level custom scripts -->
-        <script src="admin/vendor/chart-area-demo.js" type="text/javascript"></script>
-        <script src="admin/vendor/chart-pie-demo.js" type="text/javascript"></script>
+        <script src="../admin/vendor/chart-area-demo.js" type="text/javascript"></script>
+        <script src="../admin/vendor/chart-pie-demo.js" type="text/javascript"></script>
 
 </body>
 

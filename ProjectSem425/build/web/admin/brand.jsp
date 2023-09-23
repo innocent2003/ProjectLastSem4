@@ -55,7 +55,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="../">
+                    <a class="nav-link" href="index.jsp">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -74,15 +74,7 @@
                         <i class="fas fa-fw fa-sign-in-alt"></i>
                         <span>Logout</span>
                     </a>
-                </li><!--
-
-                 Nav Item - Register 
-                <li class="nav-item">
-                    <a class="nav-link" href="register.jsp">
-                        <i class="fas fa-fw fa-registered"></i>
-                        <span>Register</span></a>
-                </li>-->
-
+                </li><!--            
                 <!-- Nav Item - User -->
                 <li class="nav-item">
                     <a class="nav-link" href="user.jsp">
@@ -334,13 +326,13 @@
                         </div>
 
                         <!-- DataTales Example -->
-                       <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-         url = "jdbc:mysql://localhost/javaproject"
-         user = "root"  password = ""/>
+                        <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+                                           url = "jdbc:mysql://localhost/javaproject"
+                                           user = "root"  password = ""/>
 
-         <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from brand;
-         </sql:query>
+                        <sql:query dataSource = "${snapshot}" var = "result">
+                            SELECT * from brand;
+                        </sql:query>
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Brand List</h6>
@@ -359,24 +351,33 @@
 
                                         <tbody>
                                             <c:forEach var="row" items="${result.rows}">
-                                            <tr class="text-center">
-                                                <td><c:out value="${row.id}"/></td>
-                                                <td><c:out value="${row.BrandName}"/></td>
-                                                <td><c:out value="${row.status}"/></td>
-                                                <td>                                                
-                                                    <a class="text-success m-3" href="brandedit.jsp">
-                                                        <i class="fas fa-fw fa-edit"></i>
-                                                    </a>
-                                                    <form method="post" action="DeleteBrandServlet">
+
+                                                <tr class="text-center">
+                                                    <td><c:out value="${row.id}"/></td>
+                                                    <td><c:out value="${row.BrandName}"/></td>
+                                                    <td><c:choose>
+                                                            <c:when test="${row.Status}">
+                                                                1
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                0
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td>                                                
+                                                        <a class="text-success m-3" href="brandedit.jsp">
+                                                            <i class="fas fa-fw fa-edit"></i>
+                                                        </a>
+                                                         <form method="post" action="DeleteBrandServlet">
                                                         <input type="hidden" name="brandId" value="${row.id}"/>
                                                         
                                                         <button type="submit" class="text-danger" ><i class="fas fa-fw fa-trash"></i></button>
                                                     </form>
-                                                    
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
+
                                             </c:forEach>
-                                           
+
 
                                         </tbody>
                                     </table>

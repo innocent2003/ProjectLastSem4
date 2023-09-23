@@ -56,7 +56,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="../">
+                    <a class="nav-link" href="index.jsp">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -70,20 +70,12 @@
                 </div>
 
                 <!-- Nav Item - Login -->
-<!--                <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">
-                        <i class="fas fa-fw fa-sign-in-alt"></i>
-                        <span>Login</span>
-                    </a>
-                </li>
-
-                 Nav Item - Register 
                 <li class="nav-item">
-                    <a class="nav-link" href="register.jsp">
-                        <i class="fas fa-fw fa-registered"></i>
-                        <span>Register</span></a>
-                </li>-->
-
+                    <a class="nav-link" href="LogoutAdmin">
+                        <i class="fas fa-fw fa-sign-in-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li><!--            
                 <!-- Nav Item - User -->
                 <li class="nav-item">
                     <a class="nav-link" href="user.jsp">
@@ -352,32 +344,42 @@
                                         </thead>
 
                                         <tbody>
-                                            
-                                             <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-         url = "jdbc:mysql://localhost/javaproject"
-         user = "root"  password = ""/>
 
-         <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from category;
-         </sql:query>
-         <c:forEach var="row" items="${result.rows}">
-              <tr class="text-center">
-                                                <td>${row.Id}</td>
-                                                <td>${row.CategoryName}</td>
-                                                <td>${row.Status}</td>
-                                                <td>
-                                                    <a class="text-success m-3" href="categoryedit.jsp">
-                                                        <i class="fas fa-fw fa-edit"></i>
-                                                    </a>
-                                                    <form method="post" action="DeleteCategoryServlet">
+
+                                            <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+                                                               url = "jdbc:mysql://localhost/javaproject"
+                                                               user = "root"  password = ""/>
+
+                                            <sql:query dataSource = "${snapshot}" var = "result">
+                                                SELECT * from category;
+                                            </sql:query>
+                                            <c:forEach var="row" items="${result.rows}">
+                                                <tr class="text-center">
+                                                    <td>${row.Id}</td>
+                                                    <td>${row.CategoryName}</td>
+                                                    <td><c:choose>
+                                                            <c:when test="${row.Status}">
+                                                                1
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                0
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+
+                                                    <td>
+                                                        <a class="text-success m-3" href="categoryedit.jsp">
+                                                            <i class="fas fa-fw fa-edit"></i>
+                                                        </a>
+                                                       <form method="post" action="DeleteCategoryServlet">
                                                         <input type="hidden" name="categoryId" value="${row.Id}"/>
                                                         <button type="submit" class="text-danger" href=""><i class="fas fa-fw fa-trash"></i></button>
                                                     </form>
-                                                    
-                                                </td>
-                                            </tr>
-         </c:forEach>
-                                           
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+
+
 
                                         </tbody>
                                     </table>

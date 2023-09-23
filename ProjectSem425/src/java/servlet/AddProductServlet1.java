@@ -58,7 +58,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
         // Save the image to a directory
-        String imagePath = "E:\\linhtinh\\ProjectLastSem4\\githubsem4\\aa3\\ProjectLastSem4\\ProjectSem425\\src\\java\\images\\" + fileName;
+        String imagePath = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\ProjectLastSem4\\ProjectSem425\\web\\resources\\img\\" + fileName;
         try (InputStream fileContent = filePart.getInputStream();
              OutputStream imageOutputStream = new FileOutputStream(imagePath)) {
             byte[] buffer = new byte[1024];

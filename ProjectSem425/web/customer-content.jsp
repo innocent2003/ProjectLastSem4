@@ -121,7 +121,7 @@
         if (!customerId || !name || !address || !phone || !email) {
             Swal.fire({
                 icon: 'error',
-                title: 'Empty',
+                title: 'Missing',
                 text: 'Please fill in all fields',
                 timer: 2000,
                 timerProgressBar: true,
@@ -172,7 +172,10 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Email',
-                text: 'Please enter a valid email address'
+                text: 'Please enter a valid email address',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: true,
             });
             return;
         }

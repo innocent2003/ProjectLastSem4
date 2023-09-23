@@ -55,7 +55,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="../">
+                    <a class="nav-link" href="index.jsp">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -69,20 +69,12 @@
                 </div>
 
                 <!-- Nav Item - Login -->
-<!--                <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">
-                        <i class="fas fa-fw fa-sign-in-alt"></i>
-                        <span>Login</span>
-                    </a>
-                </li>
-
-                 Nav Item - Register 
                 <li class="nav-item">
-                    <a class="nav-link" href="register.jsp">
-                        <i class="fas fa-fw fa-registered"></i>
-                        <span>Register</span></a>
-                </li>-->
-
+                    <a class="nav-link" href="LogoutAdmin">
+                        <i class="fas fa-fw fa-sign-in-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li><!--            
                 <!-- Nav Item - User -->
                 <li class="nav-item">
                     <a class="nav-link" href="user.jsp">
@@ -342,43 +334,45 @@
                                             <tr class="text-center">
                                                 <th>ID</th>
                                                 <th>Customer</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Address</th>
-                                                <th>Amount</th>
                                                 <th>Order Date</th>
+                                                <th>Total</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
- <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-         url = "jdbc:mysql://localhost/javaproject"
-         user = "root"  password = ""/>
+                                        <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+                                                           url = "jdbc:mysql://localhost/javaproject"
+                                                           user = "root"  password = ""/>
 
-         <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from orders inner join customers on orders.CustomerId = customers.Id inner join order_detail on order_detail.orderId = orders.id;
-         </sql:query>
+
+                                        <sql:query dataSource = "${snapshot}" var = "result">
+                                            SELECT orders.*, customers.Name FROM orders JOIN customers ON orders.CustomerId = customers.Id;
+                                        </sql:query>
+
                                         <tbody>
-                                             <c:forEach var = "row" items = "${result.rows}">
-                                                     <tr class="text-center">
-                                               
-                                                <td>1</td>
-                                                <td><c:out value="${row.Id}"/></td>
-                                                <td><c:out value="${row.Name}"/></td>
-                                                <td><c:out value="${row.Order_date}"/></td>
-                                                <td><c:out value="${row.Total}"/></td>
-                                                <td><c:out value="${row.Status}"/></td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>
-                                                    <a class="m-3" href="ordershow.jsp?id=${row.Id}">
-                                                        <i class="fas fa-fw fa-eye"></i>
-                                                    </a>                                                  
-                                                    <a class="text-danger" href=""><i class="fas fa-fw fa-trash"></i></a>
-                                                </td>
-                                            </tr>
-                                                </c:forEach>
-                                           
+                                            <c:forEach var = "row" items = "${result.rows}">
+                                                <tr class="text-center">
+                                                    <td><c:out value="${row.Id}"/></td>
+                                                    <td><c:out value="${row.Name}"/></td>
+                                                    <td><c:out value="${row.Order_date}"/></td>
+                                                    <td><c:out value="${row.Total}"/></td>
+                                                    <td><c:choose>
+                                                            <c:when test="${row.Status}">
+                                                                1
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                0
+                                                            </c:otherwise>
+                                                        </c:choose></td>
+                                                    <td>
+                                                        <a class="m-3" href="ordershow.jsp?id=${row.Id}">
+                                                            <i class="fas fa-fw fa-eye"></i>
+                                                        </a>                                                  
+                                                        <a class="text-danger" href=""><i class="fas fa-fw fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+
 
                                         </tbody>
                                     </table>

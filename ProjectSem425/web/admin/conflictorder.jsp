@@ -1,13 +1,12 @@
 <%-- 
-    Document   : product
-    Created on : Sep 13, 2023, 12:10:29 AM
+    Document   : ordershow
+    Created on : Sep 13, 2023, 12:15:35 AM
     Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
-<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+<%@ page import="java.sql.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -304,7 +303,7 @@
                                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> Activity Log
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="login.jsp" data-toggle="modal" data-target="#logoutModal">
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
                                     </a>
                                 </div>
@@ -320,120 +319,162 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Product Management</h1>
-                            <a href="productcreate.jsp" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-plus fa-sm text-white-50"></i> Create</a>
+                            <h1 class="h3 mb-0 text-gray-800">Order Management</h1>
                         </div>
 
                         <!-- DataTales Example -->
+                                     <c:if test="${not empty orderId}">
+                                             <%
+                                                 // Check if the ID is valid (you can add more validation)
+                                                 String orderId = (String) pageContext.getAttribute("orderId");
+                                                 out.println(orderId);
+                                                 if (orderId != null && !orderId.isEmpty()) {
+                                                     try {
+                                                         // Establish a database connection (replace with your DB credentials)
+                                                         String jdbcUrl = "jdbc:mysql://localhost/javaproject";
+                                                         String dbUser = "root";
+                                                         String dbPassword = "";
+
+                                        Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
+
+<<<<<<< HEAD
+                    // Prepare a SQL query to fetch order details
+                    String sql = "SELECT * FROM orders INNER JOIN customers ON orders.CustomerId = customers.Id INNER JOIN order_detail ON orders.Id = order_detail.OrderId INNER JOIN product_detail ON order_detail.ProductId = product_detail.Id INNER JOIN product ON product_detail.ProductId = product.Id WHERE order_detail.Id = ?";
+                    PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                    preparedStatement.setString(1, orderId);
+=======
+                                        // Prepare a SQL query to fetch order details
+                                        String sql = "SELECT * FROM order_detail JOIN product on order_detail.productId= product.id WHERE OrderId = ?";
+                                        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                                        preparedStatement.setString(1, orderId);
+>>>>>>> b8be0874c1e536cf191314e2ec8d423417597edd
+
+                                        ResultSet resultSet = preparedStatement.executeQuery();
+
+<<<<<<< HEAD
+                    if (resultSet.next()) {
+                        // Retrieve order details
+                        int OrderDetailId = resultSet.getInt("Id");
+                        String Name = resultSet.getString("Name");
+                        
+                        String Address = resultSet.getString("Address");
+                        String Phone = resultSet.getString("Phone");
+                        int Price = resultSet.getInt("Price");
+                        double total = resultSet.getDouble("Total");
+                        String ProductName = resultSet.getString("ProductName");
+                        // Add more fields as needed
+=======
+                                        if (resultSet.next()) {
+>>>>>>> b8be0874c1e536cf191314e2ec8d423417597edd
+
+                                            String productName = resultSet.getString("ProductName");
+                                            int quantity = resultSet.getInt("Quantity");
+                                            double price = resultSet.getDouble("Price");
+                                            double total = resultSet.getDouble("Subtotal");
+                            %>
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h3 class="m-0 text-center font-weight-bold text-primary"> Order Id: <%= orderId%></h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <div class="form-group d-flex">
+                                            <label for="product" class="col-md-3 text-md-right ">Product</label>
+                                            <div class="col-md-9 col-xl-8">
+                                                <p><%= productName%></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for="quantity" class="col-md-3 text-md-right ">Quantity</label>
+                                            <div class="col-md-9 col-xl-8">
+                                                <p><%= quantity%></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for="price" class="col-md-3 text-md-right ">Price</label>
+                                            <div class="col-md-9 col-xl-8">
+                                                <p><%= price%></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for="total" class="col-md-3 text-md-right ">Total</label>
+                                            <div class="col-md-9 col-xl-8">
+                                                <p><%= total%></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <button type="button" class="btn btn-primary">Order Confirmation</button>
+                                        </div>
+                                    </div>
+<<<<<<< HEAD
+                                        <form method="POST" action="UpdateQuantityServlet">
+                                            <input type="hidden" value="<%= OrderDetailId %>" />
+                                              <div class="form-group text-center">
+                                        <button type="submit" class="btn btn-primary">Order Confirmation</button>
+                                        <h1><%= OrderDetailId %></h1>
+                                    </div>
+                                        </form>
+                                  
+=======
+>>>>>>> b8be0874c1e536cf191314e2ec8d423417597edd
+                                </div>
+                            </div>
+                            <%
+                                        } else {
+                                            // Order not found
+                                            out.println("Order not found");
+                                        }
+
+                                        // Close database resources
+                                        resultSet.close();
+                                        preparedStatement.close();
+                                        connection.close();
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    // Invalid order ID
+                                    out.println("Invalid order ID");
+                                }
+                            %>
+                        </c:if> 
+                        <!-- DataTales Example -->
+
+                        <c:set var="orderId" value="${param.id}" />
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Product List</h6>
+                                <h3 class="m-0 text-center font-weight-bold text-primary"> Order detail</h3>
                             </div>
-
-                            <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-                                               url = "jdbc:mysql://localhost/javaproject"
-                                               user = "root"  password = ""/>
-                            <sql:query dataSource = "${snapshot}" var = "result">
-                                SELECT p.id, p.productName, p.price, p.categoryId, p.brandId, pd.ram, pd.storage, pd.color, pd.description, pd.quantity, pd.status, 
-                                (SELECT pi.url FROM product_image pi WHERE pi.productid = p.id LIMIT 1) AS url, c.categoryname, b.brandname FROM product p
-                                JOIN product_detail pd ON p.id = pd.productid
-                                JOIN category c ON p.categoryid = c.id
-                                JOIN brand b ON p.brandid = b.id
-                            </sql:query>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr class="text-center">
                                                 <th>ID</th>
-                                                <th>Image</th>
-                                                <th>Product Name</th>
-                                                <th>Category</th>
-                                                <th>Brand</th>
-                                                <th>Ram</th>
-                                                <th>Storage</th>
-                                                <th>Color</th>
+                                                <th>Product</th>
                                                 <th>Price</th>
                                                 <th>Quantity</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                                <th>Total</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
+                                        <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+                                                           url = "jdbc:mysql://localhost/javaproject"
+                                                           user = "root"  password = ""/>
 
-                                            <c:forEach var="row" items="${result.rows}">
-                                                <tr class="text-center">
-                                                    <td><c:out value="${row.Id}"/></td>
-                                                    <td><img src="../resources/img/<c:out value="${row.URL}"/>"  width="50" height="50"></td>
-                                                    <td><c:out value="${row.ProductName}"/></td>
-<<<<<<< HEAD
-                                                    <td><c:out value="${row.Price}"/></td>
-<!--<<<<<<< HEAD-->
-<!--                                                <td><c:out value="${row.Ram}"/></td>
-                                                <td><c:out value="${row.Storage}"/></td>
-                                                <td><c:out value="${row.Color}"/></td>
-                                                <td><c:out value="${row.Quantity}"/></td>
-                                                <td><c:out value="${row.Status}"/></td>
-                                                <td>
-                                                    <a href="productshow.jsp?id=${row.Id}">
-                                                        <i class="fas fa-fw fa-eye"></i>
-                                                    </a>
-                                                    <a class="text-success m-3" href="productedit.jsp">
-                                                        <i class="fas fa-fw fa-edit"></i>
-                                                    </a>
-                                                     <form action="DeleteDetailImage" method="post">
-                                                         <input type="hidden" name="productId" value="${row.Id}"/>
-   
-     <button type="submit" class="text-danger" ><i class="fas fa-fw fa-trash"></i></button>
-</form>
-                                                   
-                                                </td>
-                                            </tr>-->
-<!--=======-->
-=======
-                                                    <td><c:out value="${row.CategoryName}"/></td>
-                                                    <td><c:out value="${row.BrandName}"/></td>
->>>>>>> b8be0874c1e536cf191314e2ec8d423417597edd
-                                                    <td><c:out value="${row.Ram}"/></td>
-                                                    <td><c:out value="${row.Storage}"/></td>
-                                                    <td><c:out value="${row.Color}"/></td>
-                                                    <td><c:out value="${row.Price}"/></td>
-                                                    <td><c:out value="${row.Quantity}"/></td>
-<<<<<<< HEAD
-                                                    <td><c:out value="${row.Status}"/></td>
-                                                    <td>
-                                                        <a href="productshow.jsp?id=${row.id}">
-                                                            <i class="fas fa-fw fa-eye"></i>
-                                                        </a>
-=======
-                                                    <td><c:choose>
-                                                            <c:when test="${row.Status}">
-                                                                1
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                0
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </td>
-                                                    <td style="display: flex; justify-content: center; align-items: center">
->>>>>>> b8be0874c1e536cf191314e2ec8d423417597edd
-                                                        <a class="text-success m-3" href="productedit.jsp">
-                                                            <i class="fas fa-fw fa-edit"></i>
-                                                        </a>
-                                                        <form action="DeleteDetailImage" method="post">
-                                                            <input type="hidden" name="productId" value="${row.Id}"/>
-
-                                                            <button type="submit" class="text-danger" style="background-color: white; outline: none; border:none;"><i class="fas fa-fw fa-trash"></i></button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-<<<<<<< HEAD
-<!-->>>>>>> 4350ef49d055a95808bf7c1d8e9bc16b88e836a1-->
-=======
->>>>>>> b8be0874c1e536cf191314e2ec8d423417597edd
-                                            </c:forEach>
+                                        <sql:query dataSource = "${snapshot}" var = "result">
+                                            SELECT order_detail.*,product.ProductName FROM order_detail JOIN product on order_detail.productId= product.id WHERE OrderId = ${orderId};
+                                        </sql:query>
+                                        <c:forEach var="row" items="${result.rows}">
+                                            <tr class="text-center">
+                                                <td>${row.Id}</td>
+                                                <td>${row.ProductName}</td>
+                                                <td>${row.Price}</td>
+                                                <td>${row.Quantity}</td>
+                                                <td>${row.Subtotal}</td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -485,6 +526,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Bootstrap core JavaScript-->
         <script src="../admin/vendor/jquery.min.js" type="text/javascript"></script>
         <script src="../admin/vendor/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -502,5 +544,4 @@
         <!-- Page level custom scripts -->
         <script src="../admin/vendor/datatables-demo.js" type="text/javascript"></script>
     </body>
-
 </html>

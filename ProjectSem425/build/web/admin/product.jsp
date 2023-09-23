@@ -55,7 +55,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="../">
+                    <a class="nav-link" href="index.jsp">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -69,20 +69,12 @@
                 </div>
 
                 <!-- Nav Item - Login -->
-                <!--                <li class="nav-item">
-                                    <a class="nav-link" href="login.jsp">
-                                        <i class="fas fa-fw fa-sign-in-alt"></i>
-                                        <span>Login</span>
-                                    </a>
-                                </li>
-                
-                                 Nav Item - Register 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="register.jsp">
-                                        <i class="fas fa-fw fa-registered"></i>
-                                        <span>Register</span></a>
-                                </li>-->
-
+                <li class="nav-item">
+                    <a class="nav-link" href="LogoutAdmin">
+                        <i class="fas fa-fw fa-sign-in-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li><!--            
                 <!-- Nav Item - User -->
                 <li class="nav-item">
                     <a class="nav-link" href="user.jsp">
@@ -343,7 +335,11 @@
                                                url = "jdbc:mysql://localhost/javaproject"
                                                user = "root"  password = ""/>
                             <sql:query dataSource = "${snapshot}" var = "result">
-                                SELECT * from product inner join product_detail on product.Id = product_detail.ProductId;
+                                SELECT p.id, p.productName, p.price, p.categoryId, p.brandId, pd.ram, pd.storage, pd.color, pd.description, pd.quantity, pd.status, 
+                                (SELECT pi.url FROM product_image pi WHERE pi.productid = p.id LIMIT 1) AS url, c.categoryname, b.brandname FROM product p
+                                JOIN product_detail pd ON p.id = pd.productid
+                                JOIN category c ON p.categoryid = c.id
+                                JOIN brand b ON p.brandid = b.id
                             </sql:query>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -353,10 +349,13 @@
                                                 <th>ID</th>
                                                 <th>Image</th>
                                                 <th>Product Name</th>
+                                                <th>Category</th>
                                                 <th>Brand</th>
+                                                <th>Ram</th>
+                                                <th>Storage</th>
+                                                <th>Color</th>
                                                 <th>Price</th>
                                                 <th>Quantity</th>
-                                                <th>Feature</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -367,7 +366,9 @@
                                             <c:forEach var="row" items="${result.rows}">
                                                 <tr class="text-center">
                                                     <td><c:out value="${row.Id}"/></td>
+                                                    <td><img src="../resources/img/<c:out value="${row.URL}"/>"  width="50" height="50"></td>
                                                     <td><c:out value="${row.ProductName}"/></td>
+<<<<<<< HEAD
                                                     <td><c:out value="${row.Price}"/></td>
 <!--<<<<<<< HEAD-->
 <!--                                                <td><c:out value="${row.Ram}"/></td>
@@ -391,30 +392,48 @@
                                                 </td>
                                             </tr>-->
 <!--=======-->
+=======
+                                                    <td><c:out value="${row.CategoryName}"/></td>
+                                                    <td><c:out value="${row.BrandName}"/></td>
+>>>>>>> b8be0874c1e536cf191314e2ec8d423417597edd
                                                     <td><c:out value="${row.Ram}"/></td>
                                                     <td><c:out value="${row.Storage}"/></td>
                                                     <td><c:out value="${row.Color}"/></td>
+                                                    <td><c:out value="${row.Price}"/></td>
                                                     <td><c:out value="${row.Quantity}"/></td>
+<<<<<<< HEAD
                                                     <td><c:out value="${row.Status}"/></td>
                                                     <td>
                                                         <a href="productshow.jsp?id=${row.id}">
                                                             <i class="fas fa-fw fa-eye"></i>
                                                         </a>
+=======
+                                                    <td><c:choose>
+                                                            <c:when test="${row.Status}">
+                                                                1
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                0
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td style="display: flex; justify-content: center; align-items: center">
+>>>>>>> b8be0874c1e536cf191314e2ec8d423417597edd
                                                         <a class="text-success m-3" href="productedit.jsp">
                                                             <i class="fas fa-fw fa-edit"></i>
                                                         </a>
                                                         <form action="DeleteDetailImage" method="post">
                                                             <input type="hidden" name="productId" value="${row.Id}"/>
 
-                                                            <button type="submit" class="text-danger" ><i class="fas fa-fw fa-trash"></i></button>
+                                                            <button type="submit" class="text-danger" style="background-color: white; outline: none; border:none;"><i class="fas fa-fw fa-trash"></i></button>
                                                         </form>
-
                                                     </td>
                                                 </tr>
+<<<<<<< HEAD
 <!-->>>>>>> 4350ef49d055a95808bf7c1d8e9bc16b88e836a1-->
+=======
+>>>>>>> b8be0874c1e536cf191314e2ec8d423417597edd
                                             </c:forEach>
-
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -482,8 +501,6 @@
 
         <!-- Page level custom scripts -->
         <script src="../admin/vendor/datatables-demo.js" type="text/javascript"></script>
-
-
     </body>
 
 </html>

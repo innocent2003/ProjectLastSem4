@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,7 +54,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="../">
+                    <a class="nav-link" href="index.jsp">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -67,20 +68,12 @@
                 </div>
 
                 <!-- Nav Item - Login -->
-<!--                <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">
-                        <i class="fas fa-fw fa-sign-in-alt"></i>
-                        <span>Login</span>
-                    </a>
-                </li>
-
-                 Nav Item - Register 
                 <li class="nav-item">
-                    <a class="nav-link" href="register.jsp">
-                        <i class="fas fa-fw fa-registered"></i>
-                        <span>Register</span></a>
-                </li>-->
-
+                    <a class="nav-link" href="LogoutAdmin">
+                        <i class="fas fa-fw fa-sign-in-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li><!--            
                 <!-- Nav Item - User -->
                 <li class="nav-item">
                     <a class="nav-link" href="user.jsp">
@@ -330,27 +323,35 @@
                         </div>
 
                         <!-- DataTales Example -->
-                        <c:set var="orderId" value="${param.id}" />
-    <c:if test="${not empty orderId}">
-        <%
-            // Check if the ID is valid (you can add more validation)
-            String orderId = (String) pageContext.getAttribute("orderId");
-            if (orderId != null && !orderId.isEmpty()) {
-                try {
-                    // Establish a database connection (replace with your DB credentials)
-                    String jdbcUrl = "jdbc:mysql://localhost/javaproject";
-                    String dbUser = "root";
-                    String dbPassword = "";
+                        <%--                 <c:if test="${not empty orderId}">
+                                             <%
+                                                 // Check if the ID is valid (you can add more validation)
+                                                 String orderId = (String) pageContext.getAttribute("orderId");
+                                                 out.println(orderId);
+                                                 if (orderId != null && !orderId.isEmpty()) {
+                                                     try {
+                                                         // Establish a database connection (replace with your DB credentials)
+                                                         String jdbcUrl = "jdbc:mysql://localhost/javaproject";
+                                                         String dbUser = "root";
+                                                         String dbPassword = "";
 
-                    Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
+                                        Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
 
+<<<<<<< HEAD
                     // Prepare a SQL query to fetch order details
                     String sql = "SELECT * FROM orders INNER JOIN customers ON orders.CustomerId = customers.Id INNER JOIN order_detail ON orders.Id = order_detail.OrderId INNER JOIN product_detail ON order_detail.ProductId = product_detail.Id INNER JOIN product ON product_detail.ProductId = product.Id WHERE order_detail.Id = ?";
                     PreparedStatement preparedStatement = connection.prepareStatement(sql);
                     preparedStatement.setString(1, orderId);
+=======
+                                        // Prepare a SQL query to fetch order details
+                                        String sql = "SELECT * FROM order_detail JOIN product on order_detail.productId= product.id WHERE OrderId = ?";
+                                        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                                        preparedStatement.setString(1, orderId);
+>>>>>>> b8be0874c1e536cf191314e2ec8d423417597edd
 
-                    ResultSet resultSet = preparedStatement.executeQuery();
+                                        ResultSet resultSet = preparedStatement.executeQuery();
 
+<<<<<<< HEAD
                     if (resultSet.next()) {
                         // Retrieve order details
                         int OrderDetailId = resultSet.getInt("Id");
@@ -362,45 +363,50 @@
                         double total = resultSet.getDouble("Total");
                         String ProductName = resultSet.getString("ProductName");
                         // Add more fields as needed
+=======
+                                        if (resultSet.next()) {
+>>>>>>> b8be0874c1e536cf191314e2ec8d423417597edd
 
-                        // Display order details
-        %>
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h3 class="m-0 text-center font-weight-bold text-primary"> Order Info</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <div class="form-group d-flex">
-                                        <label for="name" class="col-md-3 text-md-right ">Full Name</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p><%=Name%></p>
+                                            String productName = resultSet.getString("ProductName");
+                                            int quantity = resultSet.getInt("Quantity");
+                                            double price = resultSet.getDouble("Price");
+                                            double total = resultSet.getDouble("Subtotal");
+                            %>
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h3 class="m-0 text-center font-weight-bold text-primary"> Order Id: <%= orderId%></h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <div class="form-group d-flex">
+                                            <label for="product" class="col-md-3 text-md-right ">Product</label>
+                                            <div class="col-md-9 col-xl-8">
+                                                <p><%= productName%></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for="quantity" class="col-md-3 text-md-right ">Quantity</label>
+                                            <div class="col-md-9 col-xl-8">
+                                                <p><%= quantity%></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for="price" class="col-md-3 text-md-right ">Price</label>
+                                            <div class="col-md-9 col-xl-8">
+                                                <p><%= price%></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for="total" class="col-md-3 text-md-right ">Total</label>
+                                            <div class="col-md-9 col-xl-8">
+                                                <p><%= total%></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <button type="button" class="btn btn-primary">Order Confirmation</button>
                                         </div>
                                     </div>
-                                    <div class="form-group d-flex">
-                                        <label for="email" class="col-md-3 text-md-right ">Email</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p><%=ProductName%></p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group d-flex">
-                                        <label for="phone" class="col-md-3 text-md-right ">Phone</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p><%=Phone%></p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group d-flex">
-                                        <label for="address" class="col-md-3 text-md-right ">Address</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p><%= Address%></p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group d-flex">
-                                        <label for="total" class="col-md-3 text-md-right ">Total</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p><%= Price%></p>
-                                        </div>
-                                    </div>
+<<<<<<< HEAD
                                         <form method="POST" action="UpdateQuantityServlet">
                                             <input type="hidden" value="<%= OrderDetailId %>" />
                                               <div class="form-group text-center">
@@ -409,53 +415,66 @@
                                     </div>
                                         </form>
                                   
+=======
+>>>>>>> b8be0874c1e536cf191314e2ec8d423417597edd
                                 </div>
                             </div>
-                        </div>
- <%
-                    } else {
-                        // Order not found
-                        out.println("Order not found");
-                    }
+                            <%
+                                        } else {
+                                            // Order not found
+                                            out.println("Order not found");
+                                        }
 
-                    // Close database resources
-                    resultSet.close();
-                    preparedStatement.close();
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                // Invalid order ID
-                out.println("Invalid order ID");
-            }
-        %>
-    </c:if>
+                                        // Close database resources
+                                        resultSet.close();
+                                        preparedStatement.close();
+                                        connection.close();
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    // Invalid order ID
+                                    out.println("Invalid order ID");
+                                }
+                            %>
+                        </c:if> --%>
                         <!-- DataTales Example -->
+
+                        <c:set var="orderId" value="${param.id}" />
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h3 class="m-0 text-center font-weight-bold text-primary"> Product List</h3>
+                                <h3 class="m-0 text-center font-weight-bold text-primary"> Order detail</h3>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr class="text-center">
+                                                <th>ID</th>
                                                 <th>Product</th>
-                                                <th>Quantity</th>
                                                 <th>Price</th>
+                                                <th>Quantity</th>
                                                 <th>Total</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            <tr class="text-center">
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                            </tr>
+                                        <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+                                                           url = "jdbc:mysql://localhost/javaproject"
+                                                           user = "root"  password = ""/>
 
+                                        <sql:query dataSource = "${snapshot}" var = "result">
+                                            SELECT order_detail.*,product.ProductName FROM order_detail JOIN product on order_detail.productId= product.id WHERE OrderId = ${orderId};
+                                        </sql:query>
+                                        <c:forEach var="row" items="${result.rows}">
+                                            <tr class="text-center">
+                                                <td>${row.Id}</td>
+                                                <td>${row.ProductName}</td>
+                                                <td>${row.Price}</td>
+                                                <td>${row.Quantity}</td>
+                                                <td>${row.Subtotal}</td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -524,7 +543,5 @@
 
         <!-- Page level custom scripts -->
         <script src="../admin/vendor/datatables-demo.js" type="text/javascript"></script>
-
     </body>
-
 </html>
