@@ -18,8 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author lemin
  */
-@WebServlet(name = "LogoutAdmin", urlPatterns = {"/admin/LogoutAdmin"})
-public class LogoutAdmin extends HttpServlet {
+@WebServlet(name = "SecureServlet", urlPatterns = {"/SecureServlet"})
+public class SecureServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +38,10 @@ public class LogoutAdmin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LogoutAdmin</title>");            
+            out.println("<title>Servlet SecureServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LogoutAdmin at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SecureServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,13 +59,16 @@ public class LogoutAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-  HttpSession session = request.getSession(false);
-
-        if (session != null) {
-            session.invalidate();
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("userId") == null) {
+            // Nếu không có session hoặc không có thông tin đăng nhập,
+            // chuyển hướng đến trang đăng nhập
+            response.sendRedirect("login.jsp");
+            return;
         }
-        response.sendRedirect("/ProjectSem425");
+
+        // Nếu có session, cho phép truy cập trang bảo vệ
+        request.getRequestDispatcher("admin/user.jsp").forward(request, response);
     }
 
     /**

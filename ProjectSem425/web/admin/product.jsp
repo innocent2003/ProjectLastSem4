@@ -375,7 +375,7 @@
                                                 <td><c:out value="${row.Quantity}"/></td>
                                                 <td><c:out value="${row.Status}"/></td>
                                                 <td>
-                                                    <a href="productshow.jsp">
+                                                    <a href="productshow.jsp?id=${row.Id}">
                                                         <i class="fas fa-fw fa-eye"></i>
                                                     </a>
                                                     <a class="text-success m-3" href="productedit.jsp">

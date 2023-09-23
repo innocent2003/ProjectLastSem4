@@ -66,10 +66,10 @@
                 </div>
 
                 <!-- Nav Item - Login -->
-<!--                <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">
+ <li class="nav-item">
+                    <a class="nav-link" href="LogoutAdmin">
                         <i class="fas fa-fw fa-sign-in-alt"></i>
-                        <span>Login</span>
+                        <span>Logout</span>
                     </a>
                 </li>
 

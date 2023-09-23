@@ -7,13 +7,6 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,20 +17,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
  * @author lemin
  */
-@WebServlet(name = "AddCustomerServlet2", urlPatterns = {"/AddCustomerServlet2"})
-public class AddCustomerServlet2 extends HttpServlet {
- protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+@WebServlet(name = "AddCustomerServlet3", urlPatterns = {"/admin/AddCustomerServlet3"})
+public class AddCustomerServlet3 extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
+        String Role = request.getParameter("Role");
 
         try {
             // Kết nối đến cơ sở dữ liệu MySQL
@@ -47,10 +41,11 @@ public class AddCustomerServlet2 extends HttpServlet {
             Connection connection = DriverManager.getConnection(url, dbUsername, dbPassword);
 
             // Thêm dữ liệu vào bảng Users
-            String insertUserQuery = "INSERT INTO users (Username, Password, Role) VALUES (?, ?, 'customer')";
+            String insertUserQuery = "INSERT INTO users (Username, Password, Role) VALUES (?, ?, ?)";
             PreparedStatement userStatement = connection.prepareStatement(insertUserQuery);
             userStatement.setString(1, username);
             userStatement.setString(2, password);
+            userStatement.setString(3, Role);
             userStatement.executeUpdate();
             
             // Lấy ID của user vừa thêm
@@ -78,7 +73,7 @@ public class AddCustomerServlet2 extends HttpServlet {
             connection.close();
             
             // Chuyển hướng hoặc xuất thông báo thành công
-            response.sendRedirect("login.jsp"); // Chuyển hướng đến trang thông báo thành công
+            response.sendRedirect("user.jsp"); // Chuyển hướng đến trang thông báo thành công
         } catch (Exception e) {
             e.printStackTrace();
             // Xử lý lỗi và chuyển hướng hoặc xuất thông báo lỗi

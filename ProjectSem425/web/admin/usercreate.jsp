@@ -333,36 +333,54 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Create</h6>
                             </div>
                             <div class="card-body">
-                                <form class="row g-3 needs-validation" novalidate>
+                                <form method="post" class="row g-3 needs-validation" action="AddCustomerServlet3" novalidate>
                                     <div class="table-responsive">
-                                        <div class="form-group d-flex">
+<!--                                        <div class="form-group d-flex">
                                             <label for="name" class="col-md-3 text-md-right col-form-label">Avartar</label>
                                             <div class="col-md-9 col-xl-8">
                                                 <input type="file" name="image" aria-describedby="basic-addon1" />
+                                            </div>
+                                        </div>-->
+                                        <div class="form-group d-flex">
+                                            <label for="name" class="col-md-3 text-md-right col-form-label">Username</label>
+                                            <div class="col-md-9 col-xl-8">
+                                                <input type="text" name="username" class="form-control rounded" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for="name" class="col-md-3 text-md-right col-form-label">Password</label>
+                                            <div class="col-md-9 col-xl-8">
+                                                <input type="text" name="name" name="password" class="form-control rounded" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
                                             <label for="name" class="col-md-3 text-md-right col-form-label">Full Name</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="text" class="form-control rounded" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" />
+                                                <input type="text" name="address" class="form-control rounded" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for="name" class="col-md-3 text-md-right col-form-label">Address</label>
+                                            <div class="col-md-9 col-xl-8">
+                                                <input type="email" name="phone" class="form-control rounded" placeholder="email@gmail.com" aria-label="email" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
                                             <label for="name" class="col-md-3 text-md-right col-form-label">Email</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="email" class="form-control rounded" placeholder="email@gmail.com" aria-label="email" aria-describedby="basic-addon1" />
+                                                <input type="text" name="email" class="form-control rounded" placeholder="Level" aria-label="Level" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
-                                            <label for="name" class="col-md-3 text-md-right col-form-label">Level</label>
+                                            <label for="name" class="col-md-3 text-md-right col-form-label">Role</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="text" class="form-control rounded" placeholder="Level" aria-label="Level" aria-describedby="basic-addon1" />
+                                                <input type="text" name="Role" class="form-control rounded" placeholder="Level" aria-label="Level" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-body text-center">
-                                        <button type="button" class="btn btn-secondary">Cancer</button>
-                                        <button type="button" class="btn btn-primary">Save</button>
+                                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                                        <button type=submit class="btn btn-primary">Save</button>
                                     </div>
                                 </form>
                             </div>

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -328,52 +329,88 @@
                         </div>
 
                         <!-- DataTales Example -->
+                          <%
+        // Get the product ID from the query parameter
+        String productId = request.getParameter("id");
+
+        // Check if the ID is valid (you can add more validation)
+        if (productId != null && !productId.isEmpty()) {
+            try {
+                // Establish a database connection (replace with your DB credentials)
+                String jdbcUrl = "jdbc:mysql://localhost/javaproject";
+                String dbUser = "root";
+                String dbPassword = "";
+
+                Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
+
+                // Prepare a SQL query to fetch product details
+                String sql = "SELECT * FROM product inner join product_detail on product.id = product_detail.ProductId inner join product_image on product.Id = product_image.ProductId WHERE product.Id = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, productId);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    // Retrieve product details
+                    String productName = resultSet.getString("ProductName");
+                    double price = resultSet.getDouble("Price");
+                    int Ram = resultSet.getInt("Ram");
+                    int Storage = resultSet.getInt("Storage");
+                    String URL = resultSet.getString("URL");
+                    int Quantity = resultSet.getInt("Quantity");
+                    String color = resultSet.getString("Color");
+                    String description = resultSet.getString("Description");
+                    
+                    // Add more fields as needed
+
+                    // Display product details
+                    %>
                         <div class="card shadow mb-4">
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div class="form-group d-flex">
                                         <label for="image" class="col-md-3 text-md-right ">Image</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <img class="img-profile" style="height: 100px;" src="img/undraw_profile.svg">
+                                            <img class="img-profile" style="height: 100px;" src="/resources/img/<%=URL%>">
                                         </div>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label for="brand" class="col-md-3 text-md-right ">Brand</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>Samsung</p>
+                                            <p><%= productName%></p>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label for="category" class="col-md-3 text-md-right ">Category</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>Điện thoại</p>
+                                            <p><%=price%></p>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label for="name" class="col-md-3 text-md-right ">Product Name</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>Galaxy Z-flip 5</p>
+                                            <p><%=Ram %></p>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label for="price" class="col-md-3 text-md-right ">Price</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>Galaxy Z-flip 5</p>
+                                            <p><%= Storage%></p>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label for="qty" class="col-md-3 text-md-right ">Quantity</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>Galaxy Z-flip 5</p>
+                                            <p><%= color%></p>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label for="status" class="col-md-3 text-md-right ">Status</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>Galaxy Z-flip 5</p>
+                                            <p><%= description%></p>
                                         </div>
                                     </div>
-                                    <div class="form-group d-flex">
+<!--                                    <div class="form-group d-flex">
                                         <label for="feature" class="col-md-3 text-md-right ">Feature</label>
                                         <div class="col-md-9 col-xl-8">
                                             <p>Galaxy Z-flip 5</p>
@@ -384,11 +421,31 @@
                                         <div class="col-md-9 col-xl-8">
                                             <p>Galaxy Z-flip 5</p>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>
+ <%
+                } else {
+                    // Product not found
+                    out.println("Product not found");
+                }
 
+                // Close database resources
+                resultSet.close();
+                preparedStatement.close();
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // Invalid product ID
+            out.println("Invalid product ID");
+        }
+    %>
+                        
+                        
+                        
                     </div>
                     <!-- /.container-fluid -->
 

@@ -12,14 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author lemin
  */
-@WebServlet(name = "LogoutAdmin", urlPatterns = {"/admin/LogoutAdmin"})
-public class LogoutAdmin extends HttpServlet {
+@WebServlet(name = "AddCustomerServlet4", urlPatterns = {"/AddCustomerServlet4"})
+public class AddCustomerServlet4 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +37,10 @@ public class LogoutAdmin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LogoutAdmin</title>");            
+            out.println("<title>Servlet AddCustomerServlet4</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LogoutAdmin at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddCustomerServlet4 at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,13 +58,7 @@ public class LogoutAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-  HttpSession session = request.getSession(false);
-
-        if (session != null) {
-            session.invalidate();
-        }
-        response.sendRedirect("/ProjectSem425");
+        processRequest(request, response);
     }
 
     /**
