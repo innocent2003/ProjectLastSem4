@@ -64,7 +64,7 @@
                     Pages
                 </div>
 
-                <!-- Nav Item - Login -->
+<!--                 Nav Item - Login 
                 <li class="nav-item">
                     <a class="nav-link" href="login.jsp">
                         <i class="fas fa-fw fa-sign-in-alt"></i>
@@ -72,12 +72,12 @@
                     </a>
                 </li>
 
-                <!-- Nav Item - Register -->
+                 Nav Item - Register 
                 <li class="nav-item">
                     <a class="nav-link" href="register.jsp">
                         <i class="fas fa-fw fa-registered"></i>
                         <span>Register</span></a>
-                </li>
+                </li>-->
 
                 <!-- Nav Item - User -->
                 <li class="nav-item">

@@ -61,19 +61,19 @@
             </div>
 
             <!-- Nav Item - Login -->
-            <li class="nav-item">
+<!--            <li class="nav-item">
                 <a class="nav-link" href="admin/login.jsp">
                     <i class="fas fa-fw fa-sign-in-alt"></i>
                     <span>Login</span>
                 </a>
             </li>
 
-            <!-- Nav Item - Register -->
+             Nav Item - Register 
             <li class="nav-item">
                 <a class="nav-link" href="admin/register.jsp">
                     <i class="fas fa-fw fa-registered"></i>
                     <span>Register</span></a>
-            </li>
+            </li>-->
 
             <!-- Nav Item - User -->
             <li class="nav-item">
