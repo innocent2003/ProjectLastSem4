@@ -54,7 +54,7 @@
 
                         <form method="POST" class="register-form" id="register-form" action="AddCustomerServlet2">
                             <div class="form-group">
-                                <label for="user"><i class="zmdi zmdi-email"></i></label>
+                                <label for="user"><i class="zmdi zmdi-account"></i></label>
                                 <input type="text" name="username" id="user" placeholder="Username"/>
                             </div>
                             <div class="form-group">
@@ -62,20 +62,20 @@
                                 <input type="password" name="password" id="pass" placeholder="Password"/>
                             </div>
                            <div class="form-group">
-                                <label for="user"><i class="zmdi zmdi-email"></i></label>
-                                <input type="text" name="name" id="user" placeholder="Fullname"/>
+                                <label for="name"><i class="zmdi zmdi-account-box-phone"></i></label>
+                                <input type="text" name="name" id="name" placeholder="Fullname"/>
                             </div>
                             <div class="form-group">
-                                <label for="user"><i class="zmdi zmdi-email"></i></label>
-                                <input type="text" name="address" id="user" placeholder="Address"/>
+                                <label for="address"><i class="zmdi zmdi-adb"></i></label>
+                                <input type="text" name="address" id="address" placeholder="Address"/>
                             </div>
                             <div class="form-group">
-                                <label for="user"><i class="zmdi zmdi-email"></i></label>
-                                <input type="text" name="phone" id="user" placeholder="Phone number"/>
+                                <label for="phone"><i class="zmdi zmdi-phone"></i></label>
+                                <input type="text" name="phone" id="phone" placeholder="Phone number"/>
                             </div>
                             <div class="form-group">
-                                <label for="user"><i class="zmdi zmdi-email"></i></label>
-                                <input type="text" name="email" id="user" placeholder="Email"/>
+                                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                <input type="text" name="email" id="email" placeholder="Email"/>
                             </div>
                             
                             

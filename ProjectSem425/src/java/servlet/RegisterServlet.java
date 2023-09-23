@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 package servlet;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,20 +22,20 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String Username = request.getParameter("Username");
-        String Password = request.getParameter("Password");
 
-        try {
-            Connection conn = getConnection();
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String username = request.getParameter("Username");
+        String password = request.getParameter("Password");
+
+        try (Connection conn = getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Users (Username, Password, Role) VALUES (?, ?, 'Customer')");
-            pstmt.setString(1, Username);
-            pstmt.setString(2, Password);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
             pstmt.executeUpdate();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         response.sendRedirect("login.jsp");
