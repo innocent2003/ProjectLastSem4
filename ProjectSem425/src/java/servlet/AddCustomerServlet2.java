@@ -78,7 +78,7 @@ public class AddCustomerServlet2 extends HttpServlet {
             connection.close();
             
             // Chuyển hướng hoặc xuất thông báo thành công
-            response.sendRedirect("success.jsp"); // Chuyển hướng đến trang thông báo thành công
+            response.sendRedirect("login.jsp"); // Chuyển hướng đến trang thông báo thành công
         } catch (Exception e) {
             e.printStackTrace();
             // Xử lý lỗi và chuyển hướng hoặc xuất thông báo lỗi

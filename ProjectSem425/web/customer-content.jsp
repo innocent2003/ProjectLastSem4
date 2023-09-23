@@ -66,16 +66,11 @@
         <div class="section-title">
             <h3 class="title">Your information</h3>
         </div>
-        <form class="my-form" method="post" action="UpdateCustomerServlet">
-            <!--            <div class="form-group">
-                                <label for="form-name">Name</label>
-                                <input type="hidden" class="form-control" id="form-name" placeholder="User_id" value="">
-                            </div>
-            -->
+        <form class="info-form" method="post" action="javascript:void(0);">
             <input type="hidden" name="customerId" value="<%= userId%>"/>
             <div class="form-group">
                 <label for="form-email">Fullname</label>
-                <input type="text" name="name" class="form-control" id="form-email" value="<%= name%>">
+                <input type="text" name="name" class="form-control" id="form-subject" value="<%= name%>">
             </div>
             <div class="form-group">
                 <label for="form-subject">Address</label>
@@ -96,14 +91,14 @@
         <div class="section-title">
             <h3 class="title">Change your password</h3>
         </div>
-        <form method="post" action="UpdateCustomerServlet1">
+        <form class="pwd-form" method="post" action="javascript:void(0);">
             <input type="hidden" name="customerId" value="<%= userId%>"/>
             <div class="form-group">
-                <label for="form-email">Password</label>
-                <input type="password" name="password" class="form-control" id="form-email" placeholder="Type your new password">
+                <label for="form-password">Password</label>
+                <input type="password" name="password" class="form-control" id="form-subject" placeholder="Type your new password">
             </div>
             <div class="form-group">
-                <label for="form-subject">Re-Password</label>
+                <label for="form-password">Re-Password</label>
                 <input type="password" name="re-password" class="form-control" id="form-subject" placeholder="Re-Type your new password">
             </div>
             <button class="btn primary-btn" type="submit">Change</button>                
@@ -114,3 +109,187 @@
 
 <h1></h1>
 <!-- /SECTION -->
+<script>
+    document.querySelector('.info-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        var customerId = document.querySelector('input[name="customerId"]').value;
+        var name = document.querySelector('input[name="name"]').value;
+        var address = document.querySelector('input[name="address"]').value;
+        var phone = document.querySelector('input[name="phone"]').value;
+        var email = document.querySelector('input[name="email"]').value;
+
+        if (!customerId || !name || !address || !phone || !email) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Empty',
+                text: 'Please fill in all fields',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: true,
+            });
+            return;
+        }
+
+        if (name.length < 10 || name.length > 255) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Name',
+                text: 'Name must be between 10 and 255 characters',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: true,
+            });
+            return;
+        }
+
+        if (address.length < 10 || address.length > 255) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Address',
+                text: 'Address must be between 10 and 255 characters',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: true,
+            });
+            return;
+        }
+
+        var phoneRegex = /^\d{10}$/;
+        if (!phone.match(phoneRegex)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Phone',
+                text: 'Please enter a valid phone number',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: true,
+            });
+            return;
+        }
+
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.match(emailRegex)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Email',
+                text: 'Please enter a valid email address'
+            });
+            return;
+        }
+
+        fetch('UpdateCustomerServlet', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'customerId=' + encodeURIComponent(customerId) +
+                    '&name=' + encodeURIComponent(name) +
+                    '&address=' + encodeURIComponent(address) +
+                    '&phone=' + encodeURIComponent(phone) +
+                    '&email=' + encodeURIComponent(email)
+        })
+                .then(function (response) {
+                    if (response.ok) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Your information has been updated',
+                            timer: 2000,
+                            timerProgressBar: true,
+                            showConfirmButton: true,
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed',
+                            text: 'An error occurred while updating the information',
+                            timer: 2000,
+                            timerProgressBar: true,
+                            showConfirmButton: true,
+                        });
+                    }
+                }
+                )
+                .catch(function (error) {
+                    console.error('Error:', error);
+                });
+    });
+    document.querySelector('.pwd-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var customerId = document.querySelector('input[name="customerId"]').value;
+        var password = document.querySelector('input[name="password"]').value;
+        var rePassword = document.querySelector('input[name="re-password"]').value;
+
+        if (!password || !rePassword) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Empty',
+                text: 'Please enter a password and confirm it',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: true,
+            });
+            return;
+        }
+
+        if (password.length < 5 || password.length > 255) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Length',
+                text: 'Password must be between 5 and 255 characters',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: true,
+            });
+            return;
+        }
+
+        if (password !== rePassword) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Missmatch',
+                text: 'Please make sure the passwords match',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: true,
+            });
+            return;
+        }
+
+        fetch('changePassword', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'customerId=' + encodeURIComponent(customerId) +
+                    '&password=' + encodeURIComponent(password)
+        })
+                .then(function (response) {
+                    if (response.ok) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Password changed successfully',
+                            timer: 2000,
+                            timerProgressBar: true,
+                            showConfirmButton: true,
+                        });
+                        document.querySelector('input[name="password"]').value = '';
+                        document.querySelector('input[name="re-password"]').value = '';
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed',
+                            text: 'An error occurred while changing the password',
+                            timer: 2000,
+                            timerProgressBar: true,
+                            showConfirmButton: true,
+                        });
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error:', error);
+                });
+    });
+</script>

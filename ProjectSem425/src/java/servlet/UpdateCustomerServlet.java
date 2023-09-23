@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class UpdateCustomerServlet extends HttpServlet {
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
