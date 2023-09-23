@@ -443,8 +443,6 @@
                                                 <td>${row.Subtotal}</td>
                                             </tr>
                                         </c:forEach>
-
-
                                         </tbody>
                                     </table>
                                 </div>

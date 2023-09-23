@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/src/java/servlet/OrderServlet.java</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/layout.jsp</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/product-content.jsp</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/customer-content.jsp</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/register.jsp</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/store-content.jsp</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/login.jsp</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/src/java/servlet/LoginServlet.java</file>
+            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/admin/brand.jsp</file>
+            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/admin/order.jsp</file>
+            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/admin/index.jsp</file>
+            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/admin/product.jsp</file>
+            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/admin/category.jsp</file>
+            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/admin/ordershow.jsp</file>
+            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/admin/comment.jsp</file>
         </group>
     </open-files>
 </project-private>
