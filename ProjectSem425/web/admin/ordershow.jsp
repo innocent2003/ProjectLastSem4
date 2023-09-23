@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -328,6 +330,40 @@
                         </div>
 
                         <!-- DataTales Example -->
+                        <c:set var="orderId" value="${param.id}" />
+    <c:if test="${not empty orderId}">
+        <%
+            // Check if the ID is valid (you can add more validation)
+            String orderId = (String) pageContext.getAttribute("orderId");
+            if (orderId != null && !orderId.isEmpty()) {
+                try {
+                    // Establish a database connection (replace with your DB credentials)
+                    String jdbcUrl = "jdbc:mysql://localhost/javaproject";
+                    String dbUser = "root";
+                    String dbPassword = "";
+
+                    Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
+
+                    // Prepare a SQL query to fetch order details
+                    String sql = "SELECT * FROM orders INNER JOIN customers ON orders.CustomerId = customers.Id INNER JOIN order_detail ON orders.Id = order_detail.OrderId INNER JOIN product_detail ON order_detail.ProductId = product_detail.Id INNER JOIN product ON product_detail.ProductId = product.Id WHERE orders.Id = ?";
+                    PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                    preparedStatement.setString(1, orderId);
+
+                    ResultSet resultSet = preparedStatement.executeQuery();
+
+                    if (resultSet.next()) {
+                        // Retrieve order details
+                        String Name = resultSet.getString("Name");
+                        
+                        String Address = resultSet.getString("Address");
+                        String Phone = resultSet.getString("Phone");
+                        int Price = resultSet.getInt("Price");
+                        double total = resultSet.getDouble("Total");
+                        String ProductName = resultSet.getString("ProductName");
+                        // Add more fields as needed
+
+                        // Display order details
+        %>
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h3 class="m-0 text-center font-weight-bold text-primary"> Order Info</h3>
@@ -337,31 +373,31 @@
                                     <div class="form-group d-flex">
                                         <label for="name" class="col-md-3 text-md-right ">Full Name</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>Nguyễn Thị Ngân</p>
+                                            <p><%=Name%></p>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label for="email" class="col-md-3 text-md-right ">Email</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>admin@.com</p>
+                                            <p><%=ProductName%></p>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label for="phone" class="col-md-3 text-md-right ">Phone</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>031254499</p>
+                                            <p><%=Phone%></p>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label for="address" class="col-md-3 text-md-right ">Address</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>Hà Nội</p>
+                                            <p><%= Address%></p>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label for="total" class="col-md-3 text-md-right ">Total</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>120000đ</p>
+                                            <p><%= Price%></p>
                                         </div>
                                     </div>
                                     <div class="form-group text-center">
@@ -370,7 +406,25 @@
                                 </div>
                             </div>
                         </div>
+ <%
+                    } else {
+                        // Order not found
+                        out.println("Order not found");
+                    }
 
+                    // Close database resources
+                    resultSet.close();
+                    preparedStatement.close();
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                // Invalid order ID
+                out.println("Invalid order ID");
+            }
+        %>
+    </c:if>
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">

@@ -371,7 +371,7 @@
                                                 <td>Edinburgh</td>
                                                 <td>61</td>
                                                 <td>
-                                                    <a class="m-3" href="ordershow.jsp">
+                                                    <a class="m-3" href="ordershow.jsp?id=${row.Id}">
                                                         <i class="fas fa-fw fa-eye"></i>
                                                     </a>                                                  
                                                     <a class="text-danger" href=""><i class="fas fa-fw fa-trash"></i></a>

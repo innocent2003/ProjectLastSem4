@@ -3,16 +3,11 @@
     Created on : Sep 13, 2023, 12:09:30 AM
     Author     : Admin
 --%>
-
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import = "java.io.*,java.util.*,java.sql.*"%>
 <%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,19 +68,19 @@
                 </div>
 
                 <!-- Nav Item - Login -->
-<!--                <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">
-                        <i class="fas fa-fw fa-sign-in-alt"></i>
-                        <span>Login</span>
-                    </a>
-                </li>
-
-                 Nav Item - Register 
-                <li class="nav-item">
-                    <a class="nav-link" href="register.jsp">
-                        <i class="fas fa-fw fa-registered"></i>
-                        <span>Register</span></a>
-                </li>-->
+                <!--                <li class="nav-item">
+                                    <a class="nav-link" href="login.jsp">
+                                        <i class="fas fa-fw fa-sign-in-alt"></i>
+                                        <span>Login</span>
+                                    </a>
+                                </li>
+                
+                                 Nav Item - Register 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="register.jsp">
+                                        <i class="fas fa-fw fa-registered"></i>
+                                        <span>Register</span></a>
+                                </li>-->
 
                 <!-- Nav Item - User -->
                 <li class="nav-item">
@@ -259,7 +254,7 @@
                                         </div>
                                         <div class="font-weight-bold">
                                             <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
-                                            <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                            <div class="small text-gray-500">Emily Fowler Â· 58m</div>
                                         </div>
                                     </a>
                                     <a class="dropdown-item d-flex align-items-center" href="#">
@@ -269,7 +264,7 @@
                                         </div>
                                         <div>
                                             <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
-                                            <div class="small text-gray-500">Jae Chun · 1d</div>
+                                            <div class="small text-gray-500">Jae Chun Â· 1d</div>
                                         </div>
                                     </a>
                                     <a class="dropdown-item d-flex align-items-center" href="#">
@@ -279,7 +274,7 @@
                                         </div>
                                         <div>
                                             <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-                                            <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                            <div class="small text-gray-500">Morgan Alvarez Â· 2d</div>
                                         </div>
                                     </a>
                                     <a class="dropdown-item d-flex align-items-center" href="#">
@@ -289,7 +284,7 @@
                                         </div>
                                         <div>
                                             <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
-                                            <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                            <div class="small text-gray-500">Chicken the Dog Â· 2w</div>
                                         </div>
                                     </a>
                                     <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
@@ -343,15 +338,15 @@
                                 <h6 class="m-0 font-weight-bold text-primary">User List</h6>
                             </div>
                             <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-         url = "jdbc:mysql://localhost/javaproject"
-         user = "root"  password = ""/>
+                                               url = "jdbc:mysql://localhost/javaproject"
+                                               user = "root"  password = ""/>
 
-         <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from Users;
-         </sql:query>
- 
-      
-      </table>
+                            <sql:query dataSource = "${snapshot}" var = "result">
+                                SELECT * from Users;
+                            </sql:query>
+
+
+                            </table>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -367,29 +362,29 @@
 
                                         <tbody>
                                             <c:forEach var = "row" items = "${result.rows}">
-                                                  <tr class="text-center">
+                                                <tr class="text-center">
                                                     <td><c:out value="${row.id}"/></td>
-                                                <td><c:out value="${row.Username}"/></td>
-                                                <td><c:out value="${row.Password}"/></td>
-                                                <td><c:out value="${row.Role}"/></td>
-                                                <td>
-                                                    <a href="usershow.jsp?id=${row.id}">
-                                                        <i class="fas fa-fw fa-eye"></i>
-                                                    </a>
-                                                    <a class="text-success m-3" href="useredit.jsp">
-                                                        <i class="fas fa-fw fa-edit"></i>
-                                                    </a><form method="post" action="DeleteUserCustomerServlet">
-                                                        <input type="hidden" name="userId" value="${row.id}"/>
-                                                                        <button type="submit" style="background-color: white" class="text-danger" ><i class="fas fa-fw fa-trash">
-                                                                    
-                                                        </i></button>
-                                                                    </form>
-                                                            
-                                                </td>
-                                            </tr>
+                                                    <td><c:out value="${row.Username}"/></td>
+                                                    <td><c:out value="${row.Password}"/></td>
+                                                    <td><c:out value="${row.Role}"/></td>
+                                                    <td>
+                                                        <a href="usershow.jsp?id=${row.id}">
+                                                            <i class="fas fa-fw fa-eye"></i>
+                                                        </a>
+                                                        <a class="text-success m-3" href="useredit.jsp">
+                                                            <i class="fas fa-fw fa-edit"></i>
+                                                        </a><form method="post" action="DeleteUserCustomerServlet">
+                                                            <input type="hidden" name="userId" value="${row.id}"/>
+                                                            <button type="submit" style="background-color: white" class="text-danger" ><i class="fas fa-fw fa-trash">
+
+                                                                </i></button>
+                                                        </form>
+
+                                                    </td>
+                                                </tr>
                                             </c:forEach>
-                                          
-                                            
+
+
 
                                         </tbody>
                                     </table>
@@ -431,7 +426,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
+                            <span aria-hidden="true">Ã—</span>
                         </button>
                     </div>
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
@@ -442,7 +437,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Bootstrap core JavaScript-->
         <script src="../admin/vendor/jquery.min.js" type="text/javascript"></script>
         <script src="../admin/vendor/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -459,6 +453,7 @@
 
         <!-- Page level custom scripts -->
         <script src="../admin/vendor/datatables-demo.js" type="text/javascript"></script>
+
 
     </body>
 

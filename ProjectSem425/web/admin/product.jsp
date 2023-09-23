@@ -69,19 +69,19 @@
                 </div>
 
                 <!-- Nav Item - Login -->
-<!--                <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">
-                        <i class="fas fa-fw fa-sign-in-alt"></i>
-                        <span>Login</span>
-                    </a>
-                </li>
-
-                 Nav Item - Register 
-                <li class="nav-item">
-                    <a class="nav-link" href="register.jsp">
-                        <i class="fas fa-fw fa-registered"></i>
-                        <span>Register</span></a>
-                </li>-->
+                <!--                <li class="nav-item">
+                                    <a class="nav-link" href="login.jsp">
+                                        <i class="fas fa-fw fa-sign-in-alt"></i>
+                                        <span>Login</span>
+                                    </a>
+                                </li>
+                
+                                 Nav Item - Register 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="register.jsp">
+                                        <i class="fas fa-fw fa-registered"></i>
+                                        <span>Register</span></a>
+                                </li>-->
 
                 <!-- Nav Item - User -->
                 <li class="nav-item">
@@ -338,13 +338,13 @@
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Product List</h6>
                             </div>
-                            
+
                             <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-         url = "jdbc:mysql://localhost/javaproject"
-         user = "root"  password = ""/>
-        <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from product inner join product_detail on product.Id = product_detail.ProductId;
-         </sql:query>
+                                               url = "jdbc:mysql://localhost/javaproject"
+                                               user = "root"  password = ""/>
+                            <sql:query dataSource = "${snapshot}" var = "result">
+                                SELECT * from product inner join product_detail on product.Id = product_detail.ProductId;
+                            </sql:query>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -363,19 +363,20 @@
                                         </thead>
 
                                         <tbody>
-                                            
+
                                             <c:forEach var="row" items="${result.rows}">
                                                 <tr class="text-center">
                                                     <td><c:out value="${row.Id}"/></td>
                                                     <td><c:out value="${row.ProductName}"/></td>
                                                     <td><c:out value="${row.Price}"/></td>
+<<<<<<< HEAD
                                                 <td><c:out value="${row.Ram}"/></td>
                                                 <td><c:out value="${row.Storage}"/></td>
                                                 <td><c:out value="${row.Color}"/></td>
                                                 <td><c:out value="${row.Quantity}"/></td>
                                                 <td><c:out value="${row.Status}"/></td>
                                                 <td>
-                                                    <a href="productshow.jsp">
+                                                    <a href="productshow.jsp?id=${row.Id}">
                                                         <i class="fas fa-fw fa-eye"></i>
                                                     </a>
                                                     <a class="text-success m-3" href="productedit.jsp">
@@ -389,9 +390,31 @@
                                                    
                                                 </td>
                                             </tr>
+=======
+                                                    <td><c:out value="${row.Ram}"/></td>
+                                                    <td><c:out value="${row.Storage}"/></td>
+                                                    <td><c:out value="${row.Color}"/></td>
+                                                    <td><c:out value="${row.Quantity}"/></td>
+                                                    <td><c:out value="${row.Status}"/></td>
+                                                    <td>
+                                                        <a href="productshow.jsp">
+                                                            <i class="fas fa-fw fa-eye"></i>
+                                                        </a>
+                                                        <a class="text-success m-3" href="productedit.jsp">
+                                                            <i class="fas fa-fw fa-edit"></i>
+                                                        </a>
+                                                        <form action="DeleteDetailImage" method="post">
+                                                            <input type="hidden" name="productId" value="${row.Id}"/>
+
+                                                            <button type="submit" class="text-danger" ><i class="fas fa-fw fa-trash"></i></button>
+                                                        </form>
+
+                                                    </td>
+                                                </tr>
+>>>>>>> 4350ef49d055a95808bf7c1d8e9bc16b88e836a1
                                             </c:forEach>
 
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>
