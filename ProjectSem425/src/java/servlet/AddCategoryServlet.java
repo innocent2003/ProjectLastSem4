@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lemin
  */
- @WebServlet("/AddCategoryServlet")
+ @WebServlet("/admin/AddCategoryServlet")
 public class AddCategoryServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -45,7 +45,7 @@ public class AddCategoryServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("category.jsp");
     }
 
     private Connection getConnection() throws Exception {

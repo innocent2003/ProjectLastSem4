@@ -334,14 +334,24 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Create</h6>
                             </div>
                             <div class="card-body">
-                                <form class="row g-3 needs-validation" novalidate>
+                                <form method="POST" action="AddBrand" class="row g-3 needs-validation" >
                                     <div class="table-responsive d-flex">
+                                         <div class="table-responsive d-flex">
                                         <span class="input-group-text border-0" id="basic-addon1">Name</span>
                                         <input type="text" class="form-control rounded" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" />
                                     </div>
+                                        <br/>
+                                        <span class="input-group-text border-0" id="basic-addon1">Status</span>
+<!--                                        <input type="text" name="brandName" class="form-control rounded" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" />-->
+                                              <select name="status" class="form-control rounded">
+            <option value="1">Active</option>
+            <option value="0">Inactive</option>
+        </select><br>  
+                                    </div>
+                                   
                                     <div class="card-body text-center">
-                                        <button type="button" class="btn btn-secondary">Cancer</button>
-                                        <button type="button" class="btn btn-primary">Save</button>
+                                        <button type="reset" class="btn btn-secondary">Cancer</button>
+                                        <button type="submit" class="btn btn-primary">Save</button>
                                     </div>
                                 </form>
                             </div>

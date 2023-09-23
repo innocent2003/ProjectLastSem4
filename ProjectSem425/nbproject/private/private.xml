@@ -3,18 +3,47 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/src/java/dao/ProductDAO.java</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/src/java/servlet/ChangePasswordServlet.java</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/src/java/servlet/UpdateCustomerServlet.java</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/src/java/servlet/OrderServlet.java</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/src/java/servlet/RegisterServlet.java</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/src/java/servlet/AddCustomerServlet2.java</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/src/java/servlet/AdminServlet.java</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/product-content.jsp</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/customer-content.jsp</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/register.jsp</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/web/login.jsp</file>
-            <file>file:/C:/Users/forev/OneDrive/Documents/NetBeansProjects/ProjectLastSem4Tester/ProjectSem425/src/java/servlet/LoginServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/DeleteDetailImage.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/product.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/categoryedit.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/product.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/usercreate.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/DeleteUserCustomerServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/AddProductServlet1.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/brandcreate.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/checkout.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/brandedit.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/useredit.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/AddCustomerServlet3.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/demoProduct.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/ordershow.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/AddCustomerServlet4.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/categorycreate.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/productshow.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/user.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/AddProductServlet2.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/usershow.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/brand.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/index-content.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/productedit.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/PlaceOrderServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/SecureServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/UpdateCustomerServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/productcreate.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/register.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/order.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/checkout-content.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/comment.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/OrderServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/index.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/ProductImageServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/AddCategoryServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/demoCustomer.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/customer.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/web/admin/category.jsp</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/AddCustomerServlet2.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/LogoutServlet.java</file>
+            <file>file:/E:/linhtinh/ProjectLastSem4/githubsem4/aa8/ProjectLastSem4/ProjectSem425/src/java/servlet/LogoutAdmin.java</file>
         </group>
     </open-files>
 </project-private>

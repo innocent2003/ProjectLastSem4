@@ -356,7 +356,7 @@
          user = "root"  password = ""/>
 
          <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from orders inner join customers on orders.CustomerId = customers.Id;
+            SELECT * from orders inner join customers on orders.CustomerId = customers.Id inner join order_detail on order_detail.orderId = orders.id;
          </sql:query>
                                         <tbody>
                                              <c:forEach var = "row" items = "${result.rows}">

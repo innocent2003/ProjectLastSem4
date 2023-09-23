@@ -415,7 +415,13 @@
                                         <div class="form-group d-flex">
                                             <label for="description" class="col-md-3 text-md-right col-form-label">Description</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="text" class="form-control rounded" placeholder="Description" aria-label="Description" aria-describedby="basic-addon1" />
+                                                <input type="text" name="Description" class="form-control rounded" placeholder="Description" aria-label="Description" aria-describedby="basic-addon1" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for="description" class="col-md-3 text-md-right col-form-label">Quantity</label>
+                                            <div class="col-md-9 col-xl-8">
+                                                <input type="text" name="Quantity" class="form-control rounded" placeholder="Description" aria-label="Description" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                     </div>

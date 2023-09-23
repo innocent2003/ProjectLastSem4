@@ -369,7 +369,11 @@
                                                     <a class="text-success m-3" href="categoryedit.jsp">
                                                         <i class="fas fa-fw fa-edit"></i>
                                                     </a>
-                                                    <a class="text-danger" href=""><i class="fas fa-fw fa-trash"></i></a>
+                                                    <form method="post" action="DeleteCategoryServlet">
+                                                        <input type="hidden" name="categoryId" value="${row.Id}"/>
+                                                        <button type="submit" class="text-danger" href=""><i class="fas fa-fw fa-trash"></i></button>
+                                                    </form>
+                                                    
                                                 </td>
                                             </tr>
          </c:forEach>

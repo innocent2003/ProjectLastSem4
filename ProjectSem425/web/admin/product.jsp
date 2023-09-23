@@ -369,8 +369,8 @@
                                                     <td><c:out value="${row.Id}"/></td>
                                                     <td><c:out value="${row.ProductName}"/></td>
                                                     <td><c:out value="${row.Price}"/></td>
-<<<<<<< HEAD
-                                                <td><c:out value="${row.Ram}"/></td>
+<!--<<<<<<< HEAD-->
+<!--                                                <td><c:out value="${row.Ram}"/></td>
                                                 <td><c:out value="${row.Storage}"/></td>
                                                 <td><c:out value="${row.Color}"/></td>
                                                 <td><c:out value="${row.Quantity}"/></td>
@@ -389,15 +389,15 @@
 </form>
                                                    
                                                 </td>
-                                            </tr>
-=======
+                                            </tr>-->
+<!--=======-->
                                                     <td><c:out value="${row.Ram}"/></td>
                                                     <td><c:out value="${row.Storage}"/></td>
                                                     <td><c:out value="${row.Color}"/></td>
                                                     <td><c:out value="${row.Quantity}"/></td>
                                                     <td><c:out value="${row.Status}"/></td>
                                                     <td>
-                                                        <a href="productshow.jsp">
+                                                        <a href="productshow.jsp?id=${row.id}">
                                                             <i class="fas fa-fw fa-eye"></i>
                                                         </a>
                                                         <a class="text-success m-3" href="productedit.jsp">
@@ -411,7 +411,7 @@
 
                                                     </td>
                                                 </tr>
->>>>>>> 4350ef49d055a95808bf7c1d8e9bc16b88e836a1
+<!-->>>>>>> 4350ef49d055a95808bf7c1d8e9bc16b88e836a1-->
                                             </c:forEach>
 
 

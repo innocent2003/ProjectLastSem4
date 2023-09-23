@@ -13,76 +13,78 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  *
  * @author lemin
  */
 @WebServlet(name = "AddCustomerServlet4", urlPatterns = {"/AddCustomerServlet4"})
 public class AddCustomerServlet4 extends HttpServlet {
+ protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String Role = request.getParameter("Role");
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddCustomerServlet4</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddCustomerServlet4 at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try {
+            // Kết nối đến cơ sở dữ liệu MySQL
+            String url = "jdbc:mysql://localhost:3306/javaproject";
+            String dbUsername = "root";
+            String dbPassword = "";
+            Connection connection = DriverManager.getConnection(url, dbUsername, dbPassword);
+
+            // Thêm dữ liệu vào bảng Users
+            String insertUserQuery = "INSERT INTO users (Username, Password, Role) VALUES (?, ?, ?)";
+            PreparedStatement userStatement = connection.prepareStatement(insertUserQuery);
+            userStatement.setString(1, username);
+            userStatement.setString(2, password);
+            userStatement.setString(3, Role);
+            userStatement.executeUpdate();
+            
+            // Lấy ID của user vừa thêm
+            int userId = 0;
+            String getLastUserIdQuery = "SELECT LAST_INSERT_ID() AS User_id";
+            PreparedStatement lastUserIdStatement = connection.prepareStatement(getLastUserIdQuery);
+            if (lastUserIdStatement.execute()) {
+                ResultSet resultSet = lastUserIdStatement.getResultSet();
+                if (resultSet.next()) {
+                    userId = resultSet.getInt("User_id");
+                }
+            }
+
+            // Thêm dữ liệu vào bảng Customers
+            String insertCustomerQuery = "INSERT INTO customers (User_id, Name, Address, Phone, Email) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement customerStatement = connection.prepareStatement(insertCustomerQuery);
+            customerStatement.setInt(1, userId);
+            customerStatement.setString(2, name);
+            customerStatement.setString(3, address);
+            customerStatement.setString(4, phone);
+            customerStatement.setString(5, email);
+            customerStatement.executeUpdate();
+
+            // Đóng kết nối
+            connection.close();
+            
+            // Chuyển hướng hoặc xuất thông báo thành công
+            response.sendRedirect("user.jsp"); // Chuyển hướng đến trang thông báo thành công
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Xử lý lỗi và chuyển hướng hoặc xuất thông báo lỗi
+            response.sendRedirect("error.jsp?message=Error occurred"); // Chuyển hướng đến trang thông báo lỗi
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+  
 }

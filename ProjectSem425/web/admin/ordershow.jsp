@@ -345,7 +345,7 @@
                     Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
 
                     // Prepare a SQL query to fetch order details
-                    String sql = "SELECT * FROM orders INNER JOIN customers ON orders.CustomerId = customers.Id INNER JOIN order_detail ON orders.Id = order_detail.OrderId INNER JOIN product_detail ON order_detail.ProductId = product_detail.Id INNER JOIN product ON product_detail.ProductId = product.Id WHERE orders.Id = ?";
+                    String sql = "SELECT * FROM orders INNER JOIN customers ON orders.CustomerId = customers.Id INNER JOIN order_detail ON orders.Id = order_detail.OrderId INNER JOIN product_detail ON order_detail.ProductId = product_detail.Id INNER JOIN product ON product_detail.ProductId = product.Id WHERE order_detail.Id = ?";
                     PreparedStatement preparedStatement = connection.prepareStatement(sql);
                     preparedStatement.setString(1, orderId);
 
@@ -353,6 +353,7 @@
 
                     if (resultSet.next()) {
                         // Retrieve order details
+                        int OrderDetailId = resultSet.getInt("Id");
                         String Name = resultSet.getString("Name");
                         
                         String Address = resultSet.getString("Address");
@@ -400,9 +401,14 @@
                                             <p><%= Price%></p>
                                         </div>
                                     </div>
-                                    <div class="form-group text-center">
-                                        <button type="button" class="btn btn-primary">Order Confirmation</button>
+                                        <form method="POST" action="UpdateQuantityServlet">
+                                            <input type="hidden" value="<%= OrderDetailId %>" />
+                                              <div class="form-group text-center">
+                                        <button type="submit" class="btn btn-primary">Order Confirmation</button>
+                                        <h1><%= OrderDetailId %></h1>
                                     </div>
+                                        </form>
+                                  
                                 </div>
                             </div>
                         </div>

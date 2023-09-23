@@ -46,6 +46,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
         double price = Double.parseDouble(request.getParameter("price"));
         int CategoryId = Integer.parseInt(request.getParameter("CategoryId"));
         int BrandId = Integer.parseInt(request.getParameter("BrandId"));
+        int Quantity = Integer.parseInt(request.getParameter("Quantity"));
+        String Description = request.getParameter("Description");
 
         // Handle file upload
         Part filePart = request.getPart("image");
@@ -85,12 +87,15 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
                 }
 
                 // Insert into product_detail table
-                String detailSql = "INSERT INTO product_detail (ProductId, Ram, Storage, Color) VALUES (?, ?, ?, ?)";
+                String detailSql = "INSERT INTO product_detail (ProductId, Ram, Storage, Color,Description,Quantity,Status) VALUES (?, ?, ?, ?,?,?,1)";
                 PreparedStatement detailStatement = conn.prepareStatement(detailSql);
                 detailStatement.setInt(1, productId);
                 detailStatement.setString(2, ram);
                 detailStatement.setString(3, storage);
                 detailStatement.setString(4, color);
+                detailStatement.setString(5, Description);
+                detailStatement.setInt(6, Quantity);
+//                detailStatement.setInt(7, Status);
                 detailStatement.executeUpdate();
 
                 // Insert into product_image table

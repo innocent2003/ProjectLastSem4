@@ -357,7 +357,7 @@
          url = "jdbc:mysql://localhost/javaproject"
          user = "root"  password = ""/>
 
-         <sql:query dataSource = "${snapshot}" var = "result">
+         <sql:query dataSource = "snapshot" var = "row">
             SELECT * from comments inner join customers on comments.CustomerId = customers.Id inner join product on product.Id = comments.ProductId;
          </sql:query>
                                             <tr class="text-center">

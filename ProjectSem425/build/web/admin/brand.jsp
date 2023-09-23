@@ -367,7 +367,12 @@
                                                     <a class="text-success m-3" href="brandedit.jsp">
                                                         <i class="fas fa-fw fa-edit"></i>
                                                     </a>
-                                                    <a class="text-danger" href=""><i class="fas fa-fw fa-trash"></i></a>
+                                                    <form method="post" action="DeleteBrandServlet">
+                                                        <input type="hidden" name="brandId" value="${row.id}"/>
+                                                        
+                                                        <button type="submit" class="text-danger" ><i class="fas fa-fw fa-trash"></i></button>
+                                                    </form>
+                                                    
                                                 </td>
                                             </tr>
                                             </c:forEach>
