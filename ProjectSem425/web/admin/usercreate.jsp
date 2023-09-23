@@ -51,7 +51,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="../">
+                    <a class="nav-link" href="index.jsp">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -65,20 +65,12 @@
                 </div>
 
                 <!-- Nav Item - Login -->
-<!--                <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">
-                        <i class="fas fa-fw fa-sign-in-alt"></i>
-                        <span>Login</span>
-                    </a>
-                </li>
-
-                 Nav Item - Register 
                 <li class="nav-item">
-                    <a class="nav-link" href="register.jsp">
-                        <i class="fas fa-fw fa-registered"></i>
-                        <span>Register</span></a>
-                </li>-->
-
+                    <a class="nav-link" href="LogoutAdmin">
+                        <i class="fas fa-fw fa-sign-in-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li><!--            
                 <!-- Nav Item - User -->
                 <li class="nav-item">
                     <a class="nav-link" href="user.jsp">
@@ -335,40 +327,34 @@
                             <div class="card-body">
                                 <form method="post" class="row g-3 needs-validation" action="AddCustomerServlet3" novalidate>
                                     <div class="table-responsive">
-<!--                                        <div class="form-group d-flex">
-                                            <label for="name" class="col-md-3 text-md-right col-form-label">Avartar</label>
-                                            <div class="col-md-9 col-xl-8">
-                                                <input type="file" name="image" aria-describedby="basic-addon1" />
-                                            </div>
-                                        </div>-->
                                         <div class="form-group d-flex">
                                             <label for="name" class="col-md-3 text-md-right col-form-label">Username</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="text" name="username" class="form-control rounded" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" />
+                                                <input type="text" name="username" class="form-control rounded" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
                                             <label for="name" class="col-md-3 text-md-right col-form-label">Password</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="text" name="name" name="password" class="form-control rounded" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" />
+                                                <input type="password" name="password" class="form-control rounded" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
                                             <label for="name" class="col-md-3 text-md-right col-form-label">Full Name</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="text" name="address" class="form-control rounded" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" />
+                                                <input type="text" name="address" class="form-control rounded" placeholder="Full Name" aria-label="Name" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
                                             <label for="name" class="col-md-3 text-md-right col-form-label">Address</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="email" name="phone" class="form-control rounded" placeholder="email@gmail.com" aria-label="email" aria-describedby="basic-addon1" />
+                                                <input type="text" name="address" class="form-control rounded" placeholder="Address" aria-label="address" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">
                                             <label for="name" class="col-md-3 text-md-right col-form-label">Email</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input type="text" name="email" class="form-control rounded" placeholder="Level" aria-label="Level" aria-describedby="basic-addon1" />
+                                                <input type="email" name="email" class="form-control rounded" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" />
                                             </div>
                                         </div>
                                         <div class="form-group d-flex">

@@ -45,7 +45,7 @@ public class DeleteUserCustomerServlet extends HttpServlet {
             connection.close();
 
             // Chuyển hướng người dùng đến trang thành công hoặc gửi thông báo thành công
-            response.sendRedirect("success.jsp");
+            response.sendRedirect("user.jsp");
         } catch (SQLException e) {
             e.printStackTrace();
         }

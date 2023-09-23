@@ -64,7 +64,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
             // Commit giao dịch
             connection.commit();
 
-            response.getWriter().println("Đã xóa product, product_detail và product_image cho product có ID " + productIdToDelete);
+            response.sendRedirect("product.jsp");
         } catch (SQLException e) {
             e.printStackTrace();
             if (connection != null) {

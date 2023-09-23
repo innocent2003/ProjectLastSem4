@@ -54,7 +54,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="../">
+                    <a class="nav-link" href="index.jsp">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -68,20 +68,12 @@
                 </div>
 
                 <!-- Nav Item - Login -->
-                <!--                <li class="nav-item">
-                                    <a class="nav-link" href="login.jsp">
-                                        <i class="fas fa-fw fa-sign-in-alt"></i>
-                                        <span>Login</span>
-                                    </a>
-                                </li>
-                
-                                 Nav Item - Register 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="register.jsp">
-                                        <i class="fas fa-fw fa-registered"></i>
-                                        <span>Register</span></a>
-                                </li>-->
-
+                <li class="nav-item">
+                    <a class="nav-link" href="LogoutAdmin">
+                        <i class="fas fa-fw fa-sign-in-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li><!--            
                 <!-- Nav Item - User -->
                 <li class="nav-item">
                     <a class="nav-link" href="user.jsp">
@@ -367,25 +359,20 @@
                                                     <td><c:out value="${row.Username}"/></td>
                                                     <td><c:out value="${row.Password}"/></td>
                                                     <td><c:out value="${row.Role}"/></td>
-                                                    <td>
-                                                        <a href="usershow.jsp?id=${row.id}">
-                                                            <i class="fas fa-fw fa-eye"></i>
-                                                        </a>
+                                                    <td style="display: flex; justify-content: center; align-items: center">
                                                         <a class="text-success m-3" href="useredit.jsp">
                                                             <i class="fas fa-fw fa-edit"></i>
                                                         </a>
-                                                            <form method="post" action="DeleteUserCustomerServlet">
-                                                            <input type="hidden" name="userId" value="${row.id}"/>
-                                                            <button type="submit" style="background-color: white" class="text-danger" ><i class="fas fa-fw fa-trash">
-                                                                </i></button>
-                                                        </form>
 
+                                                        <form action="DeleteUserCustomerServlet" method="post">
+                                                            <input type="hidden" name="userId" value="${row.Id}"/>
+
+                                                            <button type="submit" class="text-danger" style="background-color: white; outline: none; border:none;"><i class="fas fa-fw fa-trash"></i></button>
+                                                            
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
-
-
-
                                         </tbody>
                                     </table>
                                 </div>

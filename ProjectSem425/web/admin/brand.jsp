@@ -55,7 +55,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="../">
+                    <a class="nav-link" href="index.jsp">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -74,15 +74,7 @@
                         <i class="fas fa-fw fa-sign-in-alt"></i>
                         <span>Logout</span>
                     </a>
-                </li><!--
-
-                 Nav Item - Register 
-                <li class="nav-item">
-                    <a class="nav-link" href="register.jsp">
-                        <i class="fas fa-fw fa-registered"></i>
-                        <span>Register</span></a>
-                </li>-->
-
+                </li><!--            
                 <!-- Nav Item - User -->
                 <li class="nav-item">
                     <a class="nav-link" href="user.jsp">
@@ -362,7 +354,7 @@
                                                 <tr class="text-center">
                                                     <td><c:out value="${row.id}"/></td>
                                                     <td><c:out value="${row.BrandName}"/></td>
-                                                    <<td><c:choose>
+                                                    <td><c:choose>
                                                             <c:when test="${row.Status}">
                                                                 1
                                                             </c:when>
